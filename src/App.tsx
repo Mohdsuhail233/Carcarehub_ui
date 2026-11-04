@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { cn } from './lib/utils'
 import {
   Calendar,
   ShieldCheck,
@@ -111,7 +112,7 @@ export default function App() {
   ]
 
   return (
-    <div className="min-h-screen w-full bg-[#FAF8F5] text-zinc-900 flex flex-col justify-between relative overflow-x-hidden selection:bg-zinc-900 selection:text-white font-sans antialiased">
+    <div className="min-h-dvh w-full bg-[#FAF8F5] text-zinc-900 flex flex-col justify-between relative overflow-x-hidden selection:bg-zinc-900 selection:text-white font-sans antialiased">
       
       {/* ================= HEADER / NAVBAR (EXACT RECREATION) ================= */}
       <header className="relative z-20 w-full px-6 sm:px-12 lg:px-20 pt-6 pb-2 flex items-center justify-between">
@@ -135,11 +136,12 @@ export default function App() {
               <button
                 key={item}
                 onClick={() => handleNavClick(item)}
-                className={`relative py-1 transition-colors flex flex-col items-center ${
+                className={cn(
+                  'relative py-1 transition-colors flex flex-col items-center',
                   activeNav === item
                     ? 'text-zinc-950 font-bold'
                     : 'text-zinc-500 font-normal hover:text-zinc-900'
-                }`}
+                )}
               >
                 <span>{item}</span>
                 {activeNav === item && (
@@ -154,7 +156,7 @@ export default function App() {
             onClick={() => setIsBookingOpen(true)}
             className="group inline-flex items-center gap-2 bg-[#101012] hover:bg-black text-white text-[12px] font-medium pl-4 pr-3.5 py-2 rounded-full shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-200/90" />
+            <Sparkles className="size-3.5 text-amber-200/90" />
             <span>Book Now</span>
             <span className="text-zinc-400 group-hover:translate-x-0.5 transition-transform text-[12px]">
               &rarr;
@@ -184,10 +186,10 @@ export default function App() {
 
             {/* Left Content */}
             <div className="relative z-10 max-w-md">
-              <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-zinc-950 tracking-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-zinc-950 tracking-tight text-balance">
                 Our Services
               </h1>
-              <p className="mt-2 text-xs sm:text-sm text-zinc-600 leading-relaxed max-w-sm">
+              <p className="mt-2 text-xs sm:text-sm text-zinc-600 leading-relaxed max-w-sm text-pretty">
                 Complete car care & maintenance solutions for long-lasting performance.
               </p>
             </div>
@@ -205,25 +207,25 @@ export default function App() {
                 >
                   {/* Left: Icon, Title, Subtitle */}
                   <div className="flex-1 flex flex-col justify-between h-full pr-1">
-                    <div className="w-8 h-8 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-700 mb-3 group-hover:bg-zinc-950 group-hover:text-white transition-colors">
-                      <IconComp className="w-4 h-4 stroke-[1.75]" />
+                    <div className="size-8 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-700 mb-3 group-hover:bg-zinc-950 group-hover:text-white transition-colors">
+                      <IconComp className="size-4 stroke-[1.75]" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-sm sm:text-[15px] text-zinc-900 group-hover:text-black leading-tight">
+                      <h3 className="font-bold text-sm sm:text-[15px] text-zinc-900 group-hover:text-black leading-tight text-balance">
                         {srv.title}
                       </h3>
-                      <p className="text-xs text-zinc-500 mt-1 leading-relaxed">
+                      <p className="text-xs text-zinc-500 mt-1 leading-relaxed text-pretty">
                         {srv.desc}
                       </p>
                     </div>
                   </div>
 
                   {/* Right: Rounded Image Thumbnail */}
-                  <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-xl sm:rounded-2xl overflow-hidden shrink-0 shadow-xs bg-zinc-100 border border-zinc-100">
+                  <div className="size-24 sm:size-28 rounded-xl sm:rounded-2xl overflow-hidden shrink-0 shadow-xs bg-zinc-100 border border-zinc-100">
                     <img
                       src={srv.image}
                       alt={srv.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                 </div>
@@ -256,9 +258,9 @@ export default function App() {
               
               {/* Availability Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-zinc-200/70 shadow-xs mb-5 sm:mb-6">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                <span className="relative flex size-2">
+                  <span className="animate-ping absolute inline-flex size-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full size-2 bg-emerald-500"></span>
                 </span>
                 <span className="text-[11px] sm:text-xs font-semibold text-zinc-800 tracking-tight">
                   Available Today
@@ -266,14 +268,14 @@ export default function App() {
               </div>
 
               {/* Headline */}
-              <h1 className="text-[44px] sm:text-[56px] lg:text-[68px] font-bold text-zinc-950 tracking-[-0.035em] leading-[1.04]">
+              <h1 className="text-[44px] sm:text-[56px] lg:text-[68px] font-bold text-zinc-950 tracking-[-0.035em] leading-[1.04] text-balance">
                 Premium care
                 <br />
                 at your door.
               </h1>
 
               {/* Subheading */}
-              <p className="mt-4 sm:mt-5 text-[15px] sm:text-base text-zinc-600 font-normal max-w-sm sm:max-w-md leading-relaxed">
+              <p className="mt-4 sm:mt-5 text-[15px] sm:text-base text-zinc-600 font-normal max-w-sm sm:max-w-md leading-relaxed text-pretty">
                 Professional mobile detailing that fits your life.
               </p>
 
@@ -285,11 +287,11 @@ export default function App() {
                   onClick={() => setIsBookingOpen(true)}
                   className="group inline-flex items-center gap-3.5 bg-zinc-950 hover:bg-black text-white px-5 sm:px-6 py-3.5 rounded-full text-xs sm:text-[13px] font-semibold shadow-lg shadow-zinc-950/15 hover:shadow-zinc-950/25 transition-all active:scale-[0.98]"
                 >
-                  <div className="w-5 h-5 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
-                    <Calendar className="w-4 h-4" />
+                  <div className="size-5 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
+                    <Calendar className="size-4" />
                   </div>
                   <span>Book Mobile Service</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="size-3.5 text-zinc-400 group-hover:translate-x-1 transition-transform" />
                 </button>
 
                 {/* Social Proof Pill */}
@@ -299,26 +301,26 @@ export default function App() {
                 >
                   <div className="flex -space-x-2 overflow-hidden">
                     <img
-                      className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
+                      className="inline-block size-6 rounded-full ring-2 ring-white object-cover"
                       src="/avatars/avatar1.jpg"
                       alt="Client avatar 1"
                     />
                     <img
-                      className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
+                      className="inline-block size-6 rounded-full ring-2 ring-white object-cover"
                       src="/avatars/avatar2.jpg"
                       alt="Client avatar 2"
                     />
                     <img
-                      className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
+                      className="inline-block size-6 rounded-full ring-2 ring-white object-cover"
                       src="/avatars/avatar3.jpg"
                       alt="Client avatar 3"
                     />
                   </div>
 
                   <div className="flex items-center gap-1.5 text-xs">
-                    <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                    <span className="font-bold text-zinc-950">4.9</span>
-                    <span className="text-zinc-500 font-normal">1,250+ reviews</span>
+                    <Star className="size-3.5 text-amber-500 fill-amber-500" />
+                    <span className="font-bold text-zinc-950 tabular-nums">4.9</span>
+                    <span className="text-zinc-500 font-normal tabular-nums">1,250+ reviews</span>
                   </div>
                 </div>
 
@@ -334,14 +336,14 @@ export default function App() {
                 
                 {/* Feature 1: Protected */}
                 <div className="flex items-center gap-4 py-2.5 md:py-1 px-3 sm:px-6 first:pl-2">
-                  <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
-                    <ShieldCheck className="w-4 h-4 stroke-[1.75]" />
+                  <div className="size-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
+                    <ShieldCheck className="size-4 stroke-[1.75]" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
+                    <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight text-balance">
                       Protected
                     </h3>
-                    <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
+                    <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5 text-pretty">
                       Licensed & insured
                     </p>
                   </div>
@@ -349,14 +351,14 @@ export default function App() {
 
                 {/* Feature 2: Safe Products */}
                 <div className="flex items-center gap-4 py-2.5 md:py-1 px-3 sm:px-6">
-                  <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
-                    <Leaf className="w-4 h-4 stroke-[1.75]" />
+                  <div className="size-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
+                    <Leaf className="size-4 stroke-[1.75]" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
+                    <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight text-balance">
                       Safe Products
                     </h3>
-                    <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
+                    <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5 text-pretty">
                       Paint-safe detailing
                     </p>
                   </div>
@@ -364,14 +366,14 @@ export default function App() {
 
                 {/* Feature 3: Expert Care */}
                 <div className="flex items-center gap-4 py-2.5 md:py-1 px-3 sm:px-6 last:pr-2">
-                  <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
-                    <Award className="w-4 h-4 stroke-[1.75]" />
+                  <div className="size-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
+                    <Award className="size-4 stroke-[1.75]" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
+                    <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight text-balance">
                       Expert Care
                     </h3>
-                    <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
+                    <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5 text-pretty">
                       Handled by pros
                     </p>
                   </div>
@@ -387,8 +389,8 @@ export default function App() {
       <div className="relative z-10 w-full px-6 sm:px-12 lg:px-20 pb-4 flex items-center justify-between text-[11px] text-zinc-400">
         <span>&copy; 2026 Atelier Mobile Detail. All rights reserved.</span>
         <div className="flex items-center gap-2">
-          <Phone className="w-3 h-3 text-zinc-400" />
-          <span>(800) 555-CARE</span>
+          <Phone className="size-3 text-zinc-400" />
+          <span className="tabular-nums">(800) 555-CARE</span>
         </div>
       </div>
 
@@ -399,9 +401,10 @@ export default function App() {
             
             <button
               onClick={resetBooking}
-              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600 transition-colors"
+              aria-label="Close booking dialog"
+              className="absolute top-5 right-5 size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600 transition-colors"
             >
-              <X className="w-4 h-4" />
+              <X className="size-4" />
             </button>
 
             {!bookingSuccess ? (
@@ -410,10 +413,10 @@ export default function App() {
                   <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-700 text-[10px] font-semibold uppercase tracking-wider mb-2">
                     Step {bookingStep} of 3
                   </div>
-                  <h2 className="text-2xl font-bold text-zinc-950">
+                  <h2 className="text-2xl font-bold text-zinc-950 text-balance">
                     Book Doorstep Detailing
                   </h2>
-                  <p className="text-xs text-zinc-500 mt-1">
+                  <p className="text-xs text-zinc-500 mt-1 text-pretty">
                     Certified technicians arrive fully equipped with water, power & high-grade tools.
                   </p>
                 </div>
@@ -431,14 +434,15 @@ export default function App() {
                             key={v}
                             type="button"
                             onClick={() => setSelectedVehicle(v)}
-                            className={`p-3 rounded-xl border text-left font-medium transition-all flex items-center justify-between ${
+                            className={cn(
+                              'p-3 rounded-xl border text-left font-medium transition-all flex items-center justify-between',
                               selectedVehicle === v
                                 ? 'border-zinc-950 bg-zinc-950 text-white shadow-xs'
                                 : 'border-zinc-200 hover:border-zinc-300 bg-zinc-50/50 text-zinc-800'
-                            }`}
+                            )}
                           >
                             <span>{v}</span>
-                            {selectedVehicle === v && <CheckCircle2 className="w-3.5 h-3.5" />}
+                            {selectedVehicle === v && <CheckCircle2 className="size-3.5" />}
                           </button>
                         ))}
                       </div>
@@ -460,17 +464,18 @@ export default function App() {
                           <div
                             key={pkg.name}
                             onClick={() => setSelectedPackage(pkg.name)}
-                            className={`p-3 rounded-xl border cursor-pointer transition-all ${
+                            className={cn(
+                              'p-3 rounded-xl border cursor-pointer transition-all',
                               selectedPackage === pkg.name
                                 ? 'border-zinc-950 bg-zinc-50 ring-1 ring-zinc-950'
                                 : 'border-zinc-200 hover:border-zinc-300'
-                            }`}
+                            )}
                           >
                             <div className="flex items-center justify-between">
                               <span className="font-bold text-sm text-zinc-950">{pkg.name}</span>
-                              <span className="font-extrabold text-sm text-zinc-900">{pkg.price}</span>
+                              <span className="font-extrabold text-sm text-zinc-900 tabular-nums">{pkg.price}</span>
                             </div>
-                            <p className="text-xs text-zinc-500 mt-0.5">{pkg.desc}</p>
+                            <p className="text-xs text-zinc-500 mt-0.5 text-pretty">{pkg.desc}</p>
                           </div>
                         ))}
                       </div>
@@ -481,7 +486,7 @@ export default function App() {
                       className="w-full mt-2 py-3 rounded-xl bg-zinc-950 hover:bg-black text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-md transition-all"
                     >
                       <span>Continue to Schedule</span>
-                      <ChevronRight className="w-4 h-4" />
+                      <ChevronRight className="size-4" />
                     </button>
                   </div>
                 )}
@@ -503,15 +508,16 @@ export default function App() {
                           <div
                             key={slot.time}
                             onClick={() => setSelectedDate(slot.time)}
-                            className={`p-3.5 rounded-xl border cursor-pointer flex items-center justify-between text-xs transition-all ${
+                            className={cn(
+                              'p-3.5 rounded-xl border cursor-pointer flex items-center justify-between text-xs transition-all',
                               selectedDate === slot.time
                                 ? 'border-zinc-950 bg-zinc-50 ring-1 ring-zinc-950 font-semibold'
                                 : 'border-zinc-200 hover:border-zinc-300'
-                            }`}
+                            )}
                           >
                             <div className="flex items-center gap-2">
-                              <Clock className="w-3.5 h-3.5 text-zinc-400" />
-                              <span>{slot.time}</span>
+                              <Clock className="size-3.5 text-zinc-400" />
+                              <span className="tabular-nums">{slot.time}</span>
                             </div>
                             <span className="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded-full">
                               {slot.badge}
@@ -533,7 +539,7 @@ export default function App() {
                         className="flex-1 py-3 rounded-xl bg-zinc-950 hover:bg-black text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-md transition-all"
                       >
                         <span>Continue to Address</span>
-                        <ChevronRight className="w-4 h-4" />
+                        <ChevronRight className="size-4" />
                       </button>
                     </div>
                   </div>
@@ -547,7 +553,7 @@ export default function App() {
                         Service Location Address
                       </label>
                       <div className="relative">
-                        <MapPin className="w-4 h-4 text-zinc-400 absolute left-3.5 top-3" />
+                        <MapPin className="size-4 text-zinc-400 absolute left-3.5 top-3" />
                         <input
                           required
                           type="text"
@@ -594,7 +600,7 @@ export default function App() {
                       </div>
                       <div className="flex justify-between text-zinc-500">
                         <span>Arrival Slot:</span>
-                        <span className="font-semibold text-zinc-800">{selectedDate}</span>
+                        <span className="font-semibold text-zinc-800 tabular-nums">{selectedDate}</span>
                       </div>
                     </div>
 
@@ -610,7 +616,7 @@ export default function App() {
                         type="submit"
                         className="flex-1 py-3 rounded-xl bg-zinc-950 hover:bg-black text-white text-xs font-semibold flex items-center justify-center gap-2 shadow-md transition-all"
                       >
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                        <CheckCircle2 className="size-4 text-emerald-400" />
                         <span>Confirm Mobile Service</span>
                       </button>
                     </div>
@@ -619,23 +625,23 @@ export default function App() {
               </div>
             ) : (
               <div className="text-center py-8 space-y-4">
-                <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="w-8 h-8" />
+                <div className="size-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="size-8" />
                 </div>
-                <h3 className="text-2xl font-bold text-zinc-950">
+                <h3 className="text-2xl font-bold text-zinc-950 text-balance">
                   Appointment Confirmed!
                 </h3>
-                <p className="text-xs text-zinc-500 max-w-sm mx-auto leading-relaxed">
+                <p className="text-xs text-zinc-500 max-w-sm mx-auto leading-relaxed text-pretty">
                   Our mobile detailing van is scheduled. A confirmation SMS with GPS live tracking has been sent to your number.
                 </p>
                 <div className="p-4 bg-zinc-50 rounded-2xl border border-zinc-200 text-left text-xs max-w-xs mx-auto space-y-2">
                   <div className="flex items-center gap-2 text-zinc-700">
-                    <CarIcon className="w-4 h-4 text-zinc-400" />
+                    <CarIcon className="size-4 text-zinc-400" />
                     <span>{selectedVehicle} &bull; {selectedPackage}</span>
                   </div>
                   <div className="flex items-center gap-2 text-zinc-700">
-                    <Clock className="w-4 h-4 text-zinc-400" />
-                    <span>{selectedDate}</span>
+                    <Clock className="size-4 text-zinc-400" />
+                    <span className="tabular-nums">{selectedDate}</span>
                   </div>
                 </div>
                 <button
@@ -657,18 +663,19 @@ export default function App() {
           <div className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-zinc-200 relative">
             <button
               onClick={() => setIsReviewsOpen(false)}
-              className="absolute top-5 right-5 w-8 h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600 transition-colors"
+              aria-label="Close reviews dialog"
+              className="absolute top-5 right-5 size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600 transition-colors"
             >
-              <X className="w-4 h-4" />
+              <X className="size-4" />
             </button>
 
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-500">
-                <Star className="w-6 h-6 fill-amber-500" />
+                <Star className="size-6 fill-amber-500" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-zinc-950">4.9 / 5.0 Rating</h3>
-                <p className="text-xs text-zinc-500">Based on 1,250+ verified luxury vehicle reviews</p>
+                <h3 className="text-xl font-bold text-zinc-950 text-balance tabular-nums">4.9 / 5.0 Rating</h3>
+                <p className="text-xs text-zinc-500 text-pretty tabular-nums">Based on 1,250+ verified luxury vehicle reviews</p>
               </div>
             </div>
 
@@ -696,15 +703,15 @@ export default function App() {
                 <div key={i} className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200/80 text-xs">
                   <div className="flex items-center justify-between mb-1.5">
                     <span className="font-bold text-zinc-900">{rev.name}</span>
-                    <span className="text-zinc-400 text-[11px]">{rev.date}</span>
+                    <span className="text-zinc-400 text-[11px] tabular-nums">{rev.date}</span>
                   </div>
                   <div className="flex items-center gap-1 text-amber-500 mb-2">
                     {[...Array(5)].map((_, idx) => (
-                      <Star key={idx} className="w-3 h-3 fill-amber-500" />
+                      <Star key={idx} className="size-3 fill-amber-500" />
                     ))}
                     <span className="ml-2 text-[11px] font-medium text-zinc-500">{rev.car}</span>
                   </div>
-                  <p className="text-zinc-600 leading-relaxed">{rev.comment}</p>
+                  <p className="text-zinc-600 leading-relaxed text-pretty">{rev.comment}</p>
                 </div>
               ))}
             </div>
