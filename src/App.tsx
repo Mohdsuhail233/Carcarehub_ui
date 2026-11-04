@@ -67,55 +67,57 @@ export default function App() {
       {/* Subtle Top Header Soft Fade */}
       <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#EDE8DC]/80 via-[#EDE8DC]/30 to-transparent pointer-events-none z-0" />
 
-      {/* ================= HEADER / NAVBAR (EXACT RECREATION) ================= */}
-      <header className="relative z-10 w-full px-6 sm:px-12 lg:px-20 pt-6 pb-2 flex items-center justify-between">
-        {/* Left: Logo */}
-        <div
-          className="flex flex-col cursor-pointer select-none"
-          onClick={() => setActiveNav('Home')}
-        >
-          <span className="font-extrabold text-[15px] sm:text-base tracking-[0.24em] text-zinc-950 uppercase leading-none font-sans">
-            ATELIER
-          </span>
-          <span className="text-[8px] sm:text-[8.5px] font-semibold tracking-[0.26em] text-zinc-400 uppercase mt-0.5 leading-none">
-            MOBILE DETAIL
-          </span>
-        </div>
-
-        {/* Right Group: Nav Links + Book Now Button Together */}
-        <div className="flex items-center gap-7 sm:gap-9">
-          <nav className="hidden md:flex items-center gap-6 sm:gap-7 text-[12.5px] sm:text-[13px]">
-            {navItems.map((item) => (
-              <button
-                key={item}
-                onClick={() => handleNavClick(item)}
-                className={`relative py-1 transition-colors flex flex-col items-center ${
-                  activeNav === item
-                    ? 'text-zinc-950 font-bold'
-                    : 'text-zinc-500 font-normal hover:text-zinc-900'
-                }`}
-              >
-                <span>{item}</span>
-                {activeNav === item && (
-                  <span className="w-3.5 h-[2px] bg-zinc-950 rounded-full mt-0.5" />
-                )}
-              </button>
-            ))}
-          </nav>
-
-          {/* Book Now Button */}
-          <button
-            onClick={() => setIsBookingOpen(true)}
-            className="group inline-flex items-center gap-2 bg-[#101012] hover:bg-black text-white text-[12px] font-medium pl-4 pr-3.5 py-2 rounded-full shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
+      {/* ================= HEADER / NAVBAR (FLOATING PILL CAPSULE) ================= */}
+      <div className="relative z-20 w-full px-4 sm:px-8 lg:px-12 pt-4 sm:pt-5">
+        <header className="max-w-[1240px] mx-auto w-full bg-[#FAF8F5]/90 hover:bg-[#FAF8F5]/98 backdrop-blur-xl border border-white/90 shadow-[0_8px_30px_-6px_rgba(0,0,0,0.07)] rounded-full px-5 sm:px-8 py-2.5 flex items-center justify-between transition-all">
+          {/* Left: Logo */}
+          <div
+            className="flex flex-col cursor-pointer select-none"
+            onClick={() => setActiveNav('Home')}
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-200/90" />
-            <span>Book Now</span>
-            <span className="text-zinc-400 group-hover:translate-x-0.5 transition-transform text-[12px]">
-              &rarr;
+            <span className="font-extrabold text-[14px] sm:text-[15px] tracking-[0.24em] text-zinc-950 uppercase leading-none font-sans">
+              ATELIER
             </span>
-          </button>
-        </div>
-      </header>
+            <span className="text-[7.5px] sm:text-[8px] font-semibold tracking-[0.26em] text-zinc-400 uppercase mt-0.5 leading-none">
+              MOBILE DETAIL
+            </span>
+          </div>
+
+          {/* Right Group: Nav Links + Book Now Button Together */}
+          <div className="flex items-center gap-6 sm:gap-8">
+            <nav className="hidden md:flex items-center gap-6 sm:gap-7 text-[12px] sm:text-[12.5px]">
+              {navItems.map((item) => (
+                <button
+                  key={item}
+                  onClick={() => handleNavClick(item)}
+                  className={`relative py-1 transition-colors flex flex-col items-center ${
+                    activeNav === item
+                      ? 'text-zinc-950 font-bold'
+                      : 'text-zinc-500 font-normal hover:text-zinc-900'
+                  }`}
+                >
+                  <span>{item}</span>
+                  {activeNav === item && (
+                    <span className="w-3.5 h-[2px] bg-zinc-950 rounded-full mt-0.5" />
+                  )}
+                </button>
+              ))}
+            </nav>
+
+            {/* Book Now Button */}
+            <button
+              onClick={() => setIsBookingOpen(true)}
+              className="group inline-flex items-center gap-2 bg-[#101012] hover:bg-black text-white text-[11.5px] sm:text-[12px] font-medium pl-3.5 pr-3 py-1.5 sm:py-2 rounded-full shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-200/90" />
+              <span>Book Now</span>
+              <span className="text-zinc-400 group-hover:translate-x-0.5 transition-transform text-[11px]">
+                &rarr;
+              </span>
+            </button>
+          </div>
+        </header>
+      </div>
 
       {/* ================= HERO CONTENT ================= */}
       <main className="relative z-10 w-full px-6 sm:px-12 lg:px-20 py-8 sm:py-10 md:py-14 flex-1 flex flex-col justify-center">
