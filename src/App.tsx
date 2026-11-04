@@ -50,225 +50,219 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-white text-zinc-900 flex flex-col items-center justify-between p-3 sm:p-5 lg:p-6 select-none font-sans antialiased selection:bg-zinc-900 selection:text-white">
+    <div className="min-h-screen w-full bg-[#FAF8F5] text-zinc-900 flex flex-col justify-between relative overflow-x-hidden selection:bg-zinc-900 selection:text-white">
       
-      {/* ================= 1. FLOATING PILL NAVBAR ================= */}
-      <div className="w-full max-w-[1240px] px-1 sm:px-2 z-30">
-        <header className="w-full bg-[#FAF8F5]/90 hover:bg-[#FAF8F5]/98 backdrop-blur-xl border border-zinc-200/70 shadow-[0_8px_30px_-6px_rgba(0,0,0,0.06)] rounded-full px-5 sm:px-8 py-2.5 flex items-center justify-between transition-all">
-          {/* Left: Brand Logo */}
-          <div
-            className="flex flex-col cursor-pointer select-none"
-            onClick={() => setActiveNav('Home')}
+      {/* Background Car Image (2nd Car: Studio HD Luxury SUV in front of glowing villa) */}
+      <div
+        className="absolute inset-0 bg-cover bg-no-repeat z-0 transition-all duration-500"
+        style={{
+          backgroundImage: "url('/hero-bg.jpg')",
+          backgroundPosition: 'right 25% center',
+        }}
+      />
+
+      {/* Seamless Left Fade Gradient for Crystal Clear Typography */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#EDE8DC] via-[#EDE8DC]/85 md:via-[#EDE8DC]/60 to-transparent w-full md:w-[60%] pointer-events-none" />
+
+      {/* Subtle Top Header Soft Fade */}
+      <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#EDE8DC]/80 via-[#EDE8DC]/30 to-transparent pointer-events-none z-0" />
+
+      {/* ================= HEADER / NAVBAR (EXACT RECREATION) ================= */}
+      <header className="relative z-10 w-full px-6 sm:px-12 lg:px-20 pt-6 pb-2 flex items-center justify-between">
+        {/* Left: Logo */}
+        <div
+          className="flex flex-col cursor-pointer select-none"
+          onClick={() => setActiveNav('Home')}
+        >
+          <span className="font-extrabold text-[15px] sm:text-base tracking-[0.24em] text-zinc-950 uppercase leading-none font-sans">
+            ATELIER
+          </span>
+          <span className="text-[8px] sm:text-[8.5px] font-semibold tracking-[0.26em] text-zinc-400 uppercase mt-0.5 leading-none">
+            MOBILE DETAIL
+          </span>
+        </div>
+
+        {/* Right Group: Nav Links + Book Now Button Together */}
+        <div className="flex items-center gap-7 sm:gap-9">
+          <nav className="hidden md:flex items-center gap-6 sm:gap-7 text-[12.5px] sm:text-[13px]">
+            {navItems.map((item) => (
+              <button
+                key={item}
+                onClick={() => handleNavClick(item)}
+                className={`relative py-1 transition-colors flex flex-col items-center ${
+                  activeNav === item
+                    ? 'text-zinc-950 font-bold'
+                    : 'text-zinc-500 font-normal hover:text-zinc-900'
+                }`}
+              >
+                <span>{item}</span>
+                {activeNav === item && (
+                  <span className="w-3.5 h-[2px] bg-zinc-950 rounded-full mt-0.5" />
+                )}
+              </button>
+            ))}
+          </nav>
+
+          {/* Book Now Button */}
+          <button
+            onClick={() => setIsBookingOpen(true)}
+            className="group inline-flex items-center gap-2 bg-[#101012] hover:bg-black text-white text-[12px] font-medium pl-4 pr-3.5 py-2 rounded-full shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
           >
-            <span className="font-extrabold text-[14px] sm:text-[15px] tracking-[0.24em] text-zinc-950 uppercase leading-none font-sans">
-              ATELIER
+            <Sparkles className="w-3.5 h-3.5 text-amber-200/90" />
+            <span>Book Now</span>
+            <span className="text-zinc-400 group-hover:translate-x-0.5 transition-transform text-[12px]">
+              &rarr;
             </span>
-            <span className="text-[7.5px] sm:text-[8px] font-semibold tracking-[0.26em] text-zinc-400 uppercase mt-0.5 leading-none">
-              MOBILE DETAIL
+          </button>
+        </div>
+      </header>
+
+      {/* ================= HERO CONTENT ================= */}
+      <main className="relative z-10 w-full px-6 sm:px-12 lg:px-20 py-8 sm:py-10 md:py-14 flex-1 flex flex-col justify-center">
+        <div className="max-w-xl">
+          
+          {/* Availability Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-zinc-200/70 shadow-xs mb-5 sm:mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-[11px] sm:text-xs font-semibold text-zinc-800 tracking-tight">
+              Available Today
             </span>
           </div>
 
-          {/* Right Group: Nav Links + Book Now Button Together */}
-          <div className="flex items-center gap-6 sm:gap-8">
-            <nav className="hidden md:flex items-center gap-6 sm:gap-7 text-[12px] sm:text-[12.5px]">
-              {navItems.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => handleNavClick(item)}
-                  className={`relative py-1 transition-colors flex flex-col items-center ${
-                    activeNav === item
-                      ? 'text-zinc-950 font-bold'
-                      : 'text-zinc-500 font-normal hover:text-zinc-900'
-                  }`}
-                >
-                  <span>{item}</span>
-                  {activeNav === item && (
-                    <span className="w-3.5 h-[2px] bg-zinc-950 rounded-full mt-0.5" />
-                  )}
-                </button>
-              ))}
-            </nav>
+          {/* Headline */}
+          <h1 className="text-[44px] sm:text-[56px] lg:text-[68px] font-bold text-zinc-950 tracking-[-0.035em] leading-[1.04]">
+            Premium care
+            <br />
+            at your door.
+          </h1>
 
-            {/* Book Now Button */}
+          {/* Subheading */}
+          <p className="mt-4 sm:mt-5 text-[15px] sm:text-base text-zinc-600 font-normal max-w-sm sm:max-w-md leading-relaxed">
+            Professional mobile detailing that fits your life.
+          </p>
+
+          {/* Action Row */}
+          <div className="mt-8 sm:mt-9 flex flex-wrap items-center gap-3.5 sm:gap-4">
+            
+            {/* Book Mobile Service Button */}
             <button
               onClick={() => setIsBookingOpen(true)}
-              className="group inline-flex items-center gap-2 bg-[#101012] hover:bg-black text-white text-[11.5px] sm:text-[12px] font-medium pl-3.5 pr-3 py-1.5 sm:py-2 rounded-full shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
+              className="group inline-flex items-center gap-3.5 bg-zinc-950 hover:bg-black text-white px-5 sm:px-6 py-3.5 rounded-full text-xs sm:text-[13px] font-semibold shadow-lg shadow-zinc-950/15 hover:shadow-zinc-950/25 transition-all active:scale-[0.98]"
             >
-              <Sparkles className="w-3.5 h-3.5 text-amber-200/90" />
-              <span>Book Now</span>
-              <span className="text-zinc-400 group-hover:translate-x-0.5 transition-transform text-[11px]">
-                &rarr;
-              </span>
+              <div className="w-5 h-5 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
+                <Calendar className="w-4 h-4" />
+              </div>
+              <span>Book Mobile Service</span>
+              <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:translate-x-1 transition-transform" />
             </button>
-          </div>
-        </header>
-      </div>
 
-      {/* ================= 2. HERO IMAGE CONTAINER WITH ROUNDED CORNERS (BELOW NAVBAR) ================= */}
-      <div className="w-full max-w-[1240px] mt-3 sm:mt-4 flex-1 bg-[#FAF8F5] rounded-[28px] sm:rounded-[36px] lg:rounded-[42px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.12)] relative overflow-hidden flex flex-col justify-between min-h-[570px] md:h-[calc(100vh-115px)] max-h-[730px]">
-        
-        {/* Background Car Image (Our 2nd Luxury SUV Car with Villa) */}
-        <div
-          className="absolute inset-0 bg-cover bg-no-repeat z-0 transition-all duration-500"
-          style={{
-            backgroundImage: "url('/hero-bg.jpg')",
-            backgroundPosition: 'right 20% center',
-          }}
-        />
-
-        {/* Seamless Left Fade Gradient for Crystal Clear Typography */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#EDE8DC] via-[#EDE8DC]/85 md:via-[#EDE8DC]/60 to-transparent w-full md:w-[60%] pointer-events-none" />
-
-        {/* Subtle Top Header Soft Fade */}
-        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#EDE8DC]/80 via-[#EDE8DC]/30 to-transparent pointer-events-none z-0" />
-
-        {/* Hero Left Content */}
-        <main className="relative z-10 w-full px-6 sm:px-10 lg:px-14 py-6 sm:py-8 flex-1 flex flex-col justify-center">
-          <div className="max-w-md lg:max-w-lg">
-            
-            {/* Availability Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md border border-zinc-200/70 shadow-xs mb-3.5 sm:mb-4">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="text-[10.5px] sm:text-[11px] font-semibold text-zinc-700 tracking-tight">
-                Available Today
-              </span>
-            </div>
-
-            {/* Headline */}
-            <h1 className="text-[40px] sm:text-[50px] lg:text-[60px] font-bold text-zinc-950 tracking-[-0.035em] leading-[1.04]">
-              Premium care
-              <br />
-              at your door.
-            </h1>
-
-            {/* Subheading */}
-            <p className="mt-3 sm:mt-3.5 text-[13.5px] sm:text-[15px] text-zinc-600 font-normal max-w-xs sm:max-w-sm leading-relaxed">
-              Professional mobile detailing that fits your life.
-            </p>
-
-            {/* Action Row */}
-            <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-3.5">
-              
-              {/* Book Mobile Service Button */}
-              <button
-                onClick={() => setIsBookingOpen(true)}
-                className="group inline-flex items-center gap-2.5 sm:gap-3 bg-[#121214] hover:bg-black text-white pl-4 pr-5 py-2.5 sm:py-3 rounded-full text-xs sm:text-[12.5px] font-semibold shadow-md hover:shadow-lg shadow-zinc-950/15 transition-all active:scale-[0.98]"
-              >
-                <div className="w-4 h-4 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
-                  <Calendar className="w-3.5 h-3.5" />
-                </div>
-                <span>Book Mobile Service</span>
-                <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
-              </button>
-
-              {/* Social Proof Pill */}
-              <div
-                onClick={() => setIsReviewsOpen(true)}
-                className="cursor-pointer inline-flex items-center gap-2 bg-white/90 hover:bg-white backdrop-blur-md border border-zinc-200/80 rounded-full px-3 py-1.5 sm:py-2 shadow-xs hover:shadow-sm transition-all"
-              >
-                <div className="flex -space-x-1.5 overflow-hidden">
-                  <img
-                    className="inline-block h-5 w-5 sm:h-5.5 sm:w-5.5 rounded-full ring-2 ring-white object-cover"
-                    src="/avatars/avatar1.jpg"
-                    alt="Customer 1"
-                  />
-                  <img
-                    className="inline-block h-5 w-5 sm:h-5.5 sm:w-5.5 rounded-full ring-2 ring-white object-cover"
-                    src="/avatars/avatar2.jpg"
-                    alt="Customer 2"
-                  />
-                  <img
-                    className="inline-block h-5 w-5 sm:h-5.5 sm:w-5.5 rounded-full ring-2 ring-white object-cover"
-                    src="/avatars/avatar3.jpg"
-                    alt="Customer 3"
-                  />
-                </div>
-
-                <div className="flex items-center gap-1.5 text-[11px] sm:text-xs">
-                  <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
-                  <span className="font-bold text-zinc-950">4.9</span>
-                  <span className="text-zinc-500 font-normal">1,250+ reviews</span>
-                </div>
+            {/* Social Proof Pill */}
+            <div
+              onClick={() => setIsReviewsOpen(true)}
+              className="cursor-pointer inline-flex items-center gap-2.5 bg-white/90 hover:bg-white backdrop-blur-md border border-zinc-200/80 rounded-full px-3.5 py-2 shadow-xs hover:shadow-sm transition-all"
+            >
+              <div className="flex -space-x-2 overflow-hidden">
+                <img
+                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
+                  src="/avatars/avatar1.jpg"
+                  alt="Client avatar 1"
+                />
+                <img
+                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
+                  src="/avatars/avatar2.jpg"
+                  alt="Client avatar 2"
+                />
+                <img
+                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
+                  src="/avatars/avatar3.jpg"
+                  alt="Client avatar 3"
+                />
               </div>
 
+              <div className="flex items-center gap-1.5 text-xs">
+                <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                <span className="font-bold text-zinc-950">4.9</span>
+                <span className="text-zinc-500 font-normal">1,250+ reviews</span>
+              </div>
             </div>
 
           </div>
-        </main>
 
-        {/* ================= 3. BOTTOM FLOATING CARD / DOCK ================= */}
-        <footer className="relative z-10 w-full px-6 sm:px-10 lg:px-12 pb-5 sm:pb-6 pt-1">
-          <div className="w-full bg-white/85 hover:bg-white/95 backdrop-blur-xl border border-white/90 shadow-[0_10px_35px_-10px_rgba(0,0,0,0.08)] rounded-xl sm:rounded-[22px] p-3 sm:p-4 transition-all">
-            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-zinc-200/60">
-              
-              {/* Feature 1: Protected */}
-              <div className="flex items-center gap-3 py-2 md:py-0.5 px-3 sm:px-5 first:pl-1">
-                <div className="w-8 h-8 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
-                  <ShieldCheck className="w-3.5 h-3.5 stroke-[1.75]" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-[12.5px] sm:text-[13px] text-zinc-900 leading-tight">
-                    Protected
-                  </h3>
-                  <p className="text-[10.5px] sm:text-[11px] text-zinc-500 mt-0.5">
-                    Licensed & insured
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 2: Safe Products */}
-              <div className="flex items-center gap-3 py-2 md:py-0.5 px-3 sm:px-5">
-                <div className="w-8 h-8 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
-                  <Leaf className="w-3.5 h-3.5 stroke-[1.75]" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-[12.5px] sm:text-[13px] text-zinc-900 leading-tight">
-                    Safe Products
-                  </h3>
-                  <p className="text-[10.5px] sm:text-[11px] text-zinc-500 mt-0.5">
-                    Paint-safe detailing
-                  </p>
-                </div>
-              </div>
-
-              {/* Feature 3: Expert Care */}
-              <div className="flex items-center gap-3 py-2 md:py-0.5 px-3 sm:px-5 last:pr-1">
-                <div className="w-8 h-8 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
-                  <Award className="w-3.5 h-3.5 stroke-[1.75]" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-[12.5px] sm:text-[13px] text-zinc-900 leading-tight">
-                    Expert Care
-                  </h3>
-                  <p className="text-[10.5px] sm:text-[11px] text-zinc-500 mt-0.5">
-                    Handled by pros
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </footer>
-
-      </div>
-
-      {/* Small bottom footer line */}
-      <div className="w-full max-w-[1240px] mt-2 flex items-center justify-between text-[11px] text-zinc-400 px-4">
-        <span>&copy; 2026 Atelier Mobile Detail. All rights reserved.</span>
-        <div className="flex items-center gap-2">
-          <Phone className="w-3 h-3 text-zinc-400" />
-          <span>(800) 555-CARE</span>
         </div>
-      </div>
+      </main>
+
+      {/* ================= BOTTOM FLOATING CARD / DOCK ================= */}
+      <footer className="relative z-10 w-full px-6 sm:px-12 lg:px-20 pb-7 pt-2">
+        <div className="w-full bg-white/85 hover:bg-white/95 backdrop-blur-xl border border-white/90 shadow-[0_12px_45px_-12px_rgba(0,0,0,0.1)] rounded-2xl sm:rounded-[26px] p-4 sm:p-5 transition-all">
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-zinc-200/70">
+            
+            {/* Feature 1: Protected */}
+            <div className="flex items-center gap-4 py-2.5 md:py-1 px-3 sm:px-6 first:pl-2">
+              <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
+                <ShieldCheck className="w-4 h-4 stroke-[1.75]" />
+              </div>
+              <div>
+                <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
+                  Protected
+                </h3>
+                <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
+                  Licensed & insured
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 2: Safe Products */}
+            <div className="flex items-center gap-4 py-2.5 md:py-1 px-3 sm:px-6">
+              <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
+                <Leaf className="w-4 h-4 stroke-[1.75]" />
+              </div>
+              <div>
+                <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
+                  Safe Products
+                </h3>
+                <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
+                  Paint-safe detailing
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 3: Expert Care */}
+            <div className="flex items-center gap-4 py-2.5 md:py-1 px-3 sm:px-6 last:pr-2">
+              <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
+                <Award className="w-4 h-4 stroke-[1.75]" />
+              </div>
+              <div>
+                <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
+                  Expert Care
+                </h3>
+                <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
+                  Handled by pros
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Small bottom footer line */}
+        <div className="mt-3 flex items-center justify-between text-[11px] text-zinc-400 px-2">
+          <span>&copy; 2026 Atelier Mobile Detail. All rights reserved.</span>
+          <div className="flex items-center gap-2">
+            <Phone className="w-3 h-3 text-zinc-400" />
+            <span>(800) 555-CARE</span>
+          </div>
+        </div>
+      </footer>
 
       {/* ================= BOOKING MODAL WIZARD ================= */}
       {isBookingOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-zinc-200 relative overflow-hidden">
             
+            {/* Close Button */}
             <button
               onClick={resetBooking}
               className="absolute top-5 right-5 w-8 h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600 transition-colors"
@@ -290,7 +284,7 @@ export default function App() {
                   </p>
                 </div>
 
-                {/* Step 1 */}
+                {/* Step 1: Vehicle & Package */}
                 {bookingStep === 1 && (
                   <div className="space-y-4">
                     <div>
@@ -355,7 +349,7 @@ export default function App() {
                   </div>
                 )}
 
-                {/* Step 2 */}
+                {/* Step 2: Date & Slot */}
                 {bookingStep === 2 && (
                   <div className="space-y-4">
                     <div>
@@ -408,7 +402,7 @@ export default function App() {
                   </div>
                 )}
 
-                {/* Step 3 */}
+                {/* Step 3: Location & Confirmation */}
                 {bookingStep === 3 && (
                   <form onSubmit={handleBookingSubmit} className="space-y-3.5">
                     <div>
@@ -452,6 +446,7 @@ export default function App() {
                       </div>
                     </div>
 
+                    {/* Summary */}
                     <div className="p-3 bg-zinc-50 border border-zinc-200 rounded-xl text-xs space-y-1.5">
                       <div className="flex justify-between text-zinc-500">
                         <span>Vehicle:</span>
@@ -491,7 +486,7 @@ export default function App() {
                 <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-bold text-zinc-950">
+                <h3 className="text-2xl font-bold text-zinc-900">
                   Appointment Confirmed!
                 </h3>
                 <p className="text-xs text-zinc-500 max-w-sm mx-auto leading-relaxed">
