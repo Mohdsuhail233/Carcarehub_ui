@@ -50,11 +50,11 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-[#EAE6DF] text-zinc-900 flex flex-col items-center justify-between p-3 sm:p-5 lg:p-6 select-none font-sans antialiased selection:bg-zinc-900 selection:text-white">
+    <div className="min-h-screen w-full bg-white text-zinc-900 flex flex-col items-center justify-between p-3 sm:p-5 lg:p-6 select-none font-sans antialiased selection:bg-zinc-900 selection:text-white">
       
       {/* ================= 1. FLOATING PILL NAVBAR ================= */}
       <div className="w-full max-w-[1240px] px-1 sm:px-2 z-30">
-        <header className="w-full bg-[#FAF8F5]/90 hover:bg-[#FAF8F5]/98 backdrop-blur-xl border border-white/90 shadow-[0_8px_30px_-6px_rgba(0,0,0,0.06)] rounded-full px-5 sm:px-8 py-2.5 flex items-center justify-between transition-all">
+        <header className="w-full bg-[#FAF8F5]/90 hover:bg-[#FAF8F5]/98 backdrop-blur-xl border border-zinc-200/70 shadow-[0_8px_30px_-6px_rgba(0,0,0,0.06)] rounded-full px-5 sm:px-8 py-2.5 flex items-center justify-between transition-all">
           {/* Left: Brand Logo */}
           <div
             className="flex flex-col cursor-pointer select-none"
