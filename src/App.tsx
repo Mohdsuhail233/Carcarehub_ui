@@ -52,12 +52,12 @@ export default function App() {
   return (
     <div className="min-h-screen w-full bg-[#FAF8F5] text-zinc-900 flex flex-col justify-between relative overflow-x-hidden selection:bg-zinc-900 selection:text-white">
       
-      {/* Background Car Image (Exact White Tesla on Wet Asphalt from reference) */}
+      {/* Background Car Image (Studio Luxury SUV in front of modern villa) */}
       <div
-        className="absolute inset-0 bg-cover bg-no-repeat z-0 transition-opacity duration-300"
+        className="absolute inset-0 bg-cover bg-no-repeat z-0 transition-all duration-500"
         style={{
-          backgroundImage: "url('/original-cleaned-bg.jpg')",
-          backgroundPosition: 'right 35% center',
+          backgroundImage: "url('/hero-bg.jpg')",
+          backgroundPosition: 'right 25% center',
         }}
       />
 
