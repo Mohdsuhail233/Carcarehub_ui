@@ -13,21 +13,11 @@ import {
   MapPin,
   Car as CarIcon,
   ChevronRight,
-  Phone,
-  Maximize2,
-  Minimize2
+  Phone
 } from 'lucide-react'
-
-// Available backgrounds
-const BACKGROUNDS = {
-  original: '/original-cleaned-bg.jpg',
-  studio: '/hero-bg.jpg'
-}
 
 export default function App() {
   const [activeNav, setActiveNav] = useState('Home')
-  const [bgChoice, setBgChoice] = useState<'original' | 'studio'>('original')
-  const [isFrameMode, setIsFrameMode] = useState(true)
   const [isBookingOpen, setIsBookingOpen] = useState(false)
   const [isReviewsOpen, setIsReviewsOpen] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
@@ -60,266 +50,210 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[#ebe8e5] text-zinc-900 flex flex-col items-center justify-center p-0 md:p-6 lg:p-8 transition-colors select-none">
+    <div className="min-h-screen w-full bg-[#FAF8F5] text-zinc-900 flex flex-col justify-between relative overflow-x-hidden selection:bg-zinc-900 selection:text-white">
       
-      {/* Top Floating Controls Bar */}
-      <div className="w-full max-w-[1240px] mb-3 px-4 flex items-center justify-between text-xs text-zinc-600">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-zinc-800">Atelier Mobile Detailing UI</span>
-          <span className="hidden sm:inline text-zinc-400">&bull; Pixel-perfect recreation</span>
+      {/* Background Car Image (Exact White Tesla on Wet Asphalt from reference) */}
+      <div
+        className="absolute inset-0 bg-cover bg-no-repeat z-0 transition-opacity duration-300"
+        style={{
+          backgroundImage: "url('/original-cleaned-bg.jpg')",
+          backgroundPosition: 'right 35% center',
+        }}
+      />
+
+      {/* Seamless Left Fade Gradient for Crystal Clear Typography */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#FAF8F5] via-[#FAF8F5]/90 md:via-[#FAF8F5]/75 to-transparent w-full md:w-[65%] pointer-events-none" />
+
+      {/* Subtle Top Header Soft Fade */}
+      <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#FAF8F5]/80 via-[#FAF8F5]/30 to-transparent pointer-events-none z-0" />
+
+      {/* ================= HEADER / NAVBAR ================= */}
+      <header className="relative z-10 w-full px-6 sm:px-12 lg:px-20 pt-6 sm:pt-7 pb-2 flex items-center justify-between">
+        {/* Logo */}
+        <div
+          className="flex flex-col cursor-pointer group"
+          onClick={() => setActiveNav('Home')}
+        >
+          <span className="font-extrabold text-[15px] sm:text-base tracking-[0.24em] text-zinc-950 uppercase leading-none font-sans">
+            ATELIER
+          </span>
+          <span className="text-[8px] sm:text-[9px] font-semibold tracking-[0.28em] text-zinc-500 uppercase mt-1">
+            MOBILE DETAIL
+          </span>
         </div>
 
-        <div className="flex items-center gap-3">
-          {/* Switch Background Toggle */}
-          <div className="flex items-center bg-white/70 backdrop-blur-md rounded-full p-1 border border-zinc-300/70 shadow-xs">
+        {/* Center Nav Menu */}
+        <nav className="hidden md:flex items-center gap-7 lg:gap-10 text-[13px] font-medium text-zinc-700">
+          {navItems.map((item) => (
             <button
-              onClick={() => setBgChoice('original')}
-              className={`px-3 py-1 rounded-full text-[11px] font-medium transition-all ${
-                bgChoice === 'original'
-                  ? 'bg-zinc-900 text-white shadow-xs'
-                  : 'text-zinc-600 hover:text-black'
+              key={item}
+              onClick={() => handleNavClick(item)}
+              className={`relative py-1 transition-colors hover:text-zinc-950 ${
+                activeNav === item ? 'text-zinc-950 font-semibold' : 'text-zinc-600'
               }`}
             >
-              Exact Ref Car
+              {item}
+              {activeNav === item && (
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-zinc-950 rounded-full" />
+              )}
             </button>
-            <button
-              onClick={() => setBgChoice('studio')}
-              className={`px-3 py-1 rounded-full text-[11px] font-medium transition-all ${
-                bgChoice === 'studio'
-                  ? 'bg-zinc-900 text-white shadow-xs'
-                  : 'text-zinc-600 hover:text-black'
-              }`}
-            >
-              Studio HD
-            </button>
-          </div>
+          ))}
+        </nav>
 
-          {/* Toggle Device Frame */}
+        {/* Right CTA Button */}
+        <div className="flex items-center gap-3">
           <button
-            onClick={() => setIsFrameMode(!isFrameMode)}
-            className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/70 hover:bg-white text-zinc-700 border border-zinc-300/70 shadow-xs text-[11px] font-medium transition-all"
-            title="Toggle between tablet bezel and full-bleed mode"
+            onClick={() => setIsBookingOpen(true)}
+            className="group inline-flex items-center gap-2 bg-zinc-950 hover:bg-black text-white text-[12px] sm:text-[13px] font-medium pl-4 pr-3.5 py-2 rounded-full shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
           >
-            {isFrameMode ? (
-              <>
-                <Maximize2 className="w-3.5 h-3.5" />
-                <span>Full Bleed</span>
-              </>
-            ) : (
-              <>
-                <Minimize2 className="w-3.5 h-3.5" />
-                <span>Bezel Frame</span>
-              </>
-            )}
+            <Sparkles className="w-3.5 h-3.5 text-zinc-300" />
+            <span>Book Now</span>
+            <span className="text-zinc-400 group-hover:translate-x-0.5 transition-transform text-xs">
+              &rarr;
+            </span>
           </button>
         </div>
-      </div>
+      </header>
 
-      {/* Main Container / Device Frame */}
-      <div
-        className={`w-full max-w-[1240px] transition-all duration-300 ${
-          isFrameMode
-            ? 'rounded-none sm:rounded-[36px] lg:rounded-[42px] border-0 sm:border-[10px] lg:border-[14px] border-white shadow-[0_25px_70px_-15px_rgba(0,0,0,0.18)]'
-            : 'rounded-none shadow-none border-none'
-        } overflow-hidden relative bg-[#faf7f5]`}
-      >
-        {/* Background Image Container */}
-        <div className="relative min-h-[660px] md:min-h-[720px] lg:min-h-[760px] flex flex-col justify-between overflow-hidden">
+      {/* ================= HERO CONTENT ================= */}
+      <main className="relative z-10 w-full px-6 sm:px-12 lg:px-20 py-8 sm:py-10 md:py-14 flex-1 flex flex-col justify-center">
+        <div className="max-w-xl">
           
-          {/* Hero Background Car Image */}
-          <div
-            className="absolute inset-0 bg-cover bg-no-repeat bg-[center_right] z-0 transition-all duration-500 scale-[1.01]"
-            style={{
-              backgroundImage: `url('${BACKGROUNDS[bgChoice]}')`,
-              backgroundPosition: 'right 42% center',
-            }}
-          />
-
-          {/* Seamless gradient overlay on left for readable typography */}
-          <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#FAF8F5] via-[#FAF8F5]/85 md:via-[#FAF8F5]/65 to-transparent w-full md:w-[70%] pointer-events-none" />
-
-          {/* Subtle top header gradient */}
-          <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-[#FAF8F5]/80 via-[#FAF8F5]/40 to-transparent pointer-events-none z-0" />
-
-          {/* ================= HEADER / NAVBAR ================= */}
-          <header className="relative z-10 w-full px-6 sm:px-10 lg:px-14 pt-7 pb-4 flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex flex-col cursor-pointer" onClick={() => setActiveNav('Home')}>
-              <span className="font-extrabold text-[15px] sm:text-base tracking-[0.24em] text-zinc-950 uppercase leading-none font-sans">
-                ATELIER
-              </span>
-              <span className="text-[8px] sm:text-[9px] font-semibold tracking-[0.28em] text-zinc-500 uppercase mt-1">
-                MOBILE DETAIL
-              </span>
-            </div>
-
-            {/* Nav Menu */}
-            <nav className="hidden md:flex items-center gap-7 lg:gap-9 text-[13px] font-medium text-zinc-700">
-              {navItems.map((item) => (
-                <button
-                  key={item}
-                  onClick={() => handleNavClick(item)}
-                  className={`relative py-1 transition-colors hover:text-zinc-950 ${
-                    activeNav === item ? 'text-zinc-950 font-semibold' : 'text-zinc-600'
-                  }`}
-                >
-                  {item}
-                  {activeNav === item && (
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-zinc-950 rounded-full" />
-                  )}
-                </button>
-              ))}
-            </nav>
-
-            {/* Top Right Book Now Button */}
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setIsBookingOpen(true)}
-                className="group inline-flex items-center gap-2 bg-zinc-950 hover:bg-black text-white text-[12px] sm:text-[13px] font-medium pl-4 pr-3.5 py-2 rounded-full shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-zinc-300" />
-                <span>Book Now</span>
-                <span className="text-zinc-400 group-hover:translate-x-0.5 transition-transform text-xs">
-                  &rarr;
-                </span>
-              </button>
-            </div>
-          </header>
-
-          {/* ================= HERO MAIN CONTENT ================= */}
-          <div className="relative z-10 w-full px-6 sm:px-10 lg:px-14 pt-8 md:pt-14 pb-12 flex-1 flex flex-col justify-center">
-            <div className="max-w-xl">
-              
-              {/* Availability Badge */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-zinc-200/70 shadow-xs mb-6 sm:mb-7">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="text-[11px] sm:text-xs font-semibold text-zinc-800 tracking-tight">
-                  Available Today
-                </span>
-              </div>
-
-              {/* Main Headline */}
-              <h1 className="text-[42px] sm:text-[54px] lg:text-[68px] font-bold text-zinc-950 tracking-[-0.035em] leading-[1.04]">
-                Premium care
-                <br />
-                at your door.
-              </h1>
-
-              {/* Subheading */}
-              <p className="mt-4 sm:mt-5 text-[14px] sm:text-base text-zinc-600 font-normal max-w-sm sm:max-w-md leading-relaxed">
-                Professional mobile detailing that fits your life.
-              </p>
-
-              {/* Action Area: Button & Reviews Pill */}
-              <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-3.5 sm:gap-4">
-                
-                {/* Book Mobile Service Button */}
-                <button
-                  onClick={() => setIsBookingOpen(true)}
-                  className="group inline-flex items-center gap-3.5 bg-zinc-950 hover:bg-black text-white px-5 sm:px-6 py-3.5 rounded-full text-xs sm:text-[13px] font-semibold shadow-lg shadow-zinc-950/15 hover:shadow-zinc-950/25 transition-all active:scale-[0.98]"
-                >
-                  <div className="w-5 h-5 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
-                    <Calendar className="w-4 h-4" />
-                  </div>
-                  <span>Book Mobile Service</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:translate-x-1 transition-transform" />
-                </button>
-
-                {/* Social Proof Reviews Pill */}
-                <div
-                  onClick={() => setIsReviewsOpen(true)}
-                  className="cursor-pointer inline-flex items-center gap-2.5 bg-white/90 hover:bg-white backdrop-blur-md border border-zinc-200/80 rounded-full px-3.5 py-2 shadow-xs hover:shadow-sm transition-all"
-                >
-                  {/* Avatar Stack */}
-                  <div className="flex -space-x-2 overflow-hidden">
-                    <img
-                      className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
-                      src="/avatars/avatar1.jpg"
-                      alt="User avatar 1"
-                    />
-                    <img
-                      className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
-                      src="/avatars/avatar2.jpg"
-                      alt="User avatar 2"
-                    />
-                    <img
-                      className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
-                      src="/avatars/avatar3.jpg"
-                      alt="User avatar 3"
-                    />
-                  </div>
-
-                  {/* Rating Info */}
-                  <div className="flex items-center gap-1.5 text-xs">
-                    <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-                    <span className="font-bold text-zinc-950">4.9</span>
-                    <span className="text-zinc-500 font-normal">1,250+ reviews</span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+          {/* Availability Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-zinc-200/70 shadow-xs mb-5 sm:mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-[11px] sm:text-xs font-semibold text-zinc-800 tracking-tight">
+              Available Today
+            </span>
           </div>
 
-          {/* ================= BOTTOM FLOATING BAR / DOCK ================= */}
-          <div className="relative z-10 w-full px-6 sm:px-10 lg:px-14 pb-8 pt-4">
-            <div className="w-full bg-white/85 hover:bg-white/95 backdrop-blur-xl border border-white/90 shadow-[0_12px_45px_-12px_rgba(0,0,0,0.1)] rounded-2xl sm:rounded-[26px] p-4 sm:p-5 transition-all">
-              <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-zinc-200/70">
-                
-                {/* Feature 1: Protected */}
-                <div className="flex items-center gap-4 py-3 md:py-1 px-3 sm:px-6 first:pl-2">
-                  <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
-                    <ShieldCheck className="w-4 h-4 stroke-[1.75]" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
-                      Protected
-                    </h3>
-                    <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
-                      Licensed & insured
-                    </p>
-                  </div>
-                </div>
+          {/* Headline */}
+          <h1 className="text-[44px] sm:text-[56px] lg:text-[68px] font-bold text-zinc-950 tracking-[-0.035em] leading-[1.04]">
+            Premium care
+            <br />
+            at your door.
+          </h1>
 
-                {/* Feature 2: Safe Products */}
-                <div className="flex items-center gap-4 py-3 md:py-1 px-3 sm:px-6">
-                  <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
-                    <Leaf className="w-4 h-4 stroke-[1.75]" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
-                      Safe Products
-                    </h3>
-                    <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
-                      Paint-safe detailing
-                    </p>
-                  </div>
-                </div>
+          {/* Subheading */}
+          <p className="mt-4 sm:mt-5 text-[15px] sm:text-base text-zinc-600 font-normal max-w-sm sm:max-w-md leading-relaxed">
+            Professional mobile detailing that fits your life.
+          </p>
 
-                {/* Feature 3: Expert Care */}
-                <div className="flex items-center gap-4 py-3 md:py-1 px-3 sm:px-6 last:pr-2">
-                  <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
-                    <Award className="w-4 h-4 stroke-[1.75]" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
-                      Expert Care
-                    </h3>
-                    <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
-                      Handled by pros
-                    </p>
-                  </div>
-                </div>
+          {/* Action Row */}
+          <div className="mt-8 sm:mt-9 flex flex-wrap items-center gap-3.5 sm:gap-4">
+            
+            {/* Book Mobile Service Button */}
+            <button
+              onClick={() => setIsBookingOpen(true)}
+              className="group inline-flex items-center gap-3.5 bg-zinc-950 hover:bg-black text-white px-5 sm:px-6 py-3.5 rounded-full text-xs sm:text-[13px] font-semibold shadow-lg shadow-zinc-950/15 hover:shadow-zinc-950/25 transition-all active:scale-[0.98]"
+            >
+              <div className="w-5 h-5 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
+                <Calendar className="w-4 h-4" />
+              </div>
+              <span>Book Mobile Service</span>
+              <ArrowRight className="w-3.5 h-3.5 text-zinc-400 group-hover:translate-x-1 transition-transform" />
+            </button>
 
+            {/* Social Proof Pill */}
+            <div
+              onClick={() => setIsReviewsOpen(true)}
+              className="cursor-pointer inline-flex items-center gap-2.5 bg-white/90 hover:bg-white backdrop-blur-md border border-zinc-200/80 rounded-full px-3.5 py-2 shadow-xs hover:shadow-sm transition-all"
+            >
+              <div className="flex -space-x-2 overflow-hidden">
+                <img
+                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
+                  src="/avatars/avatar1.jpg"
+                  alt="Client avatar 1"
+                />
+                <img
+                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
+                  src="/avatars/avatar2.jpg"
+                  alt="Client avatar 2"
+                />
+                <img
+                  className="inline-block h-6 w-6 rounded-full ring-2 ring-white object-cover"
+                  src="/avatars/avatar3.jpg"
+                  alt="Client avatar 3"
+                />
+              </div>
+
+              <div className="flex items-center gap-1.5 text-xs">
+                <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
+                <span className="font-bold text-zinc-950">4.9</span>
+                <span className="text-zinc-500 font-normal">1,250+ reviews</span>
               </div>
             </div>
+
           </div>
 
         </div>
-      </div>
+      </main>
+
+      {/* ================= BOTTOM FLOATING CARD / DOCK ================= */}
+      <footer className="relative z-10 w-full px-6 sm:px-12 lg:px-20 pb-7 pt-2">
+        <div className="w-full bg-white/85 hover:bg-white/95 backdrop-blur-xl border border-white/90 shadow-[0_12px_45px_-12px_rgba(0,0,0,0.1)] rounded-2xl sm:rounded-[26px] p-4 sm:p-5 transition-all">
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-zinc-200/70">
+            
+            {/* Feature 1: Protected */}
+            <div className="flex items-center gap-4 py-2.5 md:py-1 px-3 sm:px-6 first:pl-2">
+              <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
+                <ShieldCheck className="w-4 h-4 stroke-[1.75]" />
+              </div>
+              <div>
+                <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
+                  Protected
+                </h3>
+                <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
+                  Licensed & insured
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 2: Safe Products */}
+            <div className="flex items-center gap-4 py-2.5 md:py-1 px-3 sm:px-6">
+              <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
+                <Leaf className="w-4 h-4 stroke-[1.75]" />
+              </div>
+              <div>
+                <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
+                  Safe Products
+                </h3>
+                <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
+                  Paint-safe detailing
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 3: Expert Care */}
+            <div className="flex items-center gap-4 py-2.5 md:py-1 px-3 sm:px-6 last:pr-2">
+              <div className="w-9 h-9 rounded-full bg-zinc-100/90 flex items-center justify-center text-zinc-800 shrink-0 border border-zinc-200/60">
+                <Award className="w-4 h-4 stroke-[1.75]" />
+              </div>
+              <div>
+                <h3 className="font-bold text-[13px] sm:text-sm text-zinc-900 leading-tight">
+                  Expert Care
+                </h3>
+                <p className="text-[11px] sm:text-xs text-zinc-500 mt-0.5">
+                  Handled by pros
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Small bottom footer line */}
+        <div className="mt-3 flex items-center justify-between text-[11px] text-zinc-400 px-2">
+          <span>&copy; 2026 Atelier Mobile Detail. All rights reserved.</span>
+          <div className="flex items-center gap-2">
+            <Phone className="w-3 h-3 text-zinc-400" />
+            <span>(800) 555-CARE</span>
+          </div>
+        </div>
+      </footer>
 
       {/* ================= BOOKING MODAL WIZARD ================= */}
       {isBookingOpen && (
@@ -336,7 +270,6 @@ export default function App() {
 
             {!bookingSuccess ? (
               <div>
-                {/* Modal Header */}
                 <div className="mb-6">
                   <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-700 text-[10px] font-semibold uppercase tracking-wider mb-2">
                     Step {bookingStep} of 3
@@ -423,10 +356,10 @@ export default function App() {
                       </label>
                       <div className="space-y-2">
                         {[
-                          { time: 'Today (Within 2 hrs)', badge: 'Fastest arrival', status: 'Available' },
-                          { time: 'Tomorrow &bull; 9:00 AM - 11:30 AM', badge: 'Morning slot', status: 'Available' },
-                          { time: 'Tomorrow &bull; 2:00 PM - 4:30 PM', badge: 'Afternoon slot', status: 'Available' },
-                          { time: 'Saturday &bull; 10:00 AM - 12:30 PM', badge: 'Weekend slot', status: 'Available' }
+                          { time: 'Today (Within 2 hrs)', badge: 'Fastest arrival' },
+                          { time: 'Tomorrow • 9:00 AM - 11:30 AM', badge: 'Morning slot' },
+                          { time: 'Tomorrow • 2:00 PM - 4:30 PM', badge: 'Afternoon slot' },
+                          { time: 'Saturday • 10:00 AM - 12:30 PM', badge: 'Weekend slot' }
                         ].map((slot) => (
                           <div
                             key={slot.time}
@@ -439,7 +372,7 @@ export default function App() {
                           >
                             <div className="flex items-center gap-2">
                               <Clock className="w-3.5 h-3.5 text-zinc-400" />
-                              <span dangerouslySetInnerHTML={{ __html: slot.time }} />
+                              <span>{slot.time}</span>
                             </div>
                             <span className="text-[10px] bg-emerald-100 text-emerald-800 font-semibold px-2 py-0.5 rounded-full">
                               {slot.badge}
@@ -511,7 +444,7 @@ export default function App() {
                       </div>
                     </div>
 
-                    {/* Summary Card */}
+                    {/* Summary */}
                     <div className="p-3 bg-zinc-50 border border-zinc-200 rounded-xl text-xs space-y-1.5">
                       <div className="flex justify-between text-zinc-500">
                         <span>Vehicle:</span>
@@ -523,7 +456,7 @@ export default function App() {
                       </div>
                       <div className="flex justify-between text-zinc-500">
                         <span>Arrival Slot:</span>
-                        <span className="font-semibold text-zinc-800">{selectedDate.replace('&bull;', '•')}</span>
+                        <span className="font-semibold text-zinc-800">{selectedDate}</span>
                       </div>
                     </div>
 
@@ -547,7 +480,6 @@ export default function App() {
                 )}
               </div>
             ) : (
-              /* Success confirmation */
               <div className="text-center py-8 space-y-4">
                 <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-8 h-8" />
@@ -565,7 +497,7 @@ export default function App() {
                   </div>
                   <div className="flex items-center gap-2 text-zinc-700">
                     <Clock className="w-4 h-4 text-zinc-400" />
-                    <span>{selectedDate.replace('&bull;', '•')}</span>
+                    <span>{selectedDate}</span>
                   </div>
                 </div>
                 <button
@@ -704,18 +636,6 @@ export default function App() {
           </div>
         </div>
       )}
-
-      {/* Footer credits */}
-      <div className="w-full max-w-[1240px] mt-4 px-4 flex flex-col sm:flex-row items-center justify-between text-[11px] text-zinc-500">
-        <div>&copy; 2026 Atelier Mobile Detail. All rights reserved.</div>
-        <div className="flex items-center gap-4 mt-2 sm:mt-0">
-          <span className="flex items-center gap-1">
-            <Phone className="w-3 h-3 text-zinc-400" /> (800) 555-CARE
-          </span>
-          <span>&bull;</span>
-          <span>Insured & Certified</span>
-        </div>
-      </div>
 
     </div>
   )
