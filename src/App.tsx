@@ -105,7 +105,7 @@ export default function App() {
       </div>
 
       {/* ================= 2. HERO IMAGE CONTAINER WITH ROUNDED CORNERS (BELOW NAVBAR) ================= */}
-      <div className="w-full max-w-[1240px] mt-3 sm:mt-4 flex-1 bg-[#FAF8F5] rounded-[28px] sm:rounded-[36px] lg:rounded-[42px] border-[5px] sm:border-[7px] border-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.12)] relative overflow-hidden flex flex-col justify-between min-h-[570px] md:h-[calc(100vh-115px)] max-h-[730px]">
+      <div className="w-full max-w-[1240px] mt-3 sm:mt-4 flex-1 bg-[#FAF8F5] rounded-[28px] sm:rounded-[36px] lg:rounded-[42px] shadow-[0_20px_60px_-15px_rgba(0,0,0,0.12)] relative overflow-hidden flex flex-col justify-between min-h-[570px] md:h-[calc(100vh-115px)] max-h-[730px]">
         
         {/* Background Car Image (Our 2nd Luxury SUV Car with Villa) */}
         <div
