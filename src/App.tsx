@@ -67,48 +67,50 @@ export default function App() {
       {/* Subtle Top Header Soft Fade */}
       <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-[#EDE8DC]/80 via-[#EDE8DC]/30 to-transparent pointer-events-none z-0" />
 
-      {/* ================= HEADER / NAVBAR ================= */}
-      <header className="relative z-10 w-full px-6 sm:px-12 lg:px-20 pt-6 sm:pt-7 pb-2 flex items-center justify-between">
-        {/* Logo */}
+      {/* ================= HEADER / NAVBAR (EXACT RECREATION) ================= */}
+      <header className="relative z-10 w-full px-6 sm:px-12 lg:px-20 pt-6 pb-2 flex items-center justify-between">
+        {/* Left: Logo */}
         <div
-          className="flex flex-col cursor-pointer group"
+          className="flex flex-col cursor-pointer select-none"
           onClick={() => setActiveNav('Home')}
         >
           <span className="font-extrabold text-[15px] sm:text-base tracking-[0.24em] text-zinc-950 uppercase leading-none font-sans">
             ATELIER
           </span>
-          <span className="text-[8px] sm:text-[9px] font-semibold tracking-[0.28em] text-zinc-500 uppercase mt-1">
+          <span className="text-[8px] sm:text-[8.5px] font-semibold tracking-[0.26em] text-zinc-400 uppercase mt-0.5 leading-none">
             MOBILE DETAIL
           </span>
         </div>
 
-        {/* Center Nav Menu */}
-        <nav className="hidden md:flex items-center gap-7 lg:gap-10 text-[13px] font-medium text-zinc-700">
-          {navItems.map((item) => (
-            <button
-              key={item}
-              onClick={() => handleNavClick(item)}
-              className={`relative py-1 transition-colors hover:text-zinc-950 ${
-                activeNav === item ? 'text-zinc-950 font-semibold' : 'text-zinc-600'
-              }`}
-            >
-              {item}
-              {activeNav === item && (
-                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-[2px] bg-zinc-950 rounded-full" />
-              )}
-            </button>
-          ))}
-        </nav>
+        {/* Right Group: Nav Links + Book Now Button Together */}
+        <div className="flex items-center gap-7 sm:gap-9">
+          <nav className="hidden md:flex items-center gap-6 sm:gap-7 text-[12.5px] sm:text-[13px]">
+            {navItems.map((item) => (
+              <button
+                key={item}
+                onClick={() => handleNavClick(item)}
+                className={`relative py-1 transition-colors flex flex-col items-center ${
+                  activeNav === item
+                    ? 'text-zinc-950 font-bold'
+                    : 'text-zinc-500 font-normal hover:text-zinc-900'
+                }`}
+              >
+                <span>{item}</span>
+                {activeNav === item && (
+                  <span className="w-3.5 h-[2px] bg-zinc-950 rounded-full mt-0.5" />
+                )}
+              </button>
+            ))}
+          </nav>
 
-        {/* Right CTA Button */}
-        <div className="flex items-center gap-3">
+          {/* Book Now Button */}
           <button
             onClick={() => setIsBookingOpen(true)}
-            className="group inline-flex items-center gap-2 bg-zinc-950 hover:bg-black text-white text-[12px] sm:text-[13px] font-medium pl-4 pr-3.5 py-2 rounded-full shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
+            className="group inline-flex items-center gap-2 bg-[#101012] hover:bg-black text-white text-[12px] font-medium pl-4 pr-3.5 py-2 rounded-full shadow-sm hover:shadow-md transition-all active:scale-[0.98]"
           >
-            <Sparkles className="w-3.5 h-3.5 text-zinc-300" />
+            <Sparkles className="w-3.5 h-3.5 text-amber-200/90" />
             <span>Book Now</span>
-            <span className="text-zinc-400 group-hover:translate-x-0.5 transition-transform text-xs">
+            <span className="text-zinc-400 group-hover:translate-x-0.5 transition-transform text-[12px]">
               &rarr;
             </span>
           </button>
