@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react'
-import { Phone, Shield, Droplets, CheckCircle2, Sparkles, Award } from 'lucide-react'
+import { Phone, Shield, Droplets, Cpu, Wrench, ShieldCheck } from 'lucide-react'
 
 export default function App() {
   const shouldReduceMotion = useReducedMotion()
@@ -111,7 +111,7 @@ export default function App() {
         <header className="relative z-20 w-full px-6 sm:px-12 lg:px-20 py-8 flex items-center justify-between">
           <div className="cursor-pointer select-none">
             <span className="font-semibold text-lg sm:text-xl tracking-tight text-zinc-950">
-              Solstice Detailing
+              Solstice Automotive
             </span>
           </div>
 
@@ -272,7 +272,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================= 3. ABOUT US SECTION ================= */}
+      {/* ================= 3. ABOUT US SECTION (AUTOMOTIVE GARAGE & MECHANICAL WORKSHOP) ================= */}
       <section
         id="about"
         className="relative z-10 w-full bg-[#EAE8E3] text-zinc-950 py-24 sm:py-32 lg:py-36 px-6 sm:px-12 lg:px-20 border-t border-zinc-950/10 overflow-hidden"
@@ -282,10 +282,10 @@ export default function App() {
           {/* Section Header */}
           <div className="mb-14 sm:mb-20">
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-zinc-500 block mb-3">
-              About Solstice
+              About Our Workshop
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.03em] text-[#0f1013] leading-[1.08] text-balance max-w-3xl">
-              Where Artistry Meets Scientific Precision
+              Precision Engineering &amp; Complete Automotive Care
             </h2>
           </div>
 
@@ -301,49 +301,49 @@ export default function App() {
               className="lg:col-span-7 flex flex-col justify-between"
             >
               <p className="text-[17px] sm:text-[19px] text-[#2c2f35] font-normal leading-[1.6] mb-8 text-pretty">
-                Founded on the premise that fine automobiles deserve the standard of care usually reserved for aerospace components. We operate a dedicated, climate-controlled cleanroom laboratory where every surface is treated with unhurried rigor and scientific measurement.
+                Built on mechanical integrity and computer-guided diagnostics, our workshop provides complete automotive service for all vehicle makes and models. From complex powertrain overhauls and electronic calibration to routine scheduled servicing, our certified technicians ensure your car operates at peak reliability.
               </p>
 
               {/* 3 Value Pillars */}
               <div className="space-y-6 mb-12">
                 <div className="flex items-start gap-4">
                   <div className="size-9 rounded-full bg-zinc-900 text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <CheckCircle2 className="size-4.5 stroke-[2.2]" />
+                    <Cpu className="size-4.5 stroke-[2.2]" />
                   </div>
                   <div>
                     <h3 className="text-base sm:text-[17px] font-semibold text-[#0f1013] mb-1">
-                      Micron-Calibrated Surface Correction
+                      Advanced Computerized Diagnostics
                     </h3>
                     <p className="text-[14px] text-[#555a64] leading-relaxed">
-                      Ultrasonic paint depth gauges map clear coat thickness before cutting, eliminating swirl marks without thinning factory finish.
+                      OBD-II telemetry and live sensor mapping detect transmission, ECU, and powertrain faults before they escalate into costly failures.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
                   <div className="size-9 rounded-full bg-zinc-900 text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <Sparkles className="size-4.5 stroke-[2.2]" />
+                    <Wrench className="size-4.5 stroke-[2.2]" />
                   </div>
                   <div>
                     <h3 className="text-base sm:text-[17px] font-semibold text-[#0f1013] mb-1">
-                      Cleanroom Infrared Ceramic Curing
+                      Mechanical Overhauls &amp; OEM Standards
                     </h3>
                     <p className="text-[14px] text-[#555a64] leading-relaxed">
-                      Dual-layer 9H SiO2 coatings cured under precision short-wave infrared heat lamps for an impenetrable, hydrophobic glass armor.
+                      Engine rebuilding, suspension alignment, and brake service calibrated to exact factory torque specifications using genuine parts.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
                   <div className="size-9 rounded-full bg-zinc-900 text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <Award className="size-4.5 stroke-[2.2]" />
+                    <ShieldCheck className="size-4.5 stroke-[2.2]" />
                   </div>
                   <div>
                     <h3 className="text-base sm:text-[17px] font-semibold text-[#0f1013] mb-1">
-                      Master Guild Accreditation
+                      Certified Master Mechanics &amp; Roadside Care
                     </h3>
                     <p className="text-[14px] text-[#555a64] leading-relaxed">
-                      Every technician holds master certification in paint restoration, adhering to strict multi-point inspection protocols.
+                      Transparent digital inspection reports, upfront repair quotes with no hidden fees, and dedicated emergency roadside assistance.
                     </p>
                   </div>
                 </div>
@@ -353,35 +353,35 @@ export default function App() {
               <div className="grid grid-cols-3 gap-6 pt-8 border-t border-zinc-950/15">
                 <div>
                   <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
-                    99.8%
+                    15,000+
                   </div>
                   <div className="text-xs sm:text-[13px] text-zinc-600 mt-1">
-                    Optical Gloss Rating
+                    Vehicles Serviced
                   </div>
                 </div>
 
                 <div>
                   <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
-                    12+
+                    100%
                   </div>
                   <div className="text-xs sm:text-[13px] text-zinc-600 mt-1">
-                    Inspection Gates
+                    Genuine OEM Parts
                   </div>
                 </div>
 
                 <div>
                   <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
-                    5-Year
+                    24/7
                   </div>
                   <div className="text-xs sm:text-[13px] text-zinc-600 mt-1">
-                    Ceramic Guarantee
+                    Emergency Response
                   </div>
                 </div>
               </div>
 
             </motion.div>
 
-            {/* Right Column: Editorial Visuals (5 Columns) */}
+            {/* Right Column: Workshop Visuals (5 Columns) */}
             <motion.div
               initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -391,33 +391,33 @@ export default function App() {
             >
               <div className="relative rounded-[24px] overflow-hidden shadow-2xl border border-zinc-950/10 group bg-zinc-900 aspect-[4/5] max-w-md mx-auto">
                 <img
-                  src="/services/solstice/ceramic.jpg"
-                  alt="Precision Ceramic Detailing in Cleanroom"
+                  src="/services/diagnostics.jpg"
+                  alt="Automotive Workshop Mechanic Diagnostics"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
 
                 {/* Floating Studio Tag (Top) */}
                 <div className="absolute top-5 left-5 right-5 flex items-center justify-between">
                   <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-xs text-white">
                     <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Cleanroom Bay 01
+                    Workshop Bay 04
                   </span>
                   <span className="text-[11px] font-mono text-white/80 bg-black/50 px-2.5 py-1 rounded-full backdrop-blur-md">
-                    ISO 9001
+                    ASE Certified
                   </span>
                 </div>
 
                 {/* Bottom Spec Caption Card */}
                 <div className="absolute bottom-5 inset-x-5 p-5 rounded-[18px] bg-black/75 backdrop-blur-md border border-white/15 text-white">
                   <div className="text-xs text-zinc-400 uppercase tracking-wider mb-1 font-medium">
-                    Current Active Restoration
+                    Active Workshop Inspection
                   </div>
                   <div className="text-base font-semibold tracking-tight text-white">
-                    Multi-Stage Paint Restoration
+                    Powertrain &amp; ECU Diagnostics
                   </div>
                   <div className="text-xs text-zinc-300 mt-1 flex items-center justify-between">
-                    <span>Target Depth: 125 &micro;m</span>
+                    <span>48-Point Electronic Scan</span>
                     <span className="text-emerald-400 font-mono">Calibrated</span>
                   </div>
                 </div>
@@ -438,10 +438,10 @@ export default function App() {
           
           <div>
             <span className="font-bold text-white text-base tracking-tight block">
-              Solstice Detailing
+              Solstice Automotive
             </span>
             <p className="text-zinc-500 mt-1">
-              Precision Engineering & Vehicle Enhancements
+              Full-Service Garage &amp; Engineering Workshop
             </p>
           </div>
 
