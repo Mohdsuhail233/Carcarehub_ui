@@ -124,25 +124,7 @@ export default function App() {
         }`}
       >
         <div className="max-w-[1240px] mx-auto flex items-center justify-between w-full">
-          <a href="#" className="cursor-pointer select-none flex items-center gap-2.5 sm:gap-3 group">
-            <div className="size-8 sm:size-9 rounded-[10px] overflow-hidden shadow-xs shrink-0 group-hover:scale-105 transition-transform">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-full h-full">
-                <rect width="100" height="100" rx="23" fill="#17191D"/>
-                <path d="M67 20 A34 34 0 1 0 67 80"
-                      fill="none" stroke="#F28B24"
-                      strokeWidth="10" strokeLinecap="round"/>
-                <path d="M22 57 L29 47 Q32 43 38 43 H57 Q61 43 65 49 L70 57"
-                      fill="none" stroke="#FFFFFF"
-                      strokeWidth="4" strokeLinecap="round"
-                      strokeLinejoin="round"/>
-                <path d="M19 59 Q19 56 23 56 H68 Q73 56 73 61 V66 H19 Z"
-                      fill="#FFFFFF"/>
-                <circle cx="31" cy="67" r="5"
-                        fill="#17191D" stroke="#F28B24" strokeWidth="2"/>
-                <circle cx="60" cy="67" r="5"
-                        fill="#17191D" stroke="#F28B24" strokeWidth="2"/>
-              </svg>
-            </div>
+          <a href="#" className="cursor-pointer select-none">
             <span className="font-semibold text-lg sm:text-xl tracking-tight text-zinc-950">
               CAR CARE HUB
             </span>
@@ -591,18 +573,8 @@ export default function App() {
       {/* Minimal Legal Bottom Bar */}
       <footer className="w-full py-10 px-6 sm:px-12 lg:px-20 border-t border-zinc-950/10">
         <div className="max-w-[1240px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 w-full">
-          <div className="flex items-center gap-2.5">
-            <div className="size-5 rounded-[6px] overflow-hidden shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" className="w-full h-full">
-                <rect width="100" height="100" rx="23" fill="#17191D"/>
-                <path d="M67 20 A34 34 0 1 0 67 80" fill="none" stroke="#F28B24" strokeWidth="10" strokeLinecap="round"/>
-                <path d="M22 57 L29 47 Q32 43 38 43 H57 Q61 43 65 49 L70 57" fill="none" stroke="#FFFFFF" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M19 59 Q19 56 23 56 H68 Q73 56 73 61 V66 H19 Z" fill="#FFFFFF"/>
-                <circle cx="31" cy="67" r="5" fill="#17191D" stroke="#F28B24" strokeWidth="2"/>
-                <circle cx="60" cy="67" r="5" fill="#17191D" stroke="#F28B24" strokeWidth="2"/>
-              </svg>
-            </div>
-            <span>&copy; {new Date().getFullYear()} CarCareHub. All rights reserved.</span>
+          <div>
+            &copy; {new Date().getFullYear()} CarCareHub. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
             <button
