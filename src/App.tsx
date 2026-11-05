@@ -542,36 +542,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================= 5. MINIMAL FOOTER ================= */}
-      <footer
-        className="w-full bg-[#0a0a0c] text-zinc-500 py-16 px-6 sm:px-12 lg:px-20 border-t border-zinc-800 text-xs"
-      >
-        <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
-          
-          <div>
-            <span className="font-bold text-white text-base tracking-tight block">
-              Solstice Automotive
-            </span>
-            <p className="text-zinc-500 mt-1">
-              Full-Service Garage &amp; Engineering Workshop
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-8 text-zinc-400">
-            <a href="#services" className="hover:text-white transition-colors">Services</a>
-            <a href="#about" className="hover:text-white transition-colors">About</a>
-            <a href="tel:1234567890" className="hover:text-white transition-colors tabular-nums">
-              123-456-7890
-            </a>
-          </div>
-
-          <div className="text-zinc-500 font-mono text-[11px] tabular-nums">
-            &copy; 2026 Solstice. All rights reserved.
-          </div>
-
-        </div>
-      </footer>
-
     </div>
   )
 }
