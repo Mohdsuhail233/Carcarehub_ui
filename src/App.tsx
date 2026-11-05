@@ -531,35 +531,6 @@ export default function App() {
 
           </div>
 
-          {/* Interactive Google Map Embed */}
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-14 sm:mt-18 rounded-[28px] overflow-hidden border border-zinc-950/10 shadow-[0_12px_32px_rgba(0,0,0,0.04)] aspect-[16/8] sm:aspect-[21/8] w-full relative group bg-zinc-200"
-          >
-            <iframe
-              title="Car Care Hub Location Map"
-              src="https://maps.google.com/maps?q=Car+care+hub+Hazrat+Ali+Chowk+Ali+Nagar+Naugawan+Sadat&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700 ease-out"
-              loading="lazy"
-            />
-            <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md text-xs text-white border border-white/10 pointer-events-none">
-              <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Car Care Hub &bull; Live Location</span>
-            </div>
-            <a
-              href="https://share.google/qM0sdv309Wfve2RlG"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute bottom-4 right-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0f1013] text-white text-xs font-semibold shadow-lg hover:bg-black hover:scale-105 transition-all"
-            >
-              <span>Open in Google Maps</span>
-              <ArrowUpRight className="size-3.5" />
-            </a>
-          </motion.div>
-
         </div>
       </section>
 
