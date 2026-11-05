@@ -272,158 +272,131 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================= 3. ABOUT US SECTION (AUTOMOTIVE GARAGE & MECHANICAL WORKSHOP) ================= */}
+      {/* ================= 3. ABOUT US SECTION (CLEAN EDITORIAL GARAGE & WORKSHOP) ================= */}
       <section
         id="about"
         className="relative z-10 w-full bg-[#EAE8E3] text-zinc-950 py-24 sm:py-32 lg:py-36 px-6 sm:px-12 lg:px-20 border-t border-zinc-950/10 overflow-hidden"
       >
         <div className="max-w-[1240px] mx-auto">
           
-          {/* Section Header */}
-          <div className="mb-14 sm:mb-20">
+          {/* Section Header & Narrative */}
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl mb-16 sm:mb-20"
+          >
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-zinc-500 block mb-3">
               About Our Workshop
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.03em] text-[#0f1013] leading-[1.08] text-balance max-w-3xl">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.03em] text-[#0f1013] leading-[1.08] text-balance mb-6">
               Precision Engineering &amp; Complete Automotive Care
             </h2>
-          </div>
+            <p className="text-[16.5px] sm:text-[18px] text-[#434750] font-normal leading-[1.65] text-pretty">
+              Built on mechanical integrity and computer-guided diagnostics, our workshop provides complete automotive care for all vehicle makes and models. From complex powertrain overhauls and electronic calibration to routine scheduled servicing, our certified technicians ensure your car operates at peak reliability.
+            </p>
+          </motion.div>
 
-          {/* 2-Column Split Editorial Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* 3 Value Pillars Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-12 lg:gap-14">
             
-            {/* Left Content (7 Columns) */}
             <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-7 flex flex-col justify-between"
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="group flex flex-col justify-start"
             >
-              <p className="text-[17px] sm:text-[19px] text-[#2c2f35] font-normal leading-[1.6] mb-8 text-pretty">
-                Built on mechanical integrity and computer-guided diagnostics, our workshop provides complete automotive service for all vehicle makes and models. From complex powertrain overhauls and electronic calibration to routine scheduled servicing, our certified technicians ensure your car operates at peak reliability.
+              <div className="size-11 rounded-2xl bg-[#0f1013] text-white flex items-center justify-center shrink-0 mb-6 group-hover:scale-105 transition-transform duration-300">
+                <Cpu className="size-5 stroke-[2.2]" />
+              </div>
+              <h3 className="text-[19px] sm:text-[21px] font-semibold text-[#0f1013] mb-2 tracking-tight">
+                Advanced Computerized Diagnostics
+              </h3>
+              <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed">
+                OBD-II telemetry and live sensor mapping detect transmission, ECU, and electrical faults before they escalate into costly failures.
               </p>
-
-              {/* 3 Value Pillars */}
-              <div className="space-y-6 mb-12">
-                <div className="flex items-start gap-4">
-                  <div className="size-9 rounded-full bg-zinc-900 text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <Cpu className="size-4.5 stroke-[2.2]" />
-                  </div>
-                  <div>
-                    <h3 className="text-base sm:text-[17px] font-semibold text-[#0f1013] mb-1">
-                      Advanced Computerized Diagnostics
-                    </h3>
-                    <p className="text-[14px] text-[#555a64] leading-relaxed">
-                      OBD-II telemetry and live sensor mapping detect transmission, ECU, and powertrain faults before they escalate into costly failures.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="size-9 rounded-full bg-zinc-900 text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <Wrench className="size-4.5 stroke-[2.2]" />
-                  </div>
-                  <div>
-                    <h3 className="text-base sm:text-[17px] font-semibold text-[#0f1013] mb-1">
-                      Mechanical Overhauls &amp; OEM Standards
-                    </h3>
-                    <p className="text-[14px] text-[#555a64] leading-relaxed">
-                      Engine rebuilding, suspension alignment, and brake service calibrated to exact factory torque specifications using genuine parts.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="size-9 rounded-full bg-zinc-900 text-white flex items-center justify-center shrink-0 mt-0.5">
-                    <ShieldCheck className="size-4.5 stroke-[2.2]" />
-                  </div>
-                  <div>
-                    <h3 className="text-base sm:text-[17px] font-semibold text-[#0f1013] mb-1">
-                      Certified Master Mechanics &amp; Roadside Care
-                    </h3>
-                    <p className="text-[14px] text-[#555a64] leading-relaxed">
-                      Transparent digital inspection reports, upfront repair quotes with no hidden fees, and dedicated emergency roadside assistance.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Verified Metrics Strip */}
-              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-zinc-950/15">
-                <div>
-                  <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
-                    15,000+
-                  </div>
-                  <div className="text-xs sm:text-[13px] text-zinc-600 mt-1">
-                    Vehicles Serviced
-                  </div>
-                </div>
-
-                <div>
-                  <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
-                    100%
-                  </div>
-                  <div className="text-xs sm:text-[13px] text-zinc-600 mt-1">
-                    Genuine OEM Parts
-                  </div>
-                </div>
-
-                <div>
-                  <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
-                    24/7
-                  </div>
-                  <div className="text-xs sm:text-[13px] text-zinc-600 mt-1">
-                    Emergency Response
-                  </div>
-                </div>
-              </div>
-
             </motion.div>
 
-            {/* Right Column: Workshop Visuals (5 Columns) */}
             <motion.div
-              initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="lg:col-span-5 relative"
+              transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="group flex flex-col justify-start"
             >
-              <div className="relative rounded-[24px] overflow-hidden shadow-2xl border border-zinc-950/10 group bg-zinc-900 aspect-[4/5] max-w-md mx-auto">
-                <img
-                  src="/services/diagnostics.jpg"
-                  alt="Automotive Workshop Mechanic Diagnostics"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
-
-                {/* Floating Studio Tag (Top) */}
-                <div className="absolute top-5 left-5 right-5 flex items-center justify-between">
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-xs text-white">
-                    <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Workshop Bay 04
-                  </span>
-                  <span className="text-[11px] font-mono text-white/80 bg-black/50 px-2.5 py-1 rounded-full backdrop-blur-md">
-                    ASE Certified
-                  </span>
-                </div>
-
-                {/* Bottom Spec Caption Card */}
-                <div className="absolute bottom-5 inset-x-5 p-5 rounded-[18px] bg-black/75 backdrop-blur-md border border-white/15 text-white">
-                  <div className="text-xs text-zinc-400 uppercase tracking-wider mb-1 font-medium">
-                    Active Workshop Inspection
-                  </div>
-                  <div className="text-base font-semibold tracking-tight text-white">
-                    Powertrain &amp; ECU Diagnostics
-                  </div>
-                  <div className="text-xs text-zinc-300 mt-1 flex items-center justify-between">
-                    <span>48-Point Electronic Scan</span>
-                    <span className="text-emerald-400 font-mono">Calibrated</span>
-                  </div>
-                </div>
+              <div className="size-11 rounded-2xl bg-[#0f1013] text-white flex items-center justify-center shrink-0 mb-6 group-hover:scale-105 transition-transform duration-300">
+                <Wrench className="size-5 stroke-[2.2]" />
               </div>
+              <h3 className="text-[19px] sm:text-[21px] font-semibold text-[#0f1013] mb-2 tracking-tight">
+                Mechanical Overhauls &amp; OEM Standards
+              </h3>
+              <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed">
+                Engine rebuilding, suspension calibration, and brake service aligned to exact factory torque specifications using genuine manufacturer parts.
+              </p>
             </motion.div>
 
+            <motion.div
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="group flex flex-col justify-start"
+            >
+              <div className="size-11 rounded-2xl bg-[#0f1013] text-white flex items-center justify-center shrink-0 mb-6 group-hover:scale-105 transition-transform duration-300">
+                <ShieldCheck className="size-5 stroke-[2.2]" />
+              </div>
+              <h3 className="text-[19px] sm:text-[21px] font-semibold text-[#0f1013] mb-2 tracking-tight">
+                Certified Mechanics &amp; Roadside Care
+              </h3>
+              <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed">
+                Transparent digital inspection reports, upfront repair quotes with no hidden fees, and dedicated 24/7 emergency roadside assistance.
+              </p>
+            </motion.div>
+
+          </div>
+
+          {/* Thin Divider Line */}
+          <div className="w-full border-t border-zinc-950/15 my-14 sm:my-18" />
+
+          {/* 4-Column Verified Workshop Metrics */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
+            <div>
+              <div className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
+                15,000+
+              </div>
+              <div className="text-xs sm:text-[13.5px] text-zinc-600 mt-1 font-medium">
+                Vehicles Serviced
+              </div>
+            </div>
+
+            <div>
+              <div className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
+                100%
+              </div>
+              <div className="text-xs sm:text-[13.5px] text-zinc-600 mt-1 font-medium">
+                Genuine OEM Components
+              </div>
+            </div>
+
+            <div>
+              <div className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
+                48-Point
+              </div>
+              <div className="text-xs sm:text-[13.5px] text-zinc-600 mt-1 font-medium">
+                Electronic Inspection Scan
+              </div>
+            </div>
+
+            <div>
+              <div className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
+                24/7
+              </div>
+              <div className="text-xs sm:text-[13.5px] text-zinc-600 mt-1 font-medium">
+                Emergency Response Fleet
+              </div>
+            </div>
           </div>
 
         </div>
