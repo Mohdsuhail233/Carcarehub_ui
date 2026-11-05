@@ -139,12 +139,12 @@ export default function App() {
             </nav>
 
             <a
-              href="tel:1234567890"
+              href="tel:+918279846617"
               className="flex items-center gap-2.5 text-sm sm:text-[15px] font-medium text-zinc-950 hover:opacity-80 transition-opacity"
             >
               <Phone className="size-4 fill-zinc-950 stroke-none" />
               <span className="tabular-nums underline decoration-zinc-950/40 underline-offset-4">
-                123-456-7890
+                +91 8279846617
               </span>
             </a>
           </div>
@@ -374,7 +374,7 @@ export default function App() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
             <div>
               <div className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
-                15,000+
+                200+
               </div>
               <div className="text-xs sm:text-[13.5px] text-zinc-600 mt-1 font-medium">
                 Vehicles Serviced
@@ -391,12 +391,8 @@ export default function App() {
             </div>
 
             <div>
-              <div className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
-                48-Point
-              </div>
-              <div className="text-xs sm:text-[13.5px] text-zinc-600 mt-1 font-medium">
-                Electronic Inspection Scan
-              </div>
+              
+               
             </div>
 
             <div>
@@ -453,14 +449,14 @@ export default function App() {
                 <MapPin className="size-5 stroke-[2.2]" />
               </div>
               <h3 className="text-[19px] sm:text-[21px] font-semibold text-[#0f1013] mb-2 tracking-tight">
-                Workshop Facility
+                Car Care Hub
               </h3>
               <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed mb-4">
                 Hazrat Ali Chowk, Ali Nagar<br />
                 Naugawan Sadat, Uttar Pradesh 244251
               </p>
               <a
-                href="https://maps.google.com/?q=Hazrat+Ali+Chowk,+Ali+Nagar,+Naugawan+Sadat,+Uttar+Pradesh+244251"
+                href="https://share.google/qM0sdv309Wfve2RlG"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-900 hover:text-black underline decoration-zinc-900/30 underline-offset-4"
@@ -486,16 +482,12 @@ export default function App() {
               </h3>
               <div className="text-[14px] text-[#555a64] space-y-1.5 mb-4">
                 <div className="flex justify-between">
-                  <span>Mon &ndash; Fri:</span>
-                  <span className="font-mono text-zinc-900 font-medium">7:30 AM &ndash; 6:30 PM</span>
+                  <span>Mon &ndash; Sunday:</span>
+                  <span className="font-mono text-zinc-900 font-medium">9:00 AM &ndash; 7:00 PM</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Saturday:</span>
-                  <span className="font-mono text-zinc-900 font-medium">8:00 AM &ndash; 4:00 PM</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Sunday:</span>
-                  <span className="text-emerald-800 font-medium">Emergency Roadside</span>
+                  <span>Tuesday:</span>
+                  <span className="text-emerald-800 font-medium">Closed</span>
                 </div>
               </div>
               <span className="text-xs text-zinc-500">
@@ -515,19 +507,19 @@ export default function App() {
                 <Phone className="size-5 stroke-[2.2]" />
               </div>
               <h3 className="text-[19px] sm:text-[21px] font-semibold text-[#0f1013] mb-2 tracking-tight">
-                Direct Channels
+                Contact Us
               </h3>
               <div className="text-[14px] text-[#555a64] space-y-2 mb-4">
                 <div>
                   <span className="text-xs text-zinc-500 block">General Workshop Desk:</span>
-                  <a href="tel:1234567890" className="text-zinc-950 font-medium hover:underline tabular-nums">
-                    123-456-7890
+                  <a href="tel:+918279846617" className="text-zinc-950 font-medium hover:underline tabular-nums">
+                    +91 8279846617
                   </a>
                 </div>
                 <div>
                   <span className="text-xs text-zinc-500 block">Electronic Inquiries:</span>
-                  <a href="mailto:service@solsticeauto.com" className="text-zinc-950 font-medium hover:underline">
-                    service@solsticeauto.com
+                  <a href="mailto:carcarehub0@gmail.com" className="text-zinc-950 font-medium hover:underline">
+                    carcarehub0@gmail.com
                   </a>
                 </div>
               </div>
@@ -537,6 +529,35 @@ export default function App() {
             </motion.div>
 
           </div>
+
+          {/* Interactive Google Map Embed */}
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-14 sm:mt-18 rounded-[28px] overflow-hidden border border-zinc-950/10 shadow-[0_12px_32px_rgba(0,0,0,0.04)] aspect-[16/8] sm:aspect-[21/8] w-full relative group bg-zinc-200"
+          >
+            <iframe
+              title="Car Care Hub Location Map"
+              src="https://maps.google.com/maps?q=Car+care+hub+Hazrat+Ali+Chowk+Ali+Nagar+Naugawan+Sadat&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              className="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+              loading="lazy"
+            />
+            <div className="absolute top-4 left-4 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md text-xs text-white border border-white/10 pointer-events-none">
+              <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Car Care Hub &bull; Live Location</span>
+            </div>
+            <a
+              href="https://share.google/qM0sdv309Wfve2RlG"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-4 right-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0f1013] text-white text-xs font-semibold shadow-lg hover:bg-black hover:scale-105 transition-all"
+            >
+              <span>Open in Google Maps</span>
+              <ArrowUpRight className="size-3.5" />
+            </a>
+          </motion.div>
 
         </div>
       </section>
