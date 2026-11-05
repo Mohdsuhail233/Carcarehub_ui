@@ -8,7 +8,8 @@ import {
   ShieldCheck,
   MapPin,
   Clock,
-  ArrowUpRight
+  ArrowUpRight,
+  User
 } from 'lucide-react'
 
 export default function App() {
@@ -139,13 +140,13 @@ export default function App() {
             </nav>
 
             <a
-              href="tel:+918279846617"
-              className="flex items-center gap-2.5 text-sm sm:text-[15px] font-medium text-zinc-950 hover:opacity-80 transition-opacity"
+              href="https://portal.carcarehubgp.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-zinc-950 text-white text-xs sm:text-sm font-medium hover:bg-black hover:scale-105 active:scale-95 transition-all shadow-sm"
             >
-              <Phone className="size-4 fill-zinc-950 stroke-none" />
-              <span className="tabular-nums underline decoration-zinc-950/40 underline-offset-4">
-                +91 8279846617
-              </span>
+              <User className="size-4" />
+              <span>Login</span>
             </a>
           </div>
         </header>
