@@ -239,7 +239,7 @@ export default function App() {
             </p>
           </div>
 
-          {/* Row 1: Diagnosis | Repairs | Maintenance */}
+          {/* Row 1: Diagnosis | Repairs | Maintenance - Centered & Equal */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-14 lg:gap-16">
             {servicesRow1.map((service, idx) => (
               <motion.article
@@ -248,10 +248,10 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group cursor-pointer select-none flex flex-col justify-start"
+                className="group cursor-pointer select-none flex flex-col items-center text-center"
               >
                 {/* Minimalist Tech Icon */}
-                <div className="group-hover:scale-105 group-hover:-translate-y-0.5 transition-transform duration-300 origin-left">
+                <div className="group-hover:scale-105 group-hover:-translate-y-0.5 transition-transform duration-300">
                   {service.icon}
                 </div>
 
@@ -261,7 +261,7 @@ export default function App() {
                 </h2>
 
                 {/* Subtitle / Description */}
-                <p className="text-[14px] sm:text-[15px] text-[#555a64] font-normal leading-normal">
+                <p className="text-[14px] sm:text-[15px] text-[#555a64] font-normal leading-normal max-w-xs">
                   {service.desc}
                 </p>
               </motion.article>
@@ -271,7 +271,7 @@ export default function App() {
           {/* Clean Thin Divider Line Between Rows (Exact match with reference) */}
           <div className="w-full border-t border-zinc-950/15 my-14 sm:my-18 lg:my-20" />
 
-          {/* Row 2: Tuning | Emergency Assistance | Consultation */}
+          {/* Row 2: Tuning | Emergency Assistance | Consultation - Centered & Equal */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-14 lg:gap-16">
             {servicesRow2.map((service, idx) => (
               <motion.article
@@ -280,20 +280,20 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: 0.15 + idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group cursor-pointer select-none flex flex-col justify-start"
+                className="group cursor-pointer select-none flex flex-col items-center text-center"
               >
                 {/* Minimalist Tech Icon */}
-                <div className="group-hover:scale-105 group-hover:-translate-y-0.5 transition-transform duration-300 origin-left">
+                <div className="group-hover:scale-105 group-hover:-translate-y-0.5 transition-transform duration-300">
                   {service.icon}
                 </div>
 
                 {/* Service Title */}
-                <h2 className="text-[26px] sm:text-[30px] lg:text-[33px] font-normal tracking-[-0.025em] text-[#0f1013] mt-6 sm:mt-7 mb-2 max-w-[260px] group-hover:text-black transition-colors">
+                <h2 className="text-[26px] sm:text-[30px] lg:text-[33px] font-normal tracking-[-0.025em] text-[#0f1013] mt-6 sm:mt-7 mb-2 group-hover:text-black transition-colors">
                   {service.title}
                 </h2>
 
                 {/* Subtitle / Description */}
-                <p className="text-[14px] sm:text-[15px] text-[#555a64] font-normal leading-normal">
+                <p className="text-[14px] sm:text-[15px] text-[#555a64] font-normal leading-normal max-w-xs">
                   {service.desc}
                 </p>
               </motion.article>
@@ -329,7 +329,7 @@ export default function App() {
             </p>
           </motion.div>
 
-          {/* 3 Value Pillars Grid */}
+          {/* 3 Value Pillars Grid - Centered & Equal */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-12 lg:gap-14">
             
             <motion.div
@@ -337,7 +337,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="group flex flex-col justify-start"
+              className="group flex flex-col items-center text-center"
             >
               <div className="size-11 rounded-2xl bg-[#0f1013] text-white flex items-center justify-center shrink-0 mb-6 group-hover:scale-105 transition-transform duration-300">
                 <Cpu className="size-5 stroke-[2.2]" />
@@ -345,7 +345,7 @@ export default function App() {
               <h3 className="text-[19px] sm:text-[21px] font-semibold text-[#0f1013] mb-2 tracking-tight">
                 Advanced Computerized Diagnostics
               </h3>
-              <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed">
+              <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed max-w-sm">
                 OBD-II telemetry and live sensor mapping detect transmission, ECU, and electrical faults before they escalate into costly failures.
               </p>
             </motion.div>
@@ -355,7 +355,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="group flex flex-col justify-start"
+              className="group flex flex-col items-center text-center"
             >
               <div className="size-11 rounded-2xl bg-[#0f1013] text-white flex items-center justify-center shrink-0 mb-6 group-hover:scale-105 transition-transform duration-300">
                 <Wrench className="size-5 stroke-[2.2]" />
@@ -363,7 +363,7 @@ export default function App() {
               <h3 className="text-[19px] sm:text-[21px] font-semibold text-[#0f1013] mb-2 tracking-tight">
                 Mechanical Overhauls &amp; OEM Standards
               </h3>
-              <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed">
+              <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed max-w-sm">
                 Engine rebuilding, suspension calibration, and brake service aligned to exact factory torque specifications using genuine manufacturer parts.
               </p>
             </motion.div>
@@ -373,7 +373,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="group flex flex-col justify-start"
+              className="group flex flex-col items-center text-center"
             >
               <div className="size-11 rounded-2xl bg-[#0f1013] text-white flex items-center justify-center shrink-0 mb-6 group-hover:scale-105 transition-transform duration-300">
                 <ShieldCheck className="size-5 stroke-[2.2]" />
@@ -381,7 +381,7 @@ export default function App() {
               <h3 className="text-[19px] sm:text-[21px] font-semibold text-[#0f1013] mb-2 tracking-tight">
                 Certified Mechanics &amp; Roadside Care
               </h3>
-              <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed">
+              <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed max-w-sm">
                 Transparent digital inspection reports, upfront repair quotes with no hidden fees, and dedicated 24/7 emergency roadside assistance.
               </p>
             </motion.div>
@@ -450,7 +450,7 @@ export default function App() {
             </p>
           </motion.div>
 
-          {/* 3-Column Minimalist Details Grid */}
+          {/* 3-Column Minimalist Details Grid - Centered & Equal */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-12 lg:gap-14">
             
             {/* Column 1: Facility Location */}
@@ -459,7 +459,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col justify-start"
+              className="flex flex-col items-center text-center"
             >
               <div className="size-11 rounded-2xl bg-[#0f1013] text-white flex items-center justify-center shrink-0 mb-6">
                 <MapPin className="size-5 stroke-[2.2]" />
@@ -471,7 +471,7 @@ export default function App() {
                 href="https://share.google/qM0sdv309Wfve2RlG"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-[14px] sm:text-[14.5px] text-[#555a64] hover:text-black leading-relaxed mb-4 group"
+                className="block text-[14px] sm:text-[14.5px] text-[#555a64] hover:text-black leading-relaxed mb-4 group max-w-xs"
               >
                 <span className="underline decoration-zinc-950/40 group-hover:decoration-black underline-offset-4">
                   Hazrat Ali Chowk, Ali Nagar, Naugawan Sadat, Uttar Pradesh 244251
@@ -494,7 +494,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col justify-start"
+              className="flex flex-col items-center text-center"
             >
               <div className="size-11 rounded-2xl bg-[#0f1013] text-white flex items-center justify-center shrink-0 mb-6">
                 <Clock className="size-5 stroke-[2.2]" />
@@ -502,7 +502,7 @@ export default function App() {
               <h3 className="text-[19px] sm:text-[21px] font-semibold text-[#0f1013] mb-2 tracking-tight">
                 Hours of Operation
               </h3>
-              <div className="text-[14px] text-[#555a64] space-y-1.5 mb-4">
+              <div className="text-[14px] text-[#555a64] space-y-1.5 mb-4 w-full max-w-[240px]">
                 <div className="flex justify-between">
                   <span>Mon &ndash; Sunday:</span>
                   <span className="font-mono text-zinc-900 font-medium">9:00 AM &ndash; 7:00 PM</span>
@@ -523,7 +523,7 @@ export default function App() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col justify-start"
+              className="flex flex-col items-center text-center"
             >
               <div className="size-11 rounded-2xl bg-[#0f1013] text-white flex items-center justify-center shrink-0 mb-6">
                 <Phone className="size-5 stroke-[2.2]" />
