@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { cn } from './lib/utils'
 import {
   Calendar,
@@ -24,7 +25,8 @@ import {
 } from 'lucide-react'
 
 export default function App() {
-  const [activeNav, setActiveNav] = useState('Services')
+  const shouldReduceMotion = useReducedMotion()
+  const [activeNav, setActiveNav] = useState('Home')
   const [isBookingOpen, setIsBookingOpen] = useState(false)
   const [isReviewsOpen, setIsReviewsOpen] = useState(false)
 
@@ -254,7 +256,12 @@ export default function App() {
 
           {/* Hero Content */}
           <main className="relative z-10 w-full px-6 sm:px-12 lg:px-20 py-8 sm:py-10 md:py-14 flex-1 flex flex-col justify-center">
-            <div className="max-w-xl">
+            <motion.div
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="max-w-xl"
+            >
               
               {/* Availability Badge */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/85 backdrop-blur-md border border-zinc-200/70 shadow-xs mb-5 sm:mb-6">
@@ -283,19 +290,23 @@ export default function App() {
               <div className="mt-8 sm:mt-9 flex flex-wrap items-center gap-3.5 sm:gap-4">
                 
                 {/* Book Mobile Service Button */}
-                <button
+                <motion.button
+                  whileHover={shouldReduceMotion ? {} : { y: -1 }}
+                  whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                   onClick={() => setIsBookingOpen(true)}
-                  className="group inline-flex items-center gap-3.5 bg-zinc-950 hover:bg-black text-white px-5 sm:px-6 py-3.5 rounded-full text-xs sm:text-[13px] font-semibold shadow-lg shadow-zinc-950/15 hover:shadow-zinc-950/25 transition-all active:scale-[0.98]"
+                  className="group inline-flex items-center gap-3.5 bg-zinc-950 hover:bg-black text-white px-5 sm:px-6 py-3.5 rounded-full text-xs sm:text-[13px] font-semibold shadow-lg shadow-zinc-950/15 hover:shadow-zinc-950/25 transition-all cursor-pointer"
                 >
                   <div className="size-5 flex items-center justify-center text-zinc-400 group-hover:text-white transition-colors">
                     <Calendar className="size-4" />
                   </div>
                   <span>Book Mobile Service</span>
                   <ArrowRight className="size-3.5 text-zinc-400 group-hover:translate-x-1 transition-transform" />
-                </button>
+                </motion.button>
 
                 {/* Social Proof Pill */}
-                <div
+                <motion.div
+                  whileHover={shouldReduceMotion ? {} : { y: -1 }}
+                  whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                   onClick={() => setIsReviewsOpen(true)}
                   className="cursor-pointer inline-flex items-center gap-2.5 bg-white/90 hover:bg-white backdrop-blur-md border border-zinc-200/80 rounded-full px-3.5 py-2 shadow-xs hover:shadow-sm transition-all"
                 >
@@ -322,11 +333,11 @@ export default function App() {
                     <span className="font-bold text-zinc-950 tabular-nums">4.9</span>
                     <span className="text-zinc-500 font-normal tabular-nums">1,250+ reviews</span>
                   </div>
-                </div>
+                </motion.div>
 
               </div>
 
-            </div>
+            </motion.div>
           </main>
 
           {/* ================= BOTTOM FLOATING CARD / DOCK ================= */}
@@ -395,17 +406,29 @@ export default function App() {
       </div>
 
       {/* ================= BOOKING MODAL WIZARD ================= */}
-      {isBookingOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-zinc-200 relative overflow-hidden">
-            
-            <button
-              onClick={resetBooking}
-              aria-label="Close booking dialog"
-              className="absolute top-5 right-5 size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600 transition-colors"
+      <AnimatePresence>
+        {isBookingOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.96, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.96, y: 8 }}
+              transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+              className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-zinc-200 relative overflow-hidden"
             >
-              <X className="size-4" />
-            </button>
+              <button
+                onClick={resetBooking}
+                aria-label="Close booking dialog"
+                className="absolute top-5 right-5 size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600 transition-colors cursor-pointer"
+              >
+                <X className="size-4" />
+              </button>
 
             {!bookingSuccess ? (
               <div>
@@ -646,78 +669,93 @@ export default function App() {
                 </div>
                 <button
                   onClick={resetBooking}
-                  className="mt-4 px-6 py-2.5 rounded-full bg-zinc-950 text-white text-xs font-semibold hover:bg-black transition-colors"
+                  className="mt-4 px-6 py-2.5 rounded-full bg-zinc-950 text-white text-xs font-semibold hover:bg-black transition-colors cursor-pointer"
                 >
                   Done
                 </button>
               </div>
             )}
 
-          </div>
-        </div>
-      )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ================= REVIEWS MODAL ================= */}
-      {isReviewsOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-zinc-200 relative">
-            <button
-              onClick={() => setIsReviewsOpen(false)}
-              aria-label="Close reviews dialog"
-              className="absolute top-5 right-5 size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600 transition-colors"
+      <AnimatePresence>
+        {isReviewsOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={shouldReduceMotion ? false : { opacity: 0, scale: 0.96, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={shouldReduceMotion ? undefined : { opacity: 0, scale: 0.96, y: 8 }}
+              transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+              className="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-zinc-200 relative"
             >
-              <X className="size-4" />
-            </button>
+              <button
+                onClick={() => setIsReviewsOpen(false)}
+                aria-label="Close reviews dialog"
+                className="absolute top-5 right-5 size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600 transition-colors cursor-pointer"
+              >
+                <X className="size-4" />
+              </button>
 
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-500">
-                <Star className="size-6 fill-amber-500" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-zinc-950 text-balance tabular-nums">4.9 / 5.0 Rating</h3>
-                <p className="text-xs text-zinc-500 text-pretty tabular-nums">Based on 1,250+ verified luxury vehicle reviews</p>
-              </div>
-            </div>
-
-            <div className="space-y-3.5 max-h-[60vh] overflow-y-auto pr-1">
-              {[
-                {
-                  name: 'Marcus Vance',
-                  car: 'Tesla Model Y Performance',
-                  date: 'Yesterday',
-                  comment: 'They showed up in my driveway on time with their own water & electricity. The paint depth and ceramic reflection looked better than when I picked it up from the dealer.'
-                },
-                {
-                  name: 'Elena Rostova',
-                  car: 'Porsche Taycan 4S',
-                  date: '3 days ago',
-                  comment: 'Incredible attention to detail. No harsh chemicals, zero water marks, and the interior leather treatment feels completely revitalized.'
-                },
-                {
-                  name: 'David Chen',
-                  car: 'BMW M3 Competition',
-                  date: '1 week ago',
-                  comment: 'Booking took 30 seconds. Seamless doorstep experience while I was working from home. Will never go back to standard car washes.'
-                }
-              ].map((rev, i) => (
-                <div key={i} className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200/80 text-xs">
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="font-bold text-zinc-900">{rev.name}</span>
-                    <span className="text-zinc-400 text-[11px] tabular-nums">{rev.date}</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-amber-500 mb-2">
-                    {[...Array(5)].map((_, idx) => (
-                      <Star key={idx} className="size-3 fill-amber-500" />
-                    ))}
-                    <span className="ml-2 text-[11px] font-medium text-zinc-500">{rev.car}</span>
-                  </div>
-                  <p className="text-zinc-600 leading-relaxed text-pretty">{rev.comment}</p>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-2.5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-500">
+                  <Star className="size-6 fill-amber-500" />
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+                <div>
+                  <h3 className="text-xl font-bold text-zinc-950 text-balance tabular-nums">4.9 / 5.0 Rating</h3>
+                  <p className="text-xs text-zinc-500 text-pretty tabular-nums">Based on 1,250+ verified luxury vehicle reviews</p>
+                </div>
+              </div>
+
+              <div className="space-y-3.5 max-h-[60vh] overflow-y-auto pr-1">
+                {[
+                  {
+                    name: 'Marcus Vance',
+                    car: 'Tesla Model Y Performance',
+                    date: 'Yesterday',
+                    comment: 'They showed up in my driveway on time with their own water & electricity. The paint depth and ceramic reflection looked better than when I picked it up from the dealer.'
+                  },
+                  {
+                    name: 'Elena Rostova',
+                    car: 'Porsche Taycan 4S',
+                    date: '3 days ago',
+                    comment: 'Incredible attention to detail. No harsh chemicals, zero water marks, and the interior leather treatment feels completely revitalized.'
+                  },
+                  {
+                    name: 'David Chen',
+                    car: 'BMW M3 Competition',
+                    date: '1 week ago',
+                    comment: 'Booking took 30 seconds. Seamless doorstep experience while I was working from home. Will never go back to standard car washes.'
+                  }
+                ].map((rev, i) => (
+                  <div key={i} className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200/80 text-xs">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="font-bold text-zinc-900">{rev.name}</span>
+                      <span className="text-zinc-400 text-[11px] tabular-nums">{rev.date}</span>
+                    </div>
+                    <div className="flex items-center gap-1 text-amber-500 mb-2">
+                      {[...Array(5)].map((_, idx) => (
+                        <Star key={idx} className="size-3 fill-amber-500" />
+                      ))}
+                      <span className="ml-2 text-[11px] font-medium text-zinc-500">{rev.car}</span>
+                    </div>
+                    <p className="text-zinc-600 leading-relaxed text-pretty">{rev.comment}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   )
