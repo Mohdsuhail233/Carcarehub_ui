@@ -372,74 +372,177 @@ export default function App() {
 
       </section>
 
-      {/* ================= OUR SERVICES SECTION (EXACT 6 CARDS) ================= */}
-      <section id="services-section" className="relative z-10 w-full px-6 sm:px-12 lg:px-20 py-20 sm:py-28 max-w-[1360px] mx-auto">
-        
-        {/* Top Banner: Sports Car with Glowing Headlights */}
-        <div className="w-full bg-[#E5E3DF] rounded-2xl sm:rounded-[28px] overflow-hidden relative min-h-[170px] sm:min-h-[200px] flex items-center justify-between p-6 sm:p-10 mb-8 sm:mb-10 shadow-xs border border-zinc-200/60">
-          
-          {/* Banner Background Car Image */}
-          <div
-            className="absolute right-0 top-0 bottom-0 w-[55%] sm:w-[50%] bg-cover bg-no-repeat z-0 pointer-events-none"
-            style={{
-              backgroundImage: "url('/services/banner-exact.png')",
-              backgroundPosition: 'right center',
-            }}
+      {/* ================= 1. OUR SERVICES HERO BANNER (#servicesHero) ================= */}
+      <div id="services-section" className="relative z-10 w-full px-6 sm:px-12 lg:px-20 pt-20 sm:pt-28 pb-10 max-w-[1360px] mx-auto">
+        <section id="servicesHero" className="hero-banner relative rounded-2xl sm:rounded-[28px] overflow-hidden min-h-[220px] sm:min-h-[250px] lg:min-h-[268px] flex items-center mb-7 border border-zinc-200/60 shadow-xs">
+          <img
+            src="/images/services-hero-car.jpg"
+            alt="Luxury Dark Sports Sedan"
+            className="absolute inset-0 w-full h-full object-cover object-right sm:object-[70%_center]"
           />
-          {/* Soft fade gradient into the car image */}
-          <div className="absolute inset-y-0 left-0 w-[70%] sm:w-[55%] bg-gradient-to-r from-[#E5E3DF] via-[#E5E3DF]/95 to-transparent z-0 pointer-events-none" />
+          <div className="hero-gradient-overlay absolute inset-0 bg-gradient-to-r from-[#E5E3DF] via-[#E5E3DF]/90 sm:via-[#E5E3DF]/80 to-transparent pointer-events-none w-[75%] sm:w-[60%]"></div>
 
-          {/* Left Content */}
-          <div className="relative z-10 max-w-md">
-            <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-zinc-950 tracking-tight text-balance">
+          <div className="relative z-10 w-full px-6 sm:px-10 lg:px-12 py-8 sm:py-10 max-w-xl">
+            <h1 className="text-[34px] sm:text-[44px] lg:text-[48px] font-extrabold tracking-tight text-[#0f0f10] leading-[1.12] mb-3">
               Our Services
-            </h2>
-            <p className="mt-2 text-xs sm:text-sm text-zinc-600 leading-relaxed max-w-sm text-pretty">
-              Complete car care & maintenance solutions for long-lasting performance.
+            </h1>
+            <p className="text-[15.5px] sm:text-[17.5px] text-[#52565e] font-normal leading-[1.48] max-w-[430px]">
+              Complete car care &amp; maintenance solutions for long-lasting performance.
             </p>
           </div>
-        </div>
+        </section>
 
-        {/* 6 Service Cards Grid (3 Columns x 2 Rows) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-          {servicesList.map((srv) => {
-            const IconComp = srv.icon
-            return (
-              <motion.div
-                key={srv.id}
-                whileHover={shouldReduceMotion ? {} : { y: -2 }}
-                onClick={() => handleServiceSelect(srv.title)}
-                className="group bg-white hover:bg-zinc-50/60 border border-zinc-200/80 hover:border-zinc-300 rounded-2xl sm:rounded-[22px] p-5 flex items-center justify-between gap-4 cursor-pointer shadow-xs hover:shadow-md transition-all"
-              >
-                {/* Left: Icon, Title, Subtitle */}
-                <div className="flex-1 flex flex-col justify-between h-full pr-1">
-                  <div className="size-9 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-700 mb-4 group-hover:bg-zinc-950 group-hover:text-white transition-colors">
-                    <IconComp className="size-4 stroke-[1.75]" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-sm sm:text-[15px] text-zinc-900 group-hover:text-black leading-tight text-balance">
-                      {srv.title}
-                    </h3>
-                    <p className="text-xs text-zinc-500 mt-1 leading-relaxed text-pretty">
-                      {srv.desc}
-                    </p>
-                  </div>
+        {/* ================= 2. SERVICES 3x2 CARDS GRID (#servicesGridSection) ================= */}
+        <section id="servicesGridSection" aria-label="Car Care Services">
+          <div id="servicesGrid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+
+            {/* Card 1: General Service */}
+            <article
+              onClick={() => handleServiceSelect('General Service')}
+              className="service-card p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer group bg-white border border-zinc-200/80 rounded-[22px] hover:border-zinc-300 shadow-xs hover:shadow-md transition-all"
+            >
+              <div className="flex flex-col justify-between flex-1 min-w-0 py-1 pl-1">
+                <div className="w-12 h-12 rounded-full bg-[#f0f1f3] flex items-center justify-center mb-5 text-[#1f242d] group-hover:bg-[#141414] group-hover:text-white transition-colors">
+                  {/* Wrench Icon SVG */}
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <rect x="3" y="3" width="18" height="18" rx="4"/>
+                    <path d="M14.5 9.5 9.5 14.5"/>
+                    <path d="M15.5 7.5a2.12 2.12 0 0 1 0 3l-1-1-1-1a2.12 2.12 0 0 1 3 0Z"/>
+                    <path d="M8.5 16.5a2.12 2.12 0 0 1 0-3l1 1 1 1a2.12 2.12 0 0 1-3 0Z"/>
+                  </svg>
                 </div>
-
-                {/* Right: Rounded Image Thumbnail */}
-                <div className="size-24 sm:size-28 rounded-xl sm:rounded-2xl overflow-hidden shrink-0 shadow-xs bg-zinc-100 border border-zinc-100">
-                  <img
-                    src={srv.image}
-                    alt={srv.title}
-                    className="size-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                <div>
+                  <h2 className="text-[18px] sm:text-[19px] font-bold text-[#141414] mb-1.5">General Service</h2>
+                  <p className="text-[13.5px] sm:text-[14px] text-[#686d76]">Periodic maintenance &amp; health check.</p>
                 </div>
-              </motion.div>
-            )
-          })}
-        </div>
+              </div>
+              <div className="w-[132px] h-[132px] sm:w-[146px] sm:h-[146px] shrink-0 rounded-[16px] overflow-hidden bg-gray-100">
+                <img src="/images/general-service.jpg" alt="General Service" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              </div>
+            </article>
 
-      </section>
+            {/* Card 2: Engine Repair */}
+            <article
+              onClick={() => handleServiceSelect('Engine Repair')}
+              className="service-card p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer group bg-white border border-zinc-200/80 rounded-[22px] hover:border-zinc-300 shadow-xs hover:shadow-md transition-all"
+            >
+              <div className="flex flex-col justify-between flex-1 min-w-0 py-1 pl-1">
+                <div className="w-12 h-12 rounded-full bg-[#f0f1f3] flex items-center justify-center mb-5 text-[#1f242d] group-hover:bg-[#141414] group-hover:text-white transition-colors">
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M12 3L4 7v6c0 5 3.5 8.5 8 9 4.5-.5 8-4 8-9V7l-8-4z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 7v2M12 15v2M7 12h2M15 12h2"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-[18px] sm:text-[19px] font-bold text-[#141414] mb-1.5">Engine Repair</h2>
+                  <p className="text-[13.5px] sm:text-[14px] text-[#686d76]">Expert engine diagnostics &amp; repair.</p>
+                </div>
+              </div>
+              <div className="w-[132px] h-[132px] sm:w-[146px] sm:h-[146px] shrink-0 rounded-[16px] overflow-hidden bg-gray-100">
+                <img src="/images/engine-repair.jpg" alt="Engine Repair" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              </div>
+            </article>
+
+            {/* Card 3: Brake Service */}
+            <article
+              onClick={() => handleServiceSelect('Brake Service')}
+              className="service-card p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer group bg-white border border-zinc-200/80 rounded-[22px] hover:border-zinc-300 shadow-xs hover:shadow-md transition-all"
+            >
+              <div className="flex flex-col justify-between flex-1 min-w-0 py-1 pl-1">
+                <div className="w-12 h-12 rounded-full bg-[#f0f1f3] flex items-center justify-center mb-5 text-[#1f242d] group-hover:bg-[#141414] group-hover:text-white transition-colors">
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <circle cx="8" cy="8" r="2.5"/>
+                    <circle cx="16" cy="8" r="2.5"/>
+                    <circle cx="8" cy="16" r="2.5"/>
+                    <circle cx="16" cy="16" r="2.5"/>
+                    <path d="M10.5 8h3M8 10.5v3M16 10.5v3M10.5 16h3"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-[18px] sm:text-[19px] font-bold text-[#141414] mb-1.5">Brake Service</h2>
+                  <p className="text-[13.5px] sm:text-[14px] text-[#686d76]">Brake inspection, pad &amp; disc replacement.</p>
+                </div>
+              </div>
+              <div className="w-[132px] h-[132px] sm:w-[146px] sm:h-[146px] shrink-0 rounded-[16px] overflow-hidden bg-gray-100">
+                <img src="/images/brake-service.jpg" alt="Brake Service" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              </div>
+            </article>
+
+            {/* Card 4: AC Service */}
+            <article
+              onClick={() => handleServiceSelect('AC Service')}
+              className="service-card p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer group bg-white border border-zinc-200/80 rounded-[22px] hover:border-zinc-300 shadow-xs hover:shadow-md transition-all"
+            >
+              <div className="flex flex-col justify-between flex-1 min-w-0 py-1 pl-1">
+                <div className="w-12 h-12 rounded-full bg-[#f0f1f3] flex items-center justify-center mb-5 text-[#1f242d] group-hover:bg-[#141414] group-hover:text-white transition-colors">
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M14 4a2 2 0 1 1 4 0c0 1.5-1.5 2.5-2.5 3.5L11 12a3.5 3.5 0 1 1-5-5l4.5-4.5C11.5 1.5 12.5 4 14 4z"/>
+                    <circle cx="8.5" cy="14.5" r="1"/>
+                    <path d="M15 14h4M17 12v4"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-[18px] sm:text-[19px] font-bold text-[#141414] mb-1.5">AC Service</h2>
+                  <p className="text-[13.5px] sm:text-[14px] text-[#686d76]">Cooling system check &amp; gas refill.</p>
+                </div>
+              </div>
+              <div className="w-[132px] h-[132px] sm:w-[146px] sm:h-[146px] shrink-0 rounded-[16px] overflow-hidden bg-gray-100">
+                <img src="/images/ac-service.jpg" alt="AC Service" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              </div>
+            </article>
+
+            {/* Card 5: Denting & Painting */}
+            <article
+              onClick={() => handleServiceSelect('Denting & Painting')}
+              className="service-card p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer group bg-white border border-zinc-200/80 rounded-[22px] hover:border-zinc-300 shadow-xs hover:shadow-md transition-all"
+            >
+              <div className="flex flex-col justify-between flex-1 min-w-0 py-1 pl-1">
+                <div className="w-12 h-12 rounded-full bg-[#f0f1f3] flex items-center justify-center mb-5 text-[#1f242d] group-hover:bg-[#141414] group-hover:text-white transition-colors">
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M12 3v5m0 0L9 6m3 2 3-2"/>
+                    <rect x="6" y="11" width="12" height="5" rx="1.5"/>
+                    <path d="M8 16v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3"/>
+                    <circle cx="9.5" cy="8.5" r="1"/>
+                    <circle cx="14.5" cy="8.5" r="1"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-[18px] sm:text-[19px] font-bold text-[#141414] mb-1.5">Denting &amp; Painting</h2>
+                  <p className="text-[13.5px] sm:text-[14px] text-[#686d76]">Remove dents &amp; restore original finish.</p>
+                </div>
+              </div>
+              <div className="w-[132px] h-[132px] sm:w-[146px] sm:h-[146px] shrink-0 rounded-[16px] overflow-hidden bg-gray-100">
+                <img src="/images/denting-painting.jpg" alt="Denting and Painting" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              </div>
+            </article>
+
+            {/* Card 6: Car Diagnostics */}
+            <article
+              onClick={() => handleServiceSelect('Car Diagnostics')}
+              className="service-card p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer group bg-white border border-zinc-200/80 rounded-[22px] hover:border-zinc-300 shadow-xs hover:shadow-md transition-all"
+            >
+              <div className="flex flex-col justify-between flex-1 min-w-0 py-1 pl-1">
+                <div className="w-12 h-12 rounded-full bg-[#f0f1f3] flex items-center justify-center mb-5 text-[#1f242d] group-hover:bg-[#141414] group-hover:text-white transition-colors">
+                  <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M5 7l2-3h10l2 3v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M8 17h8"/>
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-[18px] sm:text-[19px] font-bold text-[#141414] mb-1.5">Car Diagnostics</h2>
+                  <p className="text-[13.5px] sm:text-[14px] text-[#686d76]">Advanced scanning &amp; issue detection.</p>
+                </div>
+              </div>
+              <div className="w-[132px] h-[132px] sm:w-[146px] sm:h-[146px] shrink-0 rounded-[16px] overflow-hidden bg-gray-100">
+                <img src="/images/car-diagnostics.jpg" alt="Car Diagnostics" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              </div>
+            </article>
+
+          </div>
+        </section>
+      </div>
 
       {/* ================= ABOUT US / CONCIERGE PROCESS ================= */}
       <section id="about-section" className="w-full bg-zinc-50/70 border-y border-zinc-200/60 py-20 sm:py-28 px-6 sm:px-12 lg:px-20">
