@@ -1,159 +1,61 @@
-import { useRef } from 'react'
-import {
-  motion,
-  useReducedMotion,
-  useMotionValue,
-  useMotionTemplate
-} from 'motion/react'
+import { motion, useReducedMotion } from 'motion/react'
 import { Phone, Shield, Droplets } from 'lucide-react'
-
-interface ServiceCardItem {
-  id: string
-  line1: string
-  line2: string
-  desc: string
-  icon: React.ReactNode
-}
-
-function AnimatedServiceCard({
-  card,
-  index,
-  shouldReduceMotion
-}: {
-  card: ServiceCardItem
-  index: number
-  shouldReduceMotion: boolean | null
-}) {
-  const cardRef = useRef<HTMLDivElement>(null)
-
-  // Cursor coordinates for radial spotlight
-  const spotX = useMotionValue(-1000)
-  const spotY = useMotionValue(-1000)
-  const spotBackground = useMotionTemplate`radial-gradient(350px circle at ${spotX}px ${spotY}px, rgba(255, 255, 255, 0.08), transparent 75%)`
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current || shouldReduceMotion) return
-    const rect = cardRef.current.getBoundingClientRect()
-    spotX.set(e.clientX - rect.left)
-    spotY.set(e.clientY - rect.top)
-  }
-
-  const handleMouseLeave = () => {
-    spotX.set(-1000)
-    spotY.set(-1000)
-  }
-
-  return (
-    <motion.div
-      ref={cardRef}
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{
-        duration: 0.55,
-        delay: index * 0.1,
-        ease: [0.16, 1, 0.3, 1]
-      }}
-      whileHover={
-        shouldReduceMotion
-          ? {}
-          : {
-              y: -5,
-              scale: 1.012,
-              transition: { duration: 0.25, ease: 'easeOut' }
-            }
-      }
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="group relative bg-[#17171d] border border-white/[0.18] hover:border-white/50 rounded-[20px] p-7 sm:p-8 min-h-[235px] sm:min-h-[245px] flex flex-col justify-between shadow-[0_12px_32px_rgba(0,0,0,0.5)] hover:shadow-[0_22px_45px_rgba(0,0,0,0.7)] cursor-pointer overflow-hidden transition-all duration-300 select-none will-change-transform"
-    >
-      {/* Dynamic Cursor Spotlight */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: spotBackground }}
-      />
-
-      {/* Top: Two-line Title (Exact match to screenshot) */}
-      <div className="relative z-10 pt-1">
-        <h3 className="text-[26px] sm:text-[30px] font-bold text-white tracking-tight leading-[1.12]">
-          <span className="block">{card.line1}</span>
-          <span className="block">{card.line2}</span>
-        </h3>
-      </div>
-
-      {/* Bottom: White Square Icon + Subtext directly beside it */}
-      <div className="relative z-10 flex items-center gap-4 sm:gap-5 mt-8">
-        {/* White Rounded Square Icon Box */}
-        <div className="size-12 rounded-[14px] bg-white text-zinc-950 flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
-          {card.icon}
-        </div>
-
-        {/* Subtext beside Icon */}
-        <p className="text-[13px] sm:text-[14px] text-[#cfd1d8] font-normal leading-[1.38] max-w-[210px] text-pretty group-hover:text-white transition-colors duration-200">
-          {card.desc}
-        </p>
-      </div>
-    </motion.div>
-  )
-}
 
 export default function App() {
   const shouldReduceMotion = useReducedMotion()
 
-  const serviceCards: ServiceCardItem[] = [
+  const serviceCards = [
     {
       id: 'updates',
-      line1: 'Live Ride',
-      line2: 'Updates',
+      title: 'Live Ride Updates',
       desc: 'Navigate Seamlessly with Real-Time Data',
+      tag: 'PRECISION TELEMETRY',
       icon: (
-        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round">
-          <line x1="12" y1="4" x2="12" y2="20" />
-          <line x1="5" y1="8" x2="19" y2="16" />
-          <line x1="5" y1="16" x2="19" y2="8" />
+        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/>
         </svg>
       )
     },
     {
       id: 'alerts',
-      line1: 'Assistive',
-      line2: 'Alerts',
+      title: 'Assistive Alerts',
       desc: 'Stay Informed and Safe',
+      tag: 'ACTIVE MONITORING',
       icon: (
-        <svg className="size-5 text-zinc-950" viewBox="0 0 24 24" fill="currentColor">
-          <rect x="10.5" y="2" width="3" height="3" rx="0.5"/>
-          <rect x="10.5" y="19" width="3" height="3" rx="0.5"/>
-          <rect x="2" y="10.5" width="3" height="3" rx="0.5"/>
-          <rect x="19" y="10.5" width="3" height="3" rx="0.5"/>
-          <rect x="6" y="6" width="3" height="3" rx="0.5"/>
-          <rect x="15" y="6" width="3" height="3" rx="0.5"/>
-          <rect x="6" y="15" width="3" height="3" rx="0.5"/>
-          <rect x="15" y="15" width="3" height="3" rx="0.5"/>
+        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="10" y="2" width="4" height="4" rx="1"/>
+          <rect x="10" y="18" width="4" height="4" rx="1"/>
+          <rect x="2" y="10" width="4" height="4" rx="1"/>
+          <rect x="18" y="10" width="4" height="4" rx="1"/>
+          <rect x="7" y="7" width="3" height="3" rx="0.5"/>
+          <rect x="14" y="7" width="3" height="3" rx="0.5"/>
+          <rect x="7" y="14" width="3" height="3" rx="0.5"/>
+          <rect x="14" y="14" width="3" height="3" rx="0.5"/>
         </svg>
       )
     },
     {
       id: 'recording',
-      line1: 'High-Definition',
-      line2: 'Ride Recording',
+      title: 'High-Definition Ride Recording',
       desc: 'Capture Every Adventure Clearly',
+      tag: '4K OPTICAL LOGGING',
       icon: (
         <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="9"/>
-          <circle cx="12" cy="12" r="3.5"/>
-          <path d="M12 2.5v6M21.5 12h-6M12 21.5v-6M2.5 12h6"/>
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>
         </svg>
       )
     },
     {
       id: 'installation',
-      line1: 'Easy',
-      line2: 'Installation',
+      title: 'Easy Installation',
       desc: 'Simple Setup for Instant Riding',
+      tag: 'SEAMLESS INTEGRATION',
       icon: (
-        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
           <rect x="3" y="3" width="18" height="18" rx="4"/>
-          <path d="M12 8v8M8 12h8"/>
+          <rect x="8" y="8" width="8" height="8" rx="2"/>
         </svg>
       )
     }
@@ -291,15 +193,53 @@ export default function App() {
             </p>
           </div>
 
-          {/* Cards Grid (Exact match with user screenshot) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
+          {/* Tilted Cards Grid (Exact Layout from Video) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-14 lg:gap-16 items-center">
             {serviceCards.map((card, idx) => (
-              <AnimatedServiceCard
+              <motion.div
                 key={card.id}
-                card={card}
-                index={idx}
-                shouldReduceMotion={shouldReduceMotion}
-              />
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className="group relative"
+              >
+                {/* 
+                  Tilted Card Container:
+                  - Base tilt: -rotate-[6deg]
+                  - Smooth tactile straighten on hover: group-hover:rotate-0
+                  - 1px crisp outline: border border-white/[0.18]
+                  - Deep glass card surface: bg-[#14151b]
+                */}
+                <div className="relative -rotate-[6deg] group-hover:rotate-0 group-hover:scale-[1.02] group-hover:-translate-y-2 bg-[#14151b] border border-white/[0.18] group-hover:border-white/40 rounded-[24px] sm:rounded-[28px] p-7 sm:p-9 min-h-[260px] sm:min-h-[290px] flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-500 ease-out cursor-pointer overflow-hidden">
+                  
+                  {/* Subtle top glare reflection */}
+                  <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-white/[0.04] to-transparent pointer-events-none" />
+
+                  {/* Top: Card Title */}
+                  <div className="relative z-10 pt-2">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-[1.15] text-balance">
+                      {card.title}
+                    </h3>
+                  </div>
+
+                  {/* Bottom: White Square Icon + Subtext Right Next to It */}
+                  <div className="relative z-10 flex items-center gap-4 sm:gap-5 mt-8">
+                    
+                    {/* White Rounded Square Icon Container */}
+                    <div className="size-12 sm:size-14 rounded-2xl bg-white text-zinc-950 flex items-center justify-center shrink-0 shadow-lg group-hover:scale-105 transition-transform">
+                      {card.icon}
+                    </div>
+
+                    {/* Subtext Beside Icon */}
+                    <p className="text-xs sm:text-[13.5px] text-zinc-400 font-normal leading-snug max-w-[220px] text-pretty">
+                      {card.desc}
+                    </p>
+
+                  </div>
+
+                </div>
+              </motion.div>
             ))}
           </div>
 
