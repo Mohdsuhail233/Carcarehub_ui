@@ -438,48 +438,6 @@ export default function App() {
             </p>
           </motion.div>
 
-          {/* Large Prominent Calling Banner */}
-          <motion.div
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.55, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-14 sm:mb-18 p-8 sm:p-12 rounded-[28px] bg-white border border-zinc-950/10 shadow-[0_12px_30px_rgba(0,0,0,0.03)] flex flex-col md:flex-row md:items-center justify-between gap-8"
-          >
-            <div>
-              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 mb-2">
-                <span className="size-2 rounded-full bg-emerald-500 animate-pulse" />
-                Direct Workshop Hotline &bull; Live Dispatch
-              </div>
-              <a
-                href="tel:1234567890"
-                className="text-4xl sm:text-5xl lg:text-6xl font-normal tracking-[-0.03em] text-zinc-950 hover:opacity-80 transition-opacity tabular-nums underline decoration-zinc-950/20 underline-offset-8"
-              >
-                123-456-7890
-              </a>
-              <p className="text-sm text-zinc-500 mt-3">
-                Emergency 24/7 Roadside Assistance: <span className="font-semibold text-emerald-800">1-800-SOLSTICE</span>
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <a
-                href="tel:1234567890"
-                className="px-7 py-4 rounded-full bg-[#0f1013] text-white text-sm font-semibold tracking-wide hover:bg-black hover:shadow-lg transition-all flex items-center justify-center gap-2 text-center"
-              >
-                <Phone className="size-4" />
-                <span>Call Workshop Now</span>
-              </a>
-              <a
-                href="mailto:service@solsticeauto.com"
-                className="px-7 py-4 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-900 text-sm font-semibold tracking-wide transition-all flex items-center justify-center gap-2 text-center"
-              >
-                <span>Send Email</span>
-                <ArrowUpRight className="size-4" />
-              </a>
-            </div>
-          </motion.div>
-
           {/* 3-Column Minimalist Details Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-12 lg:gap-14">
             
