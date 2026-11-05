@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import {
   Phone,
@@ -9,11 +10,13 @@ import {
   MapPin,
   Clock,
   ArrowUpRight,
-  User
+  User,
+  X
 } from 'lucide-react'
 
 export default function App() {
   const shouldReduceMotion = useReducedMotion()
+  const [showPrivacy, setShowPrivacy] = useState(false)
 
   const servicesRow1 = [
     {
@@ -533,6 +536,110 @@ export default function App() {
 
         </div>
       </section>
+
+      {/* Minimal Legal Bottom Bar */}
+      <footer className="w-full py-10 px-6 sm:px-12 lg:px-20 border-t border-zinc-950/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+        <div>
+          &copy; {new Date().getFullYear()} CarCareHub. All rights reserved.
+        </div>
+        <div className="flex items-center gap-6">
+          <button
+            onClick={() => setShowPrivacy(true)}
+            className="text-zinc-600 hover:text-black underline decoration-zinc-950/30 underline-offset-4 transition-colors cursor-pointer"
+          >
+            Privacy Policy
+          </button>
+          <a
+            href="/data-deletion.html"
+            className="text-zinc-600 hover:text-black underline decoration-zinc-950/30 underline-offset-4 transition-colors"
+          >
+            Data Deletion
+          </a>
+        </div>
+      </footer>
+
+      {/* Privacy Policy Modal */}
+      {showPrivacy && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+          onClick={() => setShowPrivacy(false)}
+        >
+          <div
+            className="relative w-full max-w-2xl bg-white rounded-[24px] shadow-2xl border border-zinc-200 overflow-hidden my-auto max-h-[85vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="px-6 sm:px-8 py-5 border-b border-zinc-100 flex items-center justify-between shrink-0 bg-zinc-50/50">
+              <div>
+                <h3 className="text-xl font-bold text-zinc-950 tracking-tight">Privacy Policy</h3>
+                <p className="text-xs text-zinc-500 mt-0.5">CarCareHub &bull; Customer Data Protection</p>
+              </div>
+              <button
+                onClick={() => setShowPrivacy(false)}
+                className="size-8 rounded-full bg-zinc-100 hover:bg-zinc-200 flex items-center justify-center text-zinc-600 hover:text-black transition-colors cursor-pointer"
+                aria-label="Close"
+              >
+                <X className="size-4" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6 sm:px-8 py-6 overflow-y-auto text-sm text-zinc-600 leading-relaxed space-y-5">
+              <p className="text-[14px] text-zinc-800 leading-relaxed font-medium bg-zinc-50 p-4 rounded-xl border border-zinc-100">
+                CarCareHub (&ldquo;we&rdquo;, &ldquo;our&rdquo; or &ldquo;us&rdquo;) respects your privacy. This Privacy Policy explains how we may collect, use, store and protect information when you contact us or use our automotive services.
+              </p>
+
+              <div>
+                <h4 className="font-semibold text-zinc-950 text-[15px] mb-1">1. Information we may collect</h4>
+                <p className="text-zinc-600">Depending on your interaction with us, we may collect your name, phone number, email address, vehicle make and model, service or parts enquiry details, appointment preferences and information you choose to provide.</p>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-zinc-950 text-[15px] mb-1">2. How we use information</h4>
+                <p className="text-zinc-600">We may use the information you provide to respond to enquiries, arrange or manage service appointments, prepare estimates or invoices, provide vehicle service updates, respond to parts enquiries and improve our customer service.</p>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-zinc-950 text-[15px] mb-1">3. Sharing of information</h4>
+                <p className="text-zinc-600">We do not sell your personal information. We may share relevant information with service providers who help us operate our business, or where disclosure is required by applicable law. We aim to limit information shared to what is reasonably necessary.</p>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-zinc-950 text-[15px] mb-1">4. Communications</h4>
+                <p className="text-zinc-600">If you provide your contact details, we may contact you about your enquiry, appointment, invoice or requested service updates. You may ask us to stop non-essential communications at any time.</p>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-zinc-950 text-[15px] mb-1">5. Data security and retention</h4>
+                <p className="text-zinc-600">We take reasonable steps to protect information and retain it only for as long as reasonably necessary for the purposes described above or as required by law. No method of electronic storage or transmission is completely secure.</p>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-zinc-950 text-[15px] mb-1">6. Your choices and requests</h4>
+                <p className="text-zinc-600">You may contact us to request access to, correction of or deletion of personal information we hold, subject to applicable legal requirements. For step-by-step instructions on submitting a data deletion request, please refer to our <a href="/data-deletion.html" className="text-zinc-950 font-semibold underline">Data Deletion Instructions</a>.</p>
+              </div>
+
+              <div>
+                <h4 className="font-semibold text-zinc-950 text-[15px] mb-1">7. Contact</h4>
+                <p className="text-zinc-600">For privacy-related questions or requests, contact us at <a href="mailto:carcarehub0@gmail.com" className="text-zinc-950 font-semibold underline">carcarehub0@gmail.com</a> or Hazrat Ali Chowk, Ali Nagar, Naugawan Sadat, Uttar Pradesh 244251.</p>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="px-6 sm:px-8 py-4 border-t border-zinc-100 flex items-center justify-between shrink-0 bg-zinc-50/50 text-xs text-zinc-500">
+              <span>Direct link: <a href="/privacy.html" className="underline font-medium text-zinc-700">carcarehubgp.in/privacy.html</a></span>
+              <button
+                onClick={() => setShowPrivacy(false)}
+                className="px-4 py-2 rounded-xl bg-zinc-950 text-white font-medium hover:bg-black transition-colors cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   )
