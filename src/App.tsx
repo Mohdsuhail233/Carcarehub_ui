@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react'
-import { Phone, Shield, Droplets } from 'lucide-react'
+import { Phone, Shield, Droplets, CheckCircle2, Sparkles, Award } from 'lucide-react'
 
 export default function App() {
   const shouldReduceMotion = useReducedMotion()
@@ -120,8 +120,8 @@ export default function App() {
               <a href="#services" className="hover:text-black transition-colors">
                 Services
               </a>
-              <a href="#services" className="hover:text-black transition-colors">
-                Features
+              <a href="#about" className="hover:text-black transition-colors">
+                About
               </a>
               <a href="#contact" className="hover:text-black transition-colors">
                 Contact
@@ -272,7 +272,164 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================= 3. MINIMAL FOOTER ================= */}
+      {/* ================= 3. ABOUT US SECTION ================= */}
+      <section
+        id="about"
+        className="relative z-10 w-full bg-[#EAE8E3] text-zinc-950 py-24 sm:py-32 lg:py-36 px-6 sm:px-12 lg:px-20 border-t border-zinc-950/10 overflow-hidden"
+      >
+        <div className="max-w-[1240px] mx-auto">
+          
+          {/* Section Header */}
+          <div className="mb-14 sm:mb-20">
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-zinc-500 block mb-3">
+              About Solstice
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.03em] text-[#0f1013] leading-[1.08] text-balance max-w-3xl">
+              Where Artistry Meets Scientific Precision
+            </h2>
+          </div>
+
+          {/* 2-Column Split Editorial Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Content (7 Columns) */}
+            <motion.div
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7 flex flex-col justify-between"
+            >
+              <p className="text-[17px] sm:text-[19px] text-[#2c2f35] font-normal leading-[1.6] mb-8 text-pretty">
+                Founded on the premise that fine automobiles deserve the standard of care usually reserved for aerospace components. We operate a dedicated, climate-controlled cleanroom laboratory where every surface is treated with unhurried rigor and scientific measurement.
+              </p>
+
+              {/* 3 Value Pillars */}
+              <div className="space-y-6 mb-12">
+                <div className="flex items-start gap-4">
+                  <div className="size-9 rounded-full bg-zinc-900 text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <CheckCircle2 className="size-4.5 stroke-[2.2]" />
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-[17px] font-semibold text-[#0f1013] mb-1">
+                      Micron-Calibrated Surface Correction
+                    </h3>
+                    <p className="text-[14px] text-[#555a64] leading-relaxed">
+                      Ultrasonic paint depth gauges map clear coat thickness before cutting, eliminating swirl marks without thinning factory finish.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="size-9 rounded-full bg-zinc-900 text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <Sparkles className="size-4.5 stroke-[2.2]" />
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-[17px] font-semibold text-[#0f1013] mb-1">
+                      Cleanroom Infrared Ceramic Curing
+                    </h3>
+                    <p className="text-[14px] text-[#555a64] leading-relaxed">
+                      Dual-layer 9H SiO2 coatings cured under precision short-wave infrared heat lamps for an impenetrable, hydrophobic glass armor.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="size-9 rounded-full bg-zinc-900 text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <Award className="size-4.5 stroke-[2.2]" />
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-[17px] font-semibold text-[#0f1013] mb-1">
+                      Master Guild Accreditation
+                    </h3>
+                    <p className="text-[14px] text-[#555a64] leading-relaxed">
+                      Every technician holds master certification in paint restoration, adhering to strict multi-point inspection protocols.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Verified Metrics Strip */}
+              <div className="grid grid-cols-3 gap-6 pt-8 border-t border-zinc-950/15">
+                <div>
+                  <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
+                    99.8%
+                  </div>
+                  <div className="text-xs sm:text-[13px] text-zinc-600 mt-1">
+                    Optical Gloss Rating
+                  </div>
+                </div>
+
+                <div>
+                  <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
+                    12+
+                  </div>
+                  <div className="text-xs sm:text-[13px] text-zinc-600 mt-1">
+                    Inspection Gates
+                  </div>
+                </div>
+
+                <div>
+                  <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
+                    5-Year
+                  </div>
+                  <div className="text-xs sm:text-[13px] text-zinc-600 mt-1">
+                    Ceramic Guarantee
+                  </div>
+                </div>
+              </div>
+
+            </motion.div>
+
+            {/* Right Column: Editorial Visuals (5 Columns) */}
+            <motion.div
+              initial={shouldReduceMotion ? false : { opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 relative"
+            >
+              <div className="relative rounded-[24px] overflow-hidden shadow-2xl border border-zinc-950/10 group bg-zinc-900 aspect-[4/5] max-w-md mx-auto">
+                <img
+                  src="/services/solstice/ceramic.jpg"
+                  alt="Precision Ceramic Detailing in Cleanroom"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+
+                {/* Floating Studio Tag (Top) */}
+                <div className="absolute top-5 left-5 right-5 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-xs text-white">
+                    <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Cleanroom Bay 01
+                  </span>
+                  <span className="text-[11px] font-mono text-white/80 bg-black/50 px-2.5 py-1 rounded-full backdrop-blur-md">
+                    ISO 9001
+                  </span>
+                </div>
+
+                {/* Bottom Spec Caption Card */}
+                <div className="absolute bottom-5 inset-x-5 p-5 rounded-[18px] bg-black/75 backdrop-blur-md border border-white/15 text-white">
+                  <div className="text-xs text-zinc-400 uppercase tracking-wider mb-1 font-medium">
+                    Current Active Restoration
+                  </div>
+                  <div className="text-base font-semibold tracking-tight text-white">
+                    Multi-Stage Paint Restoration
+                  </div>
+                  <div className="text-xs text-zinc-300 mt-1 flex items-center justify-between">
+                    <span>Target Depth: 125 &micro;m</span>
+                    <span className="text-emerald-400 font-mono">Calibrated</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================= 4. MINIMAL FOOTER ================= */}
       <footer
         id="contact"
         className="w-full bg-[#0a0a0c] text-zinc-500 py-16 px-6 sm:px-12 lg:px-20 border-t border-zinc-800 text-xs"
@@ -290,6 +447,7 @@ export default function App() {
 
           <div className="flex flex-wrap items-center gap-8 text-zinc-400">
             <a href="#services" className="hover:text-white transition-colors">Services</a>
+            <a href="#about" className="hover:text-white transition-colors">About</a>
             <a href="tel:1234567890" className="hover:text-white transition-colors tabular-nums">
               123-456-7890
             </a>
