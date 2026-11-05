@@ -4,58 +4,86 @@ import { Phone, Shield, Droplets } from 'lucide-react'
 export default function App() {
   const shouldReduceMotion = useReducedMotion()
 
-  const serviceCards = [
+  const servicesRow1 = [
     {
-      id: 'updates',
-      title: 'Live Ride Updates',
-      desc: 'Navigate Seamlessly with Real-Time Data',
-      tag: 'PRECISION TELEMETRY',
+      id: 'diagnosis',
+      title: 'Diagnosis',
+      desc: 'Efficient issue identification',
       icon: (
-        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/>
+        <svg className="size-8 text-[#0f1013]" viewBox="0 0 32 32" fill="none">
+          <rect x="4" y="10" width="3.5" height="12" rx="1.75" fill="currentColor"/>
+          <rect x="10.5" y="4" width="3.5" height="24" rx="1.75" fill="currentColor"/>
+          <rect x="17" y="8" width="3.5" height="16" rx="1.75" fill="currentColor"/>
+          <rect x="23.5" y="12" width="3.5" height="8" rx="1.75" fill="currentColor"/>
+          <circle cx="5.75" cy="27" r="1.5" fill="currentColor" fillOpacity="0.35"/>
+          <circle cx="12.25" cy="30" r="1.5" fill="currentColor" fillOpacity="0.35"/>
+          <circle cx="18.75" cy="27" r="1.5" fill="currentColor" fillOpacity="0.35"/>
         </svg>
       )
     },
     {
-      id: 'alerts',
-      title: 'Assistive Alerts',
-      desc: 'Stay Informed and Safe',
-      tag: 'ACTIVE MONITORING',
+      id: 'repairs',
+      title: 'Repairs',
+      desc: 'High-quality fixes performed',
       icon: (
-        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="currentColor">
-          <rect x="10" y="2" width="4" height="4" rx="1"/>
-          <rect x="10" y="18" width="4" height="4" rx="1"/>
-          <rect x="2" y="10" width="4" height="4" rx="1"/>
-          <rect x="18" y="10" width="4" height="4" rx="1"/>
-          <rect x="7" y="7" width="3" height="3" rx="0.5"/>
-          <rect x="14" y="7" width="3" height="3" rx="0.5"/>
-          <rect x="7" y="14" width="3" height="3" rx="0.5"/>
-          <rect x="14" y="14" width="3" height="3" rx="0.5"/>
+        <svg className="size-8 text-[#0f1013]" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="10.5" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3.5"/>
+          <path d="M16 5.5 A 10.5 10.5 0 1 1 5.5 19.5" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round"/>
         </svg>
       )
     },
     {
-      id: 'recording',
-      title: 'High-Definition Ride Recording',
-      desc: 'Capture Every Adventure Clearly',
-      tag: '4K OPTICAL LOGGING',
+      id: 'maintenance',
+      title: 'Maintenance',
+      desc: 'Regular upkeep services',
       icon: (
-        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="9"/>
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>
+        <svg className="size-8 text-[#0f1013]" viewBox="0 0 32 32" fill="none">
+          <rect x="5.5" y="16" width="3.5" height="11" rx="1.75" fill="currentColor" fillOpacity="0.35"/>
+          <rect x="12" y="8" width="3.5" height="19" rx="1.75" fill="currentColor"/>
+          <rect x="18.5" y="14" width="3.5" height="13" rx="1.75" fill="currentColor"/>
+          <rect x="25" y="5" width="3.5" height="22" rx="1.75" fill="currentColor"/>
+        </svg>
+      )
+    }
+  ]
+
+  const servicesRow2 = [
+    {
+      id: 'tuning',
+      title: 'Tuning',
+      desc: 'Optimizing vehicle performance',
+      icon: (
+        <svg className="size-8 text-[#0f1013]" viewBox="0 0 32 32" fill="none">
+          <line x1="7" y1="4" x2="7" y2="28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.3"/>
+          <circle cx="7" cy="11" r="3" fill="currentColor"/>
+          <line x1="16" y1="4" x2="16" y2="28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.3"/>
+          <circle cx="16" cy="20" r="3" fill="currentColor"/>
+          <line x1="25" y1="4" x2="25" y2="28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.3"/>
+          <circle cx="25" cy="8" r="3" fill="currentColor"/>
         </svg>
       )
     },
     {
-      id: 'installation',
-      title: 'Easy Installation',
-      desc: 'Simple Setup for Instant Riding',
-      tag: 'SEAMLESS INTEGRATION',
+      id: 'emergency',
+      title: 'Emergency Assistance',
+      desc: 'Quick response for urgent needs',
       icon: (
-        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-          <rect x="3" y="3" width="18" height="18" rx="4"/>
-          <rect x="8" y="8" width="8" height="8" rx="2"/>
+        <svg className="size-8 text-[#0f1013]" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="11.5" stroke="currentColor" strokeWidth="2.5"/>
+          <circle cx="16" cy="16" r="7" stroke="currentColor" strokeWidth="2" strokeOpacity="0.5"/>
+          <circle cx="16" cy="16" r="3" fill="currentColor"/>
+        </svg>
+      )
+    },
+    {
+      id: 'consultation',
+      title: 'Consultation',
+      desc: 'Expert advice on car care',
+      icon: (
+        <svg className="size-8 text-[#0f1013]" viewBox="0 0 32 32" fill="none">
+          <path d="M16 5.5a10.5 10.5 0 0 1 10.5 10.5 10.5 10.5 0 0 1-10.5 10.5" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+          <path d="M16 11a5 5 0 0 1 5 5 5 5 0 0 1-5 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.5"/>
+          <circle cx="16" cy="16" r="2" fill="currentColor"/>
         </svg>
       )
     }
@@ -166,80 +194,78 @@ export default function App() {
             href="#services"
             className="text-zinc-600 hover:text-black flex items-center gap-1 transition-colors"
           >
-            <span>Explore Enhancements</span>
+            <span>Explore Services</span>
             <span className="text-[11px]">&darr;</span>
           </a>
         </div>
 
       </section>
 
-      {/* ================= 2. SERVICES / ENHANCEMENTS SECTION (EXACT MATCH WITH USER'S VIDEO) ================= */}
+      {/* ================= 2. SERVICES SECTION (EXACT MATCH WITH USER REFERENCE IMAGE & HERO BG COLOR) ================= */}
       <section
         id="services"
-        className="relative z-10 w-full bg-[#0d0e12] text-white py-28 sm:py-36 px-6 sm:px-12 lg:px-20 overflow-hidden border-t border-zinc-800"
+        className="relative z-10 w-full bg-[#EAE8E3] text-zinc-950 py-24 sm:py-32 lg:py-36 px-6 sm:px-12 lg:px-20 border-t border-zinc-950/10"
       >
-        <div className="max-w-[1280px] mx-auto">
+        <div className="max-w-[1240px] mx-auto">
           
-          {/* Section Header (From Video) */}
-          <div className="max-w-2xl mb-20 sm:mb-28">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.08] mb-6 text-balance">
-              Intelligent Ride
-              <br />
-              Enhancements
-            </h2>
-            <p className="text-[15px] sm:text-base text-zinc-400 font-normal leading-relaxed max-w-xl text-pretty">
-              Discover advanced features that elevate your vehicle experience.
-              Each element is designed to enhance safety, convenience, and the joy of riding.
-            </p>
-          </div>
-
-          {/* Tilted Cards Grid (Exact Layout from Video) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-14 lg:gap-16 items-center">
-            {serviceCards.map((card, idx) => (
-              <motion.div
-                key={card.id}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
+          {/* Row 1: Diagnosis | Repairs | Maintenance */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-14 lg:gap-16">
+            {servicesRow1.map((service, idx) => (
+              <motion.article
+                key={service.id}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative"
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="group cursor-pointer select-none flex flex-col justify-start"
               >
-                {/* 
-                  Tilted Card Container:
-                  - Base tilt: -rotate-[6deg]
-                  - Smooth tactile straighten on hover: group-hover:rotate-0
-                  - 1px crisp outline: border border-white/[0.18]
-                  - Deep glass card surface: bg-[#14151b]
-                */}
-                <div className="relative -rotate-[6deg] group-hover:rotate-0 group-hover:scale-[1.02] group-hover:-translate-y-2 bg-[#14151b] border border-white/[0.18] group-hover:border-white/40 rounded-[24px] sm:rounded-[28px] p-7 sm:p-9 min-h-[260px] sm:min-h-[290px] flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-500 ease-out cursor-pointer overflow-hidden">
-                  
-                  {/* Subtle top glare reflection */}
-                  <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-white/[0.04] to-transparent pointer-events-none" />
-
-                  {/* Top: Card Title */}
-                  <div className="relative z-10 pt-2">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-[1.15] text-balance">
-                      {card.title}
-                    </h3>
-                  </div>
-
-                  {/* Bottom: White Square Icon + Subtext Right Next to It */}
-                  <div className="relative z-10 flex items-center gap-4 sm:gap-5 mt-8">
-                    
-                    {/* White Rounded Square Icon Container */}
-                    <div className="size-12 sm:size-14 rounded-2xl bg-white text-zinc-950 flex items-center justify-center shrink-0 shadow-lg group-hover:scale-105 transition-transform">
-                      {card.icon}
-                    </div>
-
-                    {/* Subtext Beside Icon */}
-                    <p className="text-xs sm:text-[13.5px] text-zinc-400 font-normal leading-snug max-w-[220px] text-pretty">
-                      {card.desc}
-                    </p>
-
-                  </div>
-
+                {/* Minimalist Tech Icon */}
+                <div className="group-hover:scale-105 group-hover:-translate-y-0.5 transition-transform duration-300 origin-left">
+                  {service.icon}
                 </div>
-              </motion.div>
+
+                {/* Service Title */}
+                <h2 className="text-[26px] sm:text-[30px] lg:text-[33px] font-normal tracking-[-0.025em] text-[#0f1013] mt-6 sm:mt-7 mb-2 group-hover:text-black transition-colors">
+                  {service.title}
+                </h2>
+
+                {/* Subtitle / Description */}
+                <p className="text-[14px] sm:text-[15px] text-[#555a64] font-normal leading-normal">
+                  {service.desc}
+                </p>
+              </motion.article>
+            ))}
+          </div>
+
+          {/* Clean Thin Divider Line Between Rows (Exact match with reference) */}
+          <div className="w-full border-t border-zinc-950/15 my-14 sm:my-18 lg:my-20" />
+
+          {/* Row 2: Tuning | Emergency Assistance | Consultation */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-14 lg:gap-16">
+            {servicesRow2.map((service, idx) => (
+              <motion.article
+                key={service.id}
+                initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.15 + idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="group cursor-pointer select-none flex flex-col justify-start"
+              >
+                {/* Minimalist Tech Icon */}
+                <div className="group-hover:scale-105 group-hover:-translate-y-0.5 transition-transform duration-300 origin-left">
+                  {service.icon}
+                </div>
+
+                {/* Service Title */}
+                <h2 className="text-[26px] sm:text-[30px] lg:text-[33px] font-normal tracking-[-0.025em] text-[#0f1013] mt-6 sm:mt-7 mb-2 max-w-[260px] group-hover:text-black transition-colors">
+                  {service.title}
+                </h2>
+
+                {/* Subtitle / Description */}
+                <p className="text-[14px] sm:text-[15px] text-[#555a64] font-normal leading-normal">
+                  {service.desc}
+                </p>
+              </motion.article>
             ))}
           </div>
 
@@ -263,7 +289,7 @@ export default function App() {
           </div>
 
           <div className="flex flex-wrap items-center gap-8 text-zinc-400">
-            <a href="#services" className="hover:text-white transition-colors">Enhancements</a>
+            <a href="#services" className="hover:text-white transition-colors">Services</a>
             <a href="tel:1234567890" className="hover:text-white transition-colors tabular-nums">
               123-456-7890
             </a>
