@@ -1,5 +1,171 @@
-import { motion, useReducedMotion } from 'motion/react'
-import { Phone, Shield, Droplets } from 'lucide-react'
+import { useRef } from 'react'
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useMotionValue,
+  useMotionTemplate
+} from 'motion/react'
+import { Phone, Shield, Droplets, ArrowUpRight } from 'lucide-react'
+
+interface ServiceCardItem {
+  id: string
+  title: string
+  desc: string
+  tag: string
+  icon: React.ReactNode
+}
+
+function AnimatedServiceCard({
+  card,
+  index,
+  shouldReduceMotion
+}: {
+  card: ServiceCardItem
+  index: number
+  shouldReduceMotion: boolean | null
+}) {
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  // 1. Scroll-Linked Rotation & Elevation (Recreating the exact video un-tilt physics)
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ['start end', 'center 55%']
+  })
+
+  // Start with the distinct negative tilt from video (-7.5deg / -6.5deg)
+  // As it scrolls into active view, smoothly straightens to level 0deg
+  const initialTilt = index % 2 === 0 ? -7.5 : -6.5
+  const rawRotate = useTransform(scrollYProgress, [0, 0.85], [initialTilt, 0])
+  const rotateZ = useSpring(rawRotate, { stiffness: 90, damping: 20, mass: 0.6 })
+
+  const rawY = useTransform(scrollYProgress, [0, 0.85], [75, 0])
+  const y = useSpring(rawY, { stiffness: 90, damping: 20, mass: 0.6 })
+
+  const opacity = useTransform(scrollYProgress, [0, 0.35, 0.85], [0.3, 0.75, 1])
+
+  // 2. Interactive 3D Cursor Tilt & Spotlight
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  const rawRotateX = useTransform(mouseY, [-0.5, 0.5], [6, -6])
+  const rawRotateY = useTransform(mouseX, [-0.5, 0.5], [-6, 6])
+  const rotateX = useSpring(rawRotateX, { stiffness: 180, damping: 22 })
+  const rotateY = useSpring(rawRotateY, { stiffness: 180, damping: 22 })
+
+  // Cursor coordinates for radial spotlight
+  const spotX = useMotionValue(-1000)
+  const spotY = useMotionValue(-1000)
+  const spotBackground = useMotionTemplate`radial-gradient(380px circle at ${spotX}px ${spotY}px, rgba(255, 255, 255, 0.08), transparent 75%)`
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current || shouldReduceMotion) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const clientX = e.clientX - rect.left
+    const clientY = e.clientY - rect.top
+
+    spotX.set(clientX)
+    spotY.set(clientY)
+
+    const normX = clientX / rect.width - 0.5
+    const normY = clientY / rect.height - 0.5
+    mouseX.set(normX)
+    mouseY.set(normY)
+  }
+
+  const handleMouseLeave = () => {
+    mouseX.set(0)
+    mouseY.set(0)
+    spotX.set(-1000)
+    spotY.set(-1000)
+  }
+
+  return (
+    <div
+      ref={cardRef}
+      style={{ perspective: 1200 }}
+      className="w-full"
+    >
+      {/* Scroll-Driven Outer Motion Layer */}
+      <motion.div
+        style={
+          shouldReduceMotion
+            ? {}
+            : {
+                rotateZ,
+                y,
+                opacity,
+                transformStyle: 'preserve-3d'
+              }
+        }
+        className="w-full"
+      >
+        {/* Interactive 3D Cursor Tilt & Hover Layer */}
+        <motion.div
+          style={
+            shouldReduceMotion
+              ? {}
+              : {
+                  rotateX,
+                  rotateY,
+                  transformStyle: 'preserve-3d'
+                }
+          }
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          whileHover={
+            shouldReduceMotion
+              ? {}
+              : {
+                  scale: 1.025,
+                  y: -4,
+                  transition: { duration: 0.25, ease: 'easeOut' }
+                }
+          }
+          className="group relative bg-[#14151b] border border-white/[0.18] hover:border-white/45 rounded-[24px] sm:rounded-[28px] p-7 sm:p-9 min-h-[260px] sm:min-h-[290px] flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:shadow-[0_28px_60px_rgba(0,0,0,0.8)] cursor-pointer overflow-hidden transition-colors duration-300 select-none will-change-transform"
+        >
+          {/* Dynamic Interactive Cursor Spotlight */}
+          <motion.div
+            className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            style={{ background: spotBackground }}
+          />
+
+          {/* Ambient Top Glare */}
+          <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent pointer-events-none z-0" />
+
+          {/* Top: Header & Micro Arrow */}
+          <div className="relative z-10 pt-2 flex items-start justify-between gap-4">
+            <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-[1.15] text-balance group-hover:text-white transition-colors">
+              {card.title}
+            </h3>
+            <span className="shrink-0 size-8 rounded-full border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-white group-hover:border-white/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+              <ArrowUpRight className="size-4" />
+            </span>
+          </div>
+
+          {/* Bottom: White Square Icon + Subtext Right Next to It */}
+          <div className="relative z-10 flex items-center gap-4 sm:gap-5 mt-8">
+            {/* White Rounded Square Icon Container with subtle elevation */}
+            <motion.div
+              whileHover={{ scale: 1.08 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="size-12 sm:size-14 rounded-2xl bg-white text-zinc-950 flex items-center justify-center shrink-0 shadow-[0_8px_20px_rgba(255,255,255,0.12)] group-hover:shadow-[0_12px_28px_rgba(255,255,255,0.22)] transition-shadow duration-300"
+            >
+              {card.icon}
+            </motion.div>
+
+            {/* Subtext Beside Icon */}
+            <p className="text-xs sm:text-[13.5px] text-zinc-400 font-normal leading-snug max-w-[220px] text-pretty group-hover:text-zinc-200 transition-colors">
+              {card.desc}
+            </p>
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
+  )
+}
 
 export default function App() {
   const shouldReduceMotion = useReducedMotion()
@@ -193,53 +359,15 @@ export default function App() {
             </p>
           </div>
 
-          {/* Tilted Cards Grid (Exact Layout from Video) */}
+          {/* Tilted Cards Grid with Scroll-Driven Rotation & 3D Interactive Physics */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-14 lg:gap-16 items-center">
             {serviceCards.map((card, idx) => (
-              <motion.div
+              <AnimatedServiceCard
                 key={card.id}
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="group relative"
-              >
-                {/* 
-                  Tilted Card Container:
-                  - Base tilt: -rotate-[6deg]
-                  - Smooth tactile straighten on hover: group-hover:rotate-0
-                  - 1px crisp outline: border border-white/[0.18]
-                  - Deep glass card surface: bg-[#14151b]
-                */}
-                <div className="relative -rotate-[6deg] group-hover:rotate-0 group-hover:scale-[1.02] group-hover:-translate-y-2 bg-[#14151b] border border-white/[0.18] group-hover:border-white/40 rounded-[24px] sm:rounded-[28px] p-7 sm:p-9 min-h-[260px] sm:min-h-[290px] flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-500 ease-out cursor-pointer overflow-hidden">
-                  
-                  {/* Subtle top glare reflection */}
-                  <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-white/[0.04] to-transparent pointer-events-none" />
-
-                  {/* Top: Card Title */}
-                  <div className="relative z-10 pt-2">
-                    <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-[1.15] text-balance">
-                      {card.title}
-                    </h3>
-                  </div>
-
-                  {/* Bottom: White Square Icon + Subtext Right Next to It */}
-                  <div className="relative z-10 flex items-center gap-4 sm:gap-5 mt-8">
-                    
-                    {/* White Rounded Square Icon Container */}
-                    <div className="size-12 sm:size-14 rounded-2xl bg-white text-zinc-950 flex items-center justify-center shrink-0 shadow-lg group-hover:scale-105 transition-transform">
-                      {card.icon}
-                    </div>
-
-                    {/* Subtext Beside Icon */}
-                    <p className="text-xs sm:text-[13.5px] text-zinc-400 font-normal leading-snug max-w-[220px] text-pretty">
-                      {card.desc}
-                    </p>
-
-                  </div>
-
-                </div>
-              </motion.div>
+                card={card}
+                index={idx}
+                shouldReduceMotion={shouldReduceMotion}
+              />
             ))}
           </div>
 
