@@ -331,7 +331,7 @@ export default function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl mx-auto text-center mb-16 sm:mb-20"
+            className="max-w-3xl text-left mb-16 sm:mb-20"
           >
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-zinc-500 block mb-3">
               About Our Workshop
