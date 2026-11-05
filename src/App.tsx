@@ -122,41 +122,43 @@ export default function App() {
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#EAE8E3]/60 via-transparent to-[#EAE8E3]/60 pointer-events-none" />
 
         {/* Top Navigation */}
-        <header className="relative z-20 w-full px-6 sm:px-12 lg:px-20 py-8 flex items-center justify-between">
-          <div className="cursor-pointer select-none">
-            <span className="font-semibold text-lg sm:text-xl tracking-tight text-zinc-950">
-             CAR CARE HUB
-            </span>
-          </div>
+        <header className="relative z-20 w-full px-6 sm:px-12 lg:px-20 py-8">
+          <div className="max-w-[1240px] mx-auto flex items-center justify-between w-full">
+            <div className="cursor-pointer select-none">
+              <span className="font-semibold text-lg sm:text-xl tracking-tight text-zinc-950">
+               CAR CARE HUB
+              </span>
+            </div>
 
-          <div className="flex items-center gap-8 sm:gap-12">
-            <nav className="hidden md:flex items-center gap-8 text-[14px] text-zinc-800">
-              <a href="#services" className="hover:text-black transition-colors">
-                Services
-              </a>
-              <a href="#about" className="hover:text-black transition-colors">
-                About
-              </a>
-              <a href="#contact" className="hover:text-black transition-colors">
-                Contact
-              </a>
-            </nav>
+            <div className="flex items-center gap-8 sm:gap-12">
+              <nav className="hidden md:flex items-center gap-8 text-[14px] text-zinc-800">
+                <a href="#services" className="hover:text-black transition-colors">
+                  Services
+                </a>
+                <a href="#about" className="hover:text-black transition-colors">
+                  About
+                </a>
+                <a href="#contact" className="hover:text-black transition-colors">
+                  Contact
+                </a>
+              </nav>
 
-            <a
-              href="https://portal.carcarehubgp.in"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-zinc-950 text-white text-xs sm:text-sm font-medium hover:bg-black hover:scale-105 active:scale-95 transition-all shadow-sm"
-            >
-              <User className="size-4" />
-              <span>Login</span>
-            </a>
+              <a
+                href="https://portal.carcarehubgp.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-zinc-950 text-white text-xs sm:text-sm font-medium hover:bg-black hover:scale-105 active:scale-95 transition-all shadow-sm"
+              >
+                <User className="size-4" />
+                <span>Login</span>
+              </a>
+            </div>
           </div>
         </header>
 
         {/* Hero Split Content */}
         <main className="relative z-10 w-full px-6 sm:px-12 lg:px-20 flex-1 flex flex-col justify-center py-10 lg:py-16">
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
+          <div className="max-w-[1240px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center">
             
             {/* Left Headline */}
             <motion.div
@@ -193,24 +195,26 @@ export default function App() {
         </main>
 
         {/* Hero Bottom Bar */}
-        <div className="relative z-10 w-full px-6 sm:px-12 lg:px-20 pb-8 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-1.5 text-zinc-700 font-medium">
-              <Shield className="size-3.5 text-zinc-900" /> Certified Precision Partner
-            </span>
-            <span className="hidden sm:inline">&bull;</span>
-            <span className="flex items-center gap-1.5 text-zinc-700 font-medium">
-              <Droplets className="size-3.5 text-zinc-900" /> Advanced Engineering Specs
-            </span>
-          </div>
+        <div className="relative z-10 w-full px-6 sm:px-12 lg:px-20 pb-8 pt-4">
+          <div className="max-w-[1240px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 w-full">
+            <div className="flex items-center gap-6">
+              <span className="flex items-center gap-1.5 text-zinc-700 font-medium">
+                <Shield className="size-3.5 text-zinc-900" /> Certified Precision Partner
+              </span>
+              <span className="hidden sm:inline">&bull;</span>
+              <span className="flex items-center gap-1.5 text-zinc-700 font-medium">
+                <Droplets className="size-3.5 text-zinc-900" /> Advanced Engineering Specs
+              </span>
+            </div>
 
-          <a
-            href="#services"
-            className="text-zinc-600 hover:text-black flex items-center gap-1 transition-colors"
-          >
-            <span>Explore Services</span>
-            <span className="text-[11px]">&darr;</span>
-          </a>
+            <a
+              href="#services"
+              className="text-zinc-600 hover:text-black flex items-center gap-1 transition-colors"
+            >
+              <span>Explore Services</span>
+              <span className="text-[11px]">&darr;</span>
+            </a>
+          </div>
         </div>
 
       </section>
@@ -222,6 +226,19 @@ export default function App() {
       >
         <div className="max-w-[1240px] mx-auto">
           
+          {/* Centered Section Header */}
+          <div className="max-w-2xl mx-auto text-center mb-16 sm:mb-20">
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-zinc-500 block mb-3">
+              Services &amp; Solutions
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.03em] text-[#0f1013] leading-[1.08] text-balance mb-4">
+              Comprehensive Automotive Care
+            </h2>
+            <p className="text-[15px] sm:text-[16.5px] text-[#555a64] font-normal leading-[1.6]">
+              Delivering specialized engineering and diagnostic solutions to ensure peak mechanical health and driving dynamics.
+            </p>
+          </div>
+
           {/* Row 1: Diagnosis | Repairs | Maintenance */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-14 lg:gap-16">
             {servicesRow1.map((service, idx) => (
@@ -293,13 +310,13 @@ export default function App() {
       >
         <div className="max-w-[1240px] mx-auto">
           
-          {/* Section Header & Narrative */}
+          {/* Section Header & Narrative - Centered */}
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl mb-16 sm:mb-20"
+            className="max-w-3xl mx-auto text-center mb-16 sm:mb-20"
           >
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-zinc-500 block mb-3">
               About Our Workshop
@@ -374,8 +391,8 @@ export default function App() {
           {/* Thin Divider Line */}
           <div className="w-full border-t border-zinc-950/15 my-14 sm:my-18" />
 
-          {/* 4-Column Verified Workshop Metrics */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
+          {/* 3-Column Verified Workshop Metrics - Centered & Equal */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 text-center">
             <div>
               <div className="text-3xl sm:text-4xl font-semibold tracking-tight text-[#0f1013] tabular-nums">
                 200+
@@ -392,11 +409,6 @@ export default function App() {
               <div className="text-xs sm:text-[13.5px] text-zinc-600 mt-1 font-medium">
                 Genuine OEM Components
               </div>
-            </div>
-
-            <div>
-              
-               
             </div>
 
             <div>
@@ -419,13 +431,13 @@ export default function App() {
       >
         <div className="max-w-[1240px] mx-auto">
           
-          {/* Section Header */}
+          {/* Section Header - Centered */}
           <motion.div
             initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-2xl mb-14 sm:mb-18"
+            className="max-w-2xl mx-auto text-center mb-14 sm:mb-18"
           >
             <span className="text-xs uppercase tracking-[0.2em] font-semibold text-zinc-500 block mb-3">
               Contact &amp; Location
@@ -455,10 +467,16 @@ export default function App() {
               <h3 className="text-[19px] sm:text-[21px] font-semibold text-[#0f1013] mb-2 tracking-tight">
                 Car Care Hub
               </h3>
-              <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed mb-4">
-                Hazrat Ali Chowk, Ali Nagar<br />
-                Naugawan Sadat, Uttar Pradesh 244251
-              </p>
+              <a
+                href="https://share.google/qM0sdv309Wfve2RlG"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-[14px] sm:text-[14.5px] text-[#555a64] hover:text-black leading-relaxed mb-4 group"
+              >
+                <span className="underline decoration-zinc-950/40 group-hover:decoration-black underline-offset-4">
+                  Hazrat Ali Chowk, Ali Nagar, Naugawan Sadat, Uttar Pradesh 244251
+                </span>
+              </a>
               <a
                 href="https://share.google/qM0sdv309Wfve2RlG"
                 target="_blank"
@@ -538,23 +556,25 @@ export default function App() {
       </section>
 
       {/* Minimal Legal Bottom Bar */}
-      <footer className="w-full py-10 px-6 sm:px-12 lg:px-20 border-t border-zinc-950/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-        <div>
-          &copy; {new Date().getFullYear()} CarCareHub. All rights reserved.
-        </div>
-        <div className="flex items-center gap-6">
-          <button
-            onClick={() => setShowPrivacy(true)}
-            className="text-zinc-600 hover:text-black underline decoration-zinc-950/30 underline-offset-4 transition-colors cursor-pointer"
-          >
-            Privacy Policy
-          </button>
-          <a
-            href="/data-deletion.html"
-            className="text-zinc-600 hover:text-black underline decoration-zinc-950/30 underline-offset-4 transition-colors"
-          >
-            Data Deletion
-          </a>
+      <footer className="w-full py-10 px-6 sm:px-12 lg:px-20 border-t border-zinc-950/10">
+        <div className="max-w-[1240px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500 w-full">
+          <div>
+            &copy; {new Date().getFullYear()} CarCareHub. All rights reserved.
+          </div>
+          <div className="flex items-center gap-6">
+            <button
+              onClick={() => setShowPrivacy(true)}
+              className="text-zinc-600 hover:text-black underline decoration-zinc-950/30 underline-offset-4 transition-colors cursor-pointer"
+            >
+              Privacy Policy
+            </button>
+            <a
+              href="/data-deletion.html"
+              className="text-zinc-600 hover:text-black underline decoration-zinc-950/30 underline-offset-4 transition-colors"
+            >
+              Data Deletion
+            </a>
+          </div>
         </div>
       </footer>
 
