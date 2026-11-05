@@ -3,7 +3,6 @@ import { motion, useReducedMotion } from 'motion/react'
 import {
   Phone,
   Shield,
-  Snowflake,
   Droplets,
   Cpu,
   Wrench,
@@ -73,10 +72,19 @@ export default function App() {
 
   const servicesRow2 = [
     {
-      id: 'AC',
+      id: 'ac',
       title: 'AC Service',
       desc: 'Cooling system inspection and repair',
-      icon: <Snowflake className="size-8 text-[#0f1013] stroke-[2.2]" />
+      icon: (
+        <svg className="size-8 text-[#0f1013]" viewBox="0 0 32 32" fill="none">
+          <line x1="7" y1="4" x2="7" y2="28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.3"/>
+          <circle cx="7" cy="11" r="3" fill="currentColor"/>
+          <line x1="16" y1="4" x2="16" y2="28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.3"/>
+          <circle cx="16" cy="20" r="3" fill="currentColor"/>
+          <line x1="25" y1="4" x2="25" y2="28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.3"/>
+          <circle cx="25" cy="8" r="3" fill="currentColor"/>
+        </svg>
+      )
     },
     {
       id: 'emergency',
@@ -194,7 +202,7 @@ export default function App() {
               className="lg:col-span-4 lg:pl-6 max-w-md"
             >
               <p className="text-[15px] sm:text-[16.5px] text-zinc-700 font-normal leading-[1.55] text-pretty">
-                We provide an unrivaled standard of vehicle care, restoring and protecting your automotive investment with scientific precision.
+                We deliver reliable servicing, expert repairs and complete automotive solutions to keep you moving with confidence  
               </p>
             </motion.div>
 
