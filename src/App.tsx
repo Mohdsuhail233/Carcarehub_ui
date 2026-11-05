@@ -1,8 +1,31 @@
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
-import { Phone, Shield, Droplets, Cpu, Wrench, ShieldCheck } from 'lucide-react'
+import {
+  Phone,
+  Shield,
+  Droplets,
+  Cpu,
+  Wrench,
+  ShieldCheck,
+  MapPin,
+  Clock,
+  Send,
+  CheckCircle2
+} from 'lucide-react'
 
 export default function App() {
   const shouldReduceMotion = useReducedMotion()
+
+  const [formSubmitted, setFormSubmitted] = useState(false)
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    vehicle: '',
+    service: 'General Service & Inspection',
+    date: '',
+    notes: ''
+  })
 
   const servicesRow1 = [
     {
@@ -402,9 +425,329 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================= 4. MINIMAL FOOTER ================= */}
-      <footer
+      {/* ================= 4. CONTACT & SERVICE BOOKING SECTION ================= */}
+      <section
         id="contact"
+        className="relative z-10 w-full bg-[#EAE8E3] text-zinc-950 py-24 sm:py-32 lg:py-36 px-6 sm:px-12 lg:px-20 border-t border-zinc-950/10 overflow-hidden"
+      >
+        <div className="max-w-[1240px] mx-auto">
+          
+          {/* Section Header */}
+          <motion.div
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-2xl mb-16 sm:mb-20"
+          >
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold text-zinc-500 block mb-3">
+              Contact &amp; Bookings
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-normal tracking-[-0.03em] text-[#0f1013] leading-[1.08] text-balance mb-4">
+              Schedule Service or Speak With a Mechanic
+            </h2>
+            <p className="text-[16px] sm:text-[17.5px] text-[#4d515a] font-normal leading-[1.6]">
+              Book your vehicle into our workshop, request a computerized diagnostic scan, or contact our 24/7 roadside emergency support.
+            </p>
+          </motion.div>
+
+          {/* 2-Column Split: Workshop Details & Booking Form */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            {/* Left Column: Workshop Details & Live Dispatch (5 Columns) */}
+            <motion.div
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 flex flex-col gap-8"
+            >
+              {/* Location Card */}
+              <div className="p-7 rounded-[22px] bg-white/60 border border-zinc-950/10 shadow-sm">
+                <div className="flex items-start gap-4">
+                  <div className="size-10 rounded-xl bg-zinc-950 text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <MapPin className="size-5 stroke-[2.2]" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-semibold text-[#0f1013] mb-1">
+                      Workshop Facility
+                    </h3>
+                    <p className="text-sm text-[#555a64] leading-relaxed">
+                      Solstice Automotive Engineering<br />
+                      500 Terry Francine St, Industrial Bay 04<br />
+                      San Francisco, CA 94158
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Phone & Direct Contacts Card */}
+              <div className="p-7 rounded-[22px] bg-white/60 border border-zinc-950/10 shadow-sm">
+                <div className="flex items-start gap-4">
+                  <div className="size-10 rounded-xl bg-zinc-950 text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <Phone className="size-5 stroke-[2.2]" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-semibold text-[#0f1013] mb-1">
+                      Direct Communication
+                    </h3>
+                    <div className="text-sm text-[#555a64] space-y-1">
+                      <div>
+                        <span className="text-zinc-500 text-xs">Direct Workshop:</span>{' '}
+                        <a href="tel:1234567890" className="font-medium text-zinc-950 hover:underline tabular-nums">
+                          123-456-7890
+                        </a>
+                      </div>
+                      <div>
+                        <span className="text-zinc-500 text-xs">Emergency Roadside:</span>{' '}
+                        <a href="tel:18007657842" className="font-medium text-emerald-700 hover:underline tabular-nums">
+                          1-800-SOLSTICE
+                        </a>
+                      </div>
+                      <div className="pt-1">
+                        <span className="text-zinc-500 text-xs">Direct Email:</span>{' '}
+                        <a href="mailto:service@solsticeauto.com" className="font-medium text-zinc-950 hover:underline">
+                          service@solsticeauto.com
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Operating Hours Card */}
+              <div className="p-7 rounded-[22px] bg-white/60 border border-zinc-950/10 shadow-sm">
+                <div className="flex items-start gap-4">
+                  <div className="size-10 rounded-xl bg-zinc-950 text-white flex items-center justify-center shrink-0 mt-0.5">
+                    <Clock className="size-5 stroke-[2.2]" />
+                  </div>
+                  <div className="w-full">
+                    <h3 className="text-base font-semibold text-[#0f1013] mb-2">
+                      Hours of Operation
+                    </h3>
+                    <div className="text-xs sm:text-sm text-[#555a64] space-y-1.5 w-full">
+                      <div className="flex justify-between items-center py-0.5 border-b border-zinc-950/5">
+                        <span>Monday - Friday</span>
+                        <span className="font-mono text-zinc-900 font-medium">7:30 AM - 6:30 PM</span>
+                      </div>
+                      <div className="flex justify-between items-center py-0.5 border-b border-zinc-950/5">
+                        <span>Saturday</span>
+                        <span className="font-mono text-zinc-900 font-medium">8:00 AM - 4:00 PM</span>
+                      </div>
+                      <div className="flex justify-between items-center py-0.5">
+                        <span>Sunday</span>
+                        <span className="text-emerald-700 font-medium">Emergency Roadside Only</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Live Workshop Status Pill */}
+              <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-zinc-900 text-white text-xs font-medium">
+                <span className="relative flex size-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full size-2.5 bg-emerald-500" />
+                </span>
+                <span>Service Bays Open &bull; Next Available Slot Today</span>
+              </div>
+
+            </motion.div>
+
+            {/* Right Column: Interactive Service Appointment Form (7 Columns) */}
+            <motion.div
+              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7"
+            >
+              <div className="p-8 sm:p-10 rounded-[26px] bg-white border border-zinc-950/10 shadow-[0_18px_40px_rgba(0,0,0,0.04)]">
+                
+                {formSubmitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="py-12 text-center flex flex-col items-center"
+                  >
+                    <div className="size-16 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center mb-5">
+                      <CheckCircle2 className="size-8 stroke-[2.2]" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-zinc-950 mb-2">
+                      Booking Request Received
+                    </h3>
+                    <p className="text-zinc-600 max-w-md mx-auto text-sm leading-relaxed mb-6">
+                      Thank you, <span className="font-semibold text-zinc-900">{formData.name || 'valued client'}</span>. Our service advisor is reviewing your request for your <span className="font-semibold text-zinc-900">{formData.vehicle || 'vehicle'}</span> and will call you within 30 minutes to confirm your bay slot.
+                    </p>
+                    <button
+                      onClick={() => {
+                        setFormSubmitted(false)
+                        setFormData({
+                          name: '',
+                          phone: '',
+                          email: '',
+                          vehicle: '',
+                          service: 'General Service & Inspection',
+                          date: '',
+                          notes: ''
+                        })
+                      }}
+                      className="px-6 py-2.5 rounded-xl bg-zinc-950 text-white text-xs font-medium hover:bg-zinc-800 transition-colors"
+                    >
+                      Book Another Appointment
+                    </button>
+                  </motion.div>
+                ) : (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault()
+                      setFormSubmitted(true)
+                    }}
+                    className="space-y-5"
+                  >
+                    <div>
+                      <h3 className="text-xl font-bold text-zinc-950 tracking-tight mb-1">
+                        Request a Service Appointment
+                      </h3>
+                      <p className="text-xs text-zinc-500">
+                        Fill out your vehicle specs and required service below.
+                      </p>
+                    </div>
+
+                    {/* Name & Phone */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-zinc-700 uppercase tracking-wider mb-1.5">
+                          Full Name *
+                        </label>
+                        <input
+                          required
+                          type="text"
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          placeholder="Alex Mercer"
+                          className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 transition-all"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-zinc-700 uppercase tracking-wider mb-1.5">
+                          Phone Number *
+                        </label>
+                        <input
+                          required
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          placeholder="123-456-7890"
+                          className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 transition-all tabular-nums"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Email & Vehicle Info */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-zinc-700 uppercase tracking-wider mb-1.5">
+                          Email Address
+                        </label>
+                        <input
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          placeholder="alex@example.com"
+                          className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 transition-all"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-zinc-700 uppercase tracking-wider mb-1.5">
+                          Vehicle Make &amp; Model *
+                        </label>
+                        <input
+                          required
+                          type="text"
+                          value={formData.vehicle}
+                          onChange={(e) => setFormData({ ...formData, vehicle: e.target.value })}
+                          placeholder="e.g. 2021 Porsche Taycan"
+                          className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Service Type & Date */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-semibold text-zinc-700 uppercase tracking-wider mb-1.5">
+                          Service Category *
+                        </label>
+                        <select
+                          value={formData.service}
+                          onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-sm text-zinc-900 focus:outline-none focus:bg-white focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 transition-all cursor-pointer"
+                        >
+                          <option value="General Service & Inspection">General Service &amp; Inspection</option>
+                          <option value="Computerized Engine Diagnostics">Computerized Engine Diagnostics</option>
+                          <option value="Mechanical & Transmission Repair">Mechanical &amp; Transmission Repair</option>
+                          <option value="Brake & Suspension Calibration">Brake &amp; Suspension Calibration</option>
+                          <option value="Performance Tuning & Dyno">Performance Tuning</option>
+                          <option value="Emergency Roadside Repair">Emergency Roadside Repair</option>
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-semibold text-zinc-700 uppercase tracking-wider mb-1.5">
+                          Preferred Date
+                        </label>
+                        <input
+                          type="date"
+                          value={formData.date}
+                          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                          className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-sm text-zinc-900 focus:outline-none focus:bg-white focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Notes / Symptoms */}
+                    <div>
+                      <label className="block text-xs font-semibold text-zinc-700 uppercase tracking-wider mb-1.5">
+                        Issue Description / Specific Requests
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={formData.notes}
+                        onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                        placeholder="Please describe any warning lights, noises, vibration, or required routine maintenance..."
+                        className="w-full px-4 py-2.5 rounded-xl bg-zinc-50 border border-zinc-200 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:bg-white focus:border-zinc-950 focus:ring-1 focus:ring-zinc-950 transition-all resize-none"
+                      />
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      className="w-full py-3.5 px-6 rounded-xl bg-[#0f1013] text-white text-sm font-semibold tracking-wide hover:bg-black hover:shadow-lg active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+                    >
+                      <span>Confirm Booking Request</span>
+                      <Send className="size-4" />
+                    </button>
+
+                    <p className="text-[11.5px] text-zinc-500 text-center">
+                      We respect your privacy. No spam. You will only be contacted regarding this service appointment.
+                    </p>
+
+                  </form>
+                )}
+
+              </div>
+            </motion.div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ================= 5. MINIMAL FOOTER ================= */}
+      <footer
         className="w-full bg-[#0a0a0c] text-zinc-500 py-16 px-6 sm:px-12 lg:px-20 border-t border-zinc-800 text-xs"
       >
         <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
