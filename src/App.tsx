@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import {
   Phone,
@@ -17,6 +17,15 @@ import {
 export default function App() {
   const shouldReduceMotion = useReducedMotion()
   const [showPrivacy, setShowPrivacy] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const servicesRow1 = [
     {
@@ -106,8 +115,49 @@ export default function App() {
   return (
     <div className="min-h-dvh w-full bg-[#EAE8E3] text-zinc-950 font-sans antialiased relative overflow-x-hidden selection:bg-black selection:text-white flex flex-col justify-between">
       
+      {/* ================= STICKY TOP NAVIGATION ================= */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 w-full px-6 sm:px-12 lg:px-20 transition-all duration-300 ${
+          scrolled
+            ? 'py-4 bg-[#EAE8E3]/90 backdrop-blur-md shadow-xs border-b border-zinc-950/10'
+            : 'py-6 sm:py-8 bg-transparent'
+        }`}
+      >
+        <div className="max-w-[1240px] mx-auto flex items-center justify-between w-full">
+          <a href="#" className="cursor-pointer select-none">
+            <span className="font-semibold text-lg sm:text-xl tracking-tight text-zinc-950">
+              CAR CARE HUB
+            </span>
+          </a>
+
+          <div className="flex items-center gap-8 sm:gap-12">
+            <nav className="hidden md:flex items-center gap-8 text-[14px] text-zinc-800">
+              <a href="#services" className="hover:text-black transition-colors font-medium">
+                Services
+              </a>
+              <a href="#about" className="hover:text-black transition-colors font-medium">
+                About
+              </a>
+              <a href="#contact" className="hover:text-black transition-colors font-medium">
+                Contact
+              </a>
+            </nav>
+
+            <a
+              href="https://portal.carcarehubgp.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-zinc-950 text-white text-xs sm:text-sm font-medium hover:bg-black hover:scale-105 active:scale-95 transition-all shadow-sm"
+            >
+              <User className="size-4" />
+              <span>Login</span>
+            </a>
+          </div>
+        </div>
+      </header>
+
       {/* ================= 1. HERO SECTION (WIX WH-1274 SOLSTICE DETAILING) ================= */}
-      <section className="relative min-h-dvh w-full flex flex-col justify-between overflow-hidden">
+      <section className="relative min-h-dvh w-full flex flex-col justify-between overflow-hidden pt-24 sm:pt-28">
         
         {/* Background: Studio Wall + Floor + Center Porsche Taycan with Laser Wireframe */}
         <div
@@ -120,41 +170,6 @@ export default function App() {
 
         {/* Ambient Vignette for crisp text contrast */}
         <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#EAE8E3]/60 via-transparent to-[#EAE8E3]/60 pointer-events-none" />
-
-        {/* Top Navigation */}
-        <header className="relative z-20 w-full px-6 sm:px-12 lg:px-20 py-8">
-          <div className="max-w-[1240px] mx-auto flex items-center justify-between w-full">
-            <div className="cursor-pointer select-none">
-              <span className="font-semibold text-lg sm:text-xl tracking-tight text-zinc-950">
-               CAR CARE HUB
-              </span>
-            </div>
-
-            <div className="flex items-center gap-8 sm:gap-12">
-              <nav className="hidden md:flex items-center gap-8 text-[14px] text-zinc-800">
-                <a href="#services" className="hover:text-black transition-colors">
-                  Services
-                </a>
-                <a href="#about" className="hover:text-black transition-colors">
-                  About
-                </a>
-                <a href="#contact" className="hover:text-black transition-colors">
-                  Contact
-                </a>
-              </nav>
-
-              <a
-                href="https://portal.carcarehubgp.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-zinc-950 text-white text-xs sm:text-sm font-medium hover:bg-black hover:scale-105 active:scale-95 transition-all shadow-sm"
-              >
-                <User className="size-4" />
-                <span>Login</span>
-              </a>
-            </div>
-          </div>
-        </header>
 
         {/* Hero Split Content */}
         <main className="relative z-10 w-full px-6 sm:px-12 lg:px-20 flex-1 flex flex-col justify-center py-10 lg:py-16">
