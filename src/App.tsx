@@ -2,19 +2,16 @@ import { useRef } from 'react'
 import {
   motion,
   useReducedMotion,
-  useScroll,
-  useTransform,
-  useSpring,
   useMotionValue,
   useMotionTemplate
 } from 'motion/react'
-import { Phone, Shield, Droplets, ArrowUpRight } from 'lucide-react'
+import { Phone, Shield, Droplets } from 'lucide-react'
 
 interface ServiceCardItem {
   id: string
-  title: string
+  line1: string
+  line2: string
   desc: string
-  tag: string
   icon: React.ReactNode
 }
 
@@ -29,199 +26,134 @@ function AnimatedServiceCard({
 }) {
   const cardRef = useRef<HTMLDivElement>(null)
 
-  // 1. Scroll-Linked Rotation & Elevation (Recreating the exact video un-tilt physics)
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ['start end', 'center 55%']
-  })
-
-  // Start with the distinct negative tilt from video (-7.5deg / -6.5deg)
-  // As it scrolls into active view, smoothly straightens to level 0deg
-  const initialTilt = index % 2 === 0 ? -7.5 : -6.5
-  const rawRotate = useTransform(scrollYProgress, [0, 0.85], [initialTilt, 0])
-  const rotateZ = useSpring(rawRotate, { stiffness: 90, damping: 20, mass: 0.6 })
-
-  const rawY = useTransform(scrollYProgress, [0, 0.85], [75, 0])
-  const y = useSpring(rawY, { stiffness: 90, damping: 20, mass: 0.6 })
-
-  const opacity = useTransform(scrollYProgress, [0, 0.35, 0.85], [0.3, 0.75, 1])
-
-  // 2. Interactive 3D Cursor Tilt & Spotlight
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-
-  const rawRotateX = useTransform(mouseY, [-0.5, 0.5], [6, -6])
-  const rawRotateY = useTransform(mouseX, [-0.5, 0.5], [-6, 6])
-  const rotateX = useSpring(rawRotateX, { stiffness: 180, damping: 22 })
-  const rotateY = useSpring(rawRotateY, { stiffness: 180, damping: 22 })
-
   // Cursor coordinates for radial spotlight
   const spotX = useMotionValue(-1000)
   const spotY = useMotionValue(-1000)
-  const spotBackground = useMotionTemplate`radial-gradient(380px circle at ${spotX}px ${spotY}px, rgba(255, 255, 255, 0.08), transparent 75%)`
+  const spotBackground = useMotionTemplate`radial-gradient(350px circle at ${spotX}px ${spotY}px, rgba(255, 255, 255, 0.08), transparent 75%)`
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current || shouldReduceMotion) return
     const rect = cardRef.current.getBoundingClientRect()
-    const clientX = e.clientX - rect.left
-    const clientY = e.clientY - rect.top
-
-    spotX.set(clientX)
-    spotY.set(clientY)
-
-    const normX = clientX / rect.width - 0.5
-    const normY = clientY / rect.height - 0.5
-    mouseX.set(normX)
-    mouseY.set(normY)
+    spotX.set(e.clientX - rect.left)
+    spotY.set(e.clientY - rect.top)
   }
 
   const handleMouseLeave = () => {
-    mouseX.set(0)
-    mouseY.set(0)
     spotX.set(-1000)
     spotY.set(-1000)
   }
 
   return (
-    <div
+    <motion.div
       ref={cardRef}
-      style={{ perspective: 1200 }}
-      className="w-full"
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.1,
+        ease: [0.16, 1, 0.3, 1]
+      }}
+      whileHover={
+        shouldReduceMotion
+          ? {}
+          : {
+              y: -5,
+              scale: 1.012,
+              transition: { duration: 0.25, ease: 'easeOut' }
+            }
+      }
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="group relative bg-[#17171d] border border-white/[0.18] hover:border-white/50 rounded-[20px] p-7 sm:p-8 min-h-[235px] sm:min-h-[245px] flex flex-col justify-between shadow-[0_12px_32px_rgba(0,0,0,0.5)] hover:shadow-[0_22px_45px_rgba(0,0,0,0.7)] cursor-pointer overflow-hidden transition-all duration-300 select-none will-change-transform"
     >
-      {/* Scroll-Driven Outer Motion Layer */}
+      {/* Dynamic Cursor Spotlight */}
       <motion.div
-        style={
-          shouldReduceMotion
-            ? {}
-            : {
-                rotateZ,
-                y,
-                opacity,
-                transformStyle: 'preserve-3d'
-              }
-        }
-        className="w-full"
-      >
-        {/* Interactive 3D Cursor Tilt & Hover Layer */}
-        <motion.div
-          style={
-            shouldReduceMotion
-              ? {}
-              : {
-                  rotateX,
-                  rotateY,
-                  transformStyle: 'preserve-3d'
-                }
-          }
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-          whileHover={
-            shouldReduceMotion
-              ? {}
-              : {
-                  scale: 1.025,
-                  y: -4,
-                  transition: { duration: 0.25, ease: 'easeOut' }
-                }
-          }
-          className="group relative bg-[#14151b] border border-white/[0.18] hover:border-white/45 rounded-[24px] sm:rounded-[28px] p-7 sm:p-9 min-h-[260px] sm:min-h-[290px] flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.6)] hover:shadow-[0_28px_60px_rgba(0,0,0,0.8)] cursor-pointer overflow-hidden transition-colors duration-300 select-none will-change-transform"
-        >
-          {/* Dynamic Interactive Cursor Spotlight */}
-          <motion.div
-            className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{ background: spotBackground }}
-          />
+        className="pointer-events-none absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: spotBackground }}
+      />
 
-          {/* Ambient Top Glare */}
-          <div className="absolute top-0 inset-x-0 h-28 bg-gradient-to-b from-white/[0.05] via-white/[0.02] to-transparent pointer-events-none z-0" />
+      {/* Top: Two-line Title (Exact match to screenshot) */}
+      <div className="relative z-10 pt-1">
+        <h3 className="text-[26px] sm:text-[30px] font-bold text-white tracking-tight leading-[1.12]">
+          <span className="block">{card.line1}</span>
+          <span className="block">{card.line2}</span>
+        </h3>
+      </div>
 
-          {/* Top: Header & Micro Arrow */}
-          <div className="relative z-10 pt-2 flex items-start justify-between gap-4">
-            <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-[1.15] text-balance group-hover:text-white transition-colors">
-              {card.title}
-            </h3>
-            <span className="shrink-0 size-8 rounded-full border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-white group-hover:border-white/40 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
-              <ArrowUpRight className="size-4" />
-            </span>
-          </div>
+      {/* Bottom: White Square Icon + Subtext directly beside it */}
+      <div className="relative z-10 flex items-center gap-4 sm:gap-5 mt-8">
+        {/* White Rounded Square Icon Box */}
+        <div className="size-12 rounded-[14px] bg-white text-zinc-950 flex items-center justify-center shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
+          {card.icon}
+        </div>
 
-          {/* Bottom: White Square Icon + Subtext Right Next to It */}
-          <div className="relative z-10 flex items-center gap-4 sm:gap-5 mt-8">
-            {/* White Rounded Square Icon Container with subtle elevation */}
-            <motion.div
-              whileHover={{ scale: 1.08 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="size-12 sm:size-14 rounded-2xl bg-white text-zinc-950 flex items-center justify-center shrink-0 shadow-[0_8px_20px_rgba(255,255,255,0.12)] group-hover:shadow-[0_12px_28px_rgba(255,255,255,0.22)] transition-shadow duration-300"
-            >
-              {card.icon}
-            </motion.div>
-
-            {/* Subtext Beside Icon */}
-            <p className="text-xs sm:text-[13.5px] text-zinc-400 font-normal leading-snug max-w-[220px] text-pretty group-hover:text-zinc-200 transition-colors">
-              {card.desc}
-            </p>
-          </div>
-        </motion.div>
-      </motion.div>
-    </div>
+        {/* Subtext beside Icon */}
+        <p className="text-[13px] sm:text-[14px] text-[#cfd1d8] font-normal leading-[1.38] max-w-[210px] text-pretty group-hover:text-white transition-colors duration-200">
+          {card.desc}
+        </p>
+      </div>
+    </motion.div>
   )
 }
 
 export default function App() {
   const shouldReduceMotion = useReducedMotion()
 
-  const serviceCards = [
+  const serviceCards: ServiceCardItem[] = [
     {
       id: 'updates',
-      title: 'Live Ride Updates',
+      line1: 'Live Ride',
+      line2: 'Updates',
       desc: 'Navigate Seamlessly with Real-Time Data',
-      tag: 'PRECISION TELEMETRY',
       icon: (
-        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/>
+        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round">
+          <line x1="12" y1="4" x2="12" y2="20" />
+          <line x1="5" y1="8" x2="19" y2="16" />
+          <line x1="5" y1="16" x2="19" y2="8" />
         </svg>
       )
     },
     {
       id: 'alerts',
-      title: 'Assistive Alerts',
+      line1: 'Assistive',
+      line2: 'Alerts',
       desc: 'Stay Informed and Safe',
-      tag: 'ACTIVE MONITORING',
       icon: (
-        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="currentColor">
-          <rect x="10" y="2" width="4" height="4" rx="1"/>
-          <rect x="10" y="18" width="4" height="4" rx="1"/>
-          <rect x="2" y="10" width="4" height="4" rx="1"/>
-          <rect x="18" y="10" width="4" height="4" rx="1"/>
-          <rect x="7" y="7" width="3" height="3" rx="0.5"/>
-          <rect x="14" y="7" width="3" height="3" rx="0.5"/>
-          <rect x="7" y="14" width="3" height="3" rx="0.5"/>
-          <rect x="14" y="14" width="3" height="3" rx="0.5"/>
+        <svg className="size-5 text-zinc-950" viewBox="0 0 24 24" fill="currentColor">
+          <rect x="10.5" y="2" width="3" height="3" rx="0.5"/>
+          <rect x="10.5" y="19" width="3" height="3" rx="0.5"/>
+          <rect x="2" y="10.5" width="3" height="3" rx="0.5"/>
+          <rect x="19" y="10.5" width="3" height="3" rx="0.5"/>
+          <rect x="6" y="6" width="3" height="3" rx="0.5"/>
+          <rect x="15" y="6" width="3" height="3" rx="0.5"/>
+          <rect x="6" y="15" width="3" height="3" rx="0.5"/>
+          <rect x="15" y="15" width="3" height="3" rx="0.5"/>
         </svg>
       )
     },
     {
       id: 'recording',
-      title: 'High-Definition Ride Recording',
+      line1: 'High-Definition',
+      line2: 'Ride Recording',
       desc: 'Capture Every Adventure Clearly',
-      tag: '4K OPTICAL LOGGING',
       icon: (
         <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="9"/>
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M12 3v3M12 18v3M3 12h3M18 12h3"/>
+          <circle cx="12" cy="12" r="3.5"/>
+          <path d="M12 2.5v6M21.5 12h-6M12 21.5v-6M2.5 12h6"/>
         </svg>
       )
     },
     {
       id: 'installation',
-      title: 'Easy Installation',
+      line1: 'Easy',
+      line2: 'Installation',
       desc: 'Simple Setup for Instant Riding',
-      tag: 'SEAMLESS INTEGRATION',
       icon: (
-        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+        <svg className="size-6 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="3" width="18" height="18" rx="4"/>
-          <rect x="8" y="8" width="8" height="8" rx="2"/>
+          <path d="M12 8v8M8 12h8"/>
         </svg>
       )
     }
@@ -359,8 +291,8 @@ export default function App() {
             </p>
           </div>
 
-          {/* Tilted Cards Grid with Scroll-Driven Rotation & 3D Interactive Physics */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 sm:gap-14 lg:gap-16 items-center">
+          {/* Cards Grid (Exact match with user screenshot) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
             {serviceCards.map((card, idx) => (
               <AnimatedServiceCard
                 key={card.id}
