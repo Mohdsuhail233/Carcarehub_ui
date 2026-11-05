@@ -121,7 +121,7 @@ export default function App() {
         <header className="relative z-20 w-full px-6 sm:px-12 lg:px-20 py-8 flex items-center justify-between">
           <div className="cursor-pointer select-none">
             <span className="font-semibold text-lg sm:text-xl tracking-tight text-zinc-950">
-              Solstice Automotive
+             CAR CARE HUB
             </span>
           </div>
 
@@ -456,12 +456,11 @@ export default function App() {
                 Workshop Facility
               </h3>
               <p className="text-[14px] sm:text-[14.5px] text-[#555a64] leading-relaxed mb-4">
-                Solstice Automotive Engineering<br />
-                500 Terry Francine St, Industrial Bay 04<br />
-                San Francisco, CA 94158
+                Hazrat Ali Chowk, Ali Nagar<br />
+                Naugawan Sadat, Uttar Pradesh 244251
               </p>
               <a
-                href="https://maps.google.com/?q=500+Terry+Francine+St,+San+Francisco,+CA+94158"
+                href="https://maps.google.com/?q=Hazrat+Ali+Chowk,+Ali+Nagar,+Naugawan+Sadat,+Uttar+Pradesh+244251"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-900 hover:text-black underline decoration-zinc-900/30 underline-offset-4"
