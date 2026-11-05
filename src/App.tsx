@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'motion/react'
 import {
   Phone,
   Shield,
+  Snowflake,
   Droplets,
   Cpu,
   Wrench,
@@ -72,19 +73,10 @@ export default function App() {
 
   const servicesRow2 = [
     {
-      id: 'tuning',
-      title: 'Tuning',
-      desc: 'Optimizing vehicle performance',
-      icon: (
-        <svg className="size-8 text-[#0f1013]" viewBox="0 0 32 32" fill="none">
-          <line x1="7" y1="4" x2="7" y2="28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.3"/>
-          <circle cx="7" cy="11" r="3" fill="currentColor"/>
-          <line x1="16" y1="4" x2="16" y2="28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.3"/>
-          <circle cx="16" cy="20" r="3" fill="currentColor"/>
-          <line x1="25" y1="4" x2="25" y2="28" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeOpacity="0.3"/>
-          <circle cx="25" cy="8" r="3" fill="currentColor"/>
-        </svg>
-      )
+      id: 'AC',
+      title: 'AC Service',
+      desc: 'Cooling system inspection and repair',
+      icon: <Snowflake className="size-8 text-[#0f1013] stroke-[2.2]" />
     },
     {
       id: 'emergency',
